@@ -1,0 +1,19 @@
+header{
+  height: 60px;
+  background: #3c8dbc;
+}
+header nav{
+  height: 100%;
+}
+header .logo{
+  float: left;
+  width: 200px;
+  height: 100%;
+  line-height: 60px;
+}
+header ul{
+  float: right;
+  width: 100%;
+  margin-left: 200px;
+  height: 100%;
+}
