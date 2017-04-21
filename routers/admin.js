@@ -3,7 +3,8 @@
  */
 var express=require('express');
 var router=express.Router();
-var User=require('../models/AdminUser');
+var AdminUser=require('../models/AdminUser');
+var AdminUserGroup=require('../models/AdminUserGroup');
 
 router.get('/',function (req,res,next) {
   res.render('admin/admin');
@@ -18,7 +19,37 @@ router.get('/users_group_add',function (req,res,next) {
   res.render('admin/users_group_add');
 });
 router.post('/users_group_add/add',function (req,res,next) {
-  console.log('chenggong');
+  var name=req.body.name;
+  var pid=req.body.pid;
+  var status=req.body.status;
+  var remark=req.body.remark;
+  /*
+  * 查询数据库
+  * */
+  AdminUserGroup.findOne({
+    name:name
+  }).then(function(adminUserGroupInfo) {
+    if(adminUserGroupInfo){
+      res.json({
+        code:0,
+        msg:'用户组已存在'
+      });
+    }else{
+      var adminUserGroup=new AdminUserGroup({
+        name:name,
+        pid:pid,
+        status:status,
+        remark:remark
+      });
+      adminUserGroup.save();
+      console.log(req.body);
+      res.json({
+        code:1,
+        msg:'新增成功'
+      });
+    }
+  });
+
 });
 //所有用户
 router.get('/users',function (req,res,next) {

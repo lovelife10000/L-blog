@@ -36,12 +36,12 @@
               <div class="form-group">
                 <label  class="col-sm-2 control-label">父级组ID</label>
                 <div class="col-sm-10">
-                  <select class="form-control" name="pid" ng-model="pie">
-                    <option>无</option>
-                    <option>超级管理员</option>
-                    <option>网站管理员</option>
-                    <option>内容管理员</option>
-                    <option>投稿员</option>
+                  <select class="form-control" name="pid" ng-model="pid">
+                    <option value="0">无</option>
+                    <option value="1">超级管理员</option>
+                    <option value="2">网站管理员</option>
+                    <option value="3">内容管理员</option>
+                    <option value="4">投稿员</option>
                   </select>
                 </div>
               </div>
@@ -49,8 +49,8 @@
                 <label  class="col-sm-2 control-label">状态</label>
                 <div class="col-sm-10">
                   <select class="form-control" name="status" ng-model="status">
-                    <option>启用</option>
-                    <option>禁用</option>
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
                   </select>
                 </div>
               </div>
@@ -81,20 +81,19 @@
   var app=angular.module('myApp',[]);
   app.controller('myCtrl',function($scope,$http) {
     $scope.addAdminUserGroup=function () {
-      console.log('yes');
       var name=$scope.name;
       var pid=$scope.pid;
       var status=$scope.status;
       var remark=$scope.remark;
       $http({
         method:'POST',
-        url:'/add',
-        data:{
+        url:'users_group_add/add',
+        data:$.param({
           name:name,
           pid:pid,
           status:status,
           remark:remark
-        },
+        }),
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
       }).then(function success(res) {
 

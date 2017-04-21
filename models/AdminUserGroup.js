@@ -10,5 +10,5 @@ var AdminUserGroupSchema=Schema({
   status:Number,
   remark:String
 });
-var AdminUserGroup=mongoose.module('AdminUserGroup',AdminUserGroupSchema);
+var AdminUserGroup=mongoose.model('AdminUserGroup',AdminUserGroupSchema);
 module.exports=AdminUserGroup;
