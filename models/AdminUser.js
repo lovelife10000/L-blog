@@ -4,13 +4,13 @@
 var mongoose=require('mongoose');
 
 //用户的表结构，定义字段
-var userSchema=new mongoose.Schema({
+var AdminUserSchema=new mongoose.Schema({
   username:String,
   password:String
 });
 
-var User=mongoose.model('User',userSchema);
+var AdminUser=mongoose.model('User',AdminUserSchema);
 
 
 
-module.exports=User;
+module.exports=AdminUser;

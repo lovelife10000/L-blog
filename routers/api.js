@@ -3,7 +3,7 @@
  */
 var express=require('express');
 var router=express.Router();
-var User=require('../models/User');
+var User=require('../models/AdminUser');
 
 //定义统一的响应格式
 var responseData;

@@ -24,20 +24,47 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form class="form-horizontal">
+          <form class="form-horizontal" ng-app="myApp" ng-controller="myCtrl" onsubmit="return false;">
             <div class="box-body">
               <div class="form-group">
-                <label for="groupName" class="col-sm-2 control-label">组名称</label>
+                <label for="name" class="col-sm-2 control-label">组名称</label>
 
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="groupName" placeholder="请输入组名称">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="请输入组名称" ng-model="name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">父级组ID</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="pid" ng-model="pie">
+                    <option>无</option>
+                    <option>超级管理员</option>
+                    <option>网站管理员</option>
+                    <option>内容管理员</option>
+                    <option>投稿员</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-10">
+                  <select class="form-control" name="status" ng-model="status">
+                    <option>启用</option>
+                    <option>禁用</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label  class="col-sm-2 control-label">描述</label>
+                <div class="col-sm-10">
+                  <textarea name="remark" class="form-control" rows="3" placeholder="请输入描述信息" ng-model="remark"></textarea>
                 </div>
               </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
               <button type="submit" class="btn btn-default">取消</button>
-              <button type="submit" class="btn btn-info pull-right">提交</button>
+              <button type="submit" class="btn btn-info pull-right" ng-click="addAdminUserGroup()">添加</button>
             </div>
             <!-- /.box-footer -->
           </form>
@@ -49,4 +76,32 @@
   </section>
   <!-- /.content -->
 </div>
+<script>
+
+  var app=angular.module('myApp',[]);
+  app.controller('myCtrl',function($scope,$http) {
+    $scope.addAdminUserGroup=function () {
+      console.log('yes');
+      var name=$scope.name;
+      var pid=$scope.pid;
+      var status=$scope.status;
+      var remark=$scope.remark;
+      $http({
+        method:'POST',
+        url:'/add',
+        data:{
+          name:name,
+          pid:pid,
+          status:status,
+          remark:remark
+        },
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }).then(function success(res) {
+
+      },function error(res) {
+
+      });
+    };
+  });
+</script>
 {% endblock %}

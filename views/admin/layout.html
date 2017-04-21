@@ -14,7 +14,7 @@
 <header class="main-header">
   <a href="../../index2.html" class="logo">
     <!-- LOGO -->
-    AdminLTE
+    L-blog
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top" role="navigation">
@@ -134,10 +134,10 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="#" class="btn btn-default btn-flat">简介</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <a href="#" class="btn btn-default btn-flat">退出</a>
               </div>
             </li>
           </ul>
@@ -201,6 +201,7 @@
         <ul class="treeview-menu">
           <li><a href="/admin/articles">所有文章</a></li>
           <li><a href="/admin/articles_categories">文章分类</a></li>
+          <li><a href="/admin/articles_categories_add">添加分类</a></li>
           <li><a href="#">写文章</a></li>
           <li><a href="#">待审核</a></li>
           <li><a href="#">未通过</a></li>
@@ -268,10 +269,10 @@
           <li><a href="#">BUG反馈</a></li>
         </ul>
       </li>
-    </ul><!-- /.sidebar-menu -->
+    </ul>
 
-  </div><!-- /.sidebar -->
-</div><!-- /.main-sidebar -->
+  </div>
+</div>
 
 <!--用户管理-->
 {% block usersGroup %}{% endblock %}
@@ -283,6 +284,7 @@
 <!--文章管理-->
 {% block articles %}{% endblock %}
 {% block articlesCategories %}{% endblock %}
+{% block articlesCategoriesAdd %}{% endblock %}
 <!--底部-->
 <footer class="main-footer">
   <div class="pull-right hidden-xs">
@@ -483,6 +485,7 @@
 </aside>
 <div class="control-sidebar-bg"></div>
 </div>
+
 <script src="/public/js/bootstrap.js"></script>
 <script src="/public/js/app.js"></script>
 </body>
