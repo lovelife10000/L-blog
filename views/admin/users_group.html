@@ -25,19 +25,18 @@
           <div class="box-body table-responsive no-padding">
             <table class="table table-hover  table-bordered table-striped">
               <tr>
-                <th>序号</th>
                 <th>组ID</th>
                 <th>组名称</th>
                 <th>描述</th>
                 <th>状态</th>
                 <th>操作</th>
               </tr>
+              {% for x in adminUserGroups %}
               <tr>
-                <td>183</td>
-                <td>183</td>
-                <td>John Doe</td>
-                <td>11-7-2014</td>
-                <td>启用</td>
+                <td>{{x.pid}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.remark}}</td>
+                <td>{{x.status}}</td>
                 <td>
                   <button type="button" class="btn btn-danger">禁用</button>
                   <button type="button" class="btn btn-primary">编辑</button>
@@ -45,45 +44,7 @@
                   <button type="button" class="btn btn-info">投稿分类</button>
                 </td>
               </tr>
-              <tr>
-                <td>183</td>
-                <td>219</td>
-                <td>Alexander Pierce</td>
-                <td>11-7-2014</td>
-                <td>启用</td>
-                <td>
-                  <button type="button" class="btn btn-danger">禁用</button>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-warning">权限分配</button>
-                  <button type="button" class="btn btn-info">投稿分类</button>
-                </td>
-              </tr>
-              <tr>
-                <td>183</td>
-                <td>657</td>
-                <td>Bob Doe</td>
-                <td>11-7-2014</td>
-                <td>启用</td>
-                <td>
-                  <button type="button" class="btn btn-danger">禁用</button>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-warning">权限分配</button>
-                  <button type="button" class="btn btn-info">投稿分类</button>
-                </td>
-              </tr>
-              <tr>
-                <td>183</td>
-                <td>175</td>
-                <td>Mike Doe</td>
-                <td>11-7-2014</td>
-                <td>启用</td>
-                <td>
-                  <button type="button" class="btn btn-danger">禁用</button>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-warning">权限分配</button>
-                  <button type="button" class="btn btn-info">投稿分类</button>
-                </td>
-              </tr>
+              {% endfor %}
             </table>
           </div>
           <!-- /.box-body -->

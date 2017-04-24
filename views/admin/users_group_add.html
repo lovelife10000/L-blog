@@ -1,5 +1,20 @@
 {% extends 'layout.html' %}
 {% block usersGroupAdd %}
+<style>
+  .example-modal .modal {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    display: block;
+    z-index: 1;
+  }
+
+  .example-modal .modal {
+    background: transparent !important;
+  }
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -71,6 +86,12 @@
   </section>
   <!-- /.content -->
 </div>
+{% include 'modals.html' %}
+
+
+
+
+
 <script>
 
   var app=angular.module('myApp',[]);
@@ -81,12 +102,14 @@
     ];
     $scope.status=$scope.statusOptions[0].id;//设置默认值
     $scope.pidOptions = [
-      {name:'超级管理员',id:1},
-      {name:'网站管理员',id:2},
-      {name:'内容管理员',id:3},
-      {name:'投稿员',id:4}
+      {name:'无',id:1},
+      {name:'超级管理员',id:2},
+      {name:'网站管理员',id:3},
+      {name:'内容管理员',id:4},
+      {name:'投稿员',id:5}
     ];
     $scope.pid=$scope.pidOptions[0].id;//设置默认值
+
     $scope.addAdminUserGroup=function () {
       var name=$scope.name;
       var pid=$scope.pid;
@@ -102,12 +125,23 @@
           remark:remark
         }),
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-      }).then(function success(res) {
-
-      },function error(res) {
+      }).then(function(res) {
+         if(res.data.code==1){
+           $('#myModal').modal({
+             keyboard: true
+           });
+         }
+      },function(res) {
 
       });
     };
+
+    $('#myModal').on('hidden.bs.modal', function () {
+      window.location = "/admin/users_group"
+    });
+    $('#myModal').on('hide.bs.modal', function () {
+      window.location = "/admin/users_group"
+    });
   });
 </script>
 {% endblock %}
