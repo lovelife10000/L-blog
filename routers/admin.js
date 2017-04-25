@@ -96,7 +96,7 @@ router.post('/users_add/add',function (req,res,next) {
     var adminUser_phone=Number(req.body.adminUser_phone);
     var adminUser_email=req.body.adminUser_email;
     var adminUser_remark=req.body.adminUser_remark;
-  console.log(adminUser_phone);
+  console.log(adminUser_username);
 
   /*
   * 查询数据库是否已经存在该用户
