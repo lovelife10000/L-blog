@@ -93,16 +93,17 @@ router.post('/users_add/add',function (req,res,next) {
     var adminUser_password=req.body.adminUser_password;
     var adminUser_repassword=req.body.adminUser_repassword;
     var adminUser_userGroup=req.body.adminUser_userGroup;
-    var adminUser_phone=req.body.adminUser_phone;
+    var adminUser_phone=Number(req.body.adminUser_phone);
     var adminUser_email=req.body.adminUser_email;
     var adminUser_remark=req.body.adminUser_remark;
+  console.log(adminUser_phone);
 
   /*
   * 查询数据库是否已经存在该用户
   * */
   
   AdminUser.findOne({
-    username:req.body.adminUser_username
+    adminUser_username:adminUser_username
   }).then(function (usernames) {
     if(usernames){
       res.json({
