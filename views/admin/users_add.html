@@ -45,6 +45,9 @@
                   <span class="help-block ng-hide" ng-show="myForm.adminUser_nickname.$valid && !myForm.adminUser_nickname.$pristine"><span class="glyphicon glyphicon-ok"></span>恭喜您，该昵称可用！</span>
                 </div>
               </div>
+
+
+              <!--用户头像上传-->
               <div class="form-group" ng-class="{'has-warning':myForm.adminUser_avatar.$invalid && !myForm.adminUser_avatar.$pristine,'has-success':myForm.adminUser_avatar.$valid && !myForm.adminUser_avatar.$pristine}" ng-controller="UploaderController">
                 <label for="adminUser_avatar"  class="col-sm-2 control-label">用户头像</label>
                 <div class="col-sm-10">
@@ -52,8 +55,9 @@
                   <span class="help-block ng-hide" ng-show="myForm.adminUser_avatar.$invalid && !myForm.adminUser_avatar.$pristine"><span class="glyphicon glyphicon-remove"></span>对不起，请选择一个头像文件！</span>
                   <span class="help-block ng-hide" ng-show="myForm.adminUser_avatar.$valid && !myForm.adminUser_avatar.$pristine"><span class="glyphicon glyphicon-ok"></span>恭喜您，您已选择头像文件！</span>
                 </div>
-
               </div>
+
+
 
               <div class="form-group" ng-class="{'has-warning':myForm.adminUser_password.$invalid && !myForm.adminUser_password.$pristine,'has-success':myForm.adminUser_password.$valid && !myForm.adminUser_password.$pristine}">
                 <label for="adminUser_password" class="col-sm-2 control-label">密码</label>
@@ -64,6 +68,8 @@
                   <span class="help-block ng-hide" ng-show="myForm.adminUser_password.$valid && !myForm.adminUser_password.$pristine"><span class="glyphicon glyphicon-ok"></span>恭喜您，该密码可用！</span>
                 </div>
               </div>
+
+              <!--确认密码-->
               <div class="form-group" ng-class="{'has-warning':myForm.adminUser_repassword.$invalid && !myForm.adminUser_repassword.$pristine,'has-success':myForm.adminUser_repassword.$valid && !myForm.adminUser_repassword.$pristine}">
                 <label for="adminUser_repassword" class="col-sm-2 control-label">确认密码</label>
 
@@ -73,6 +79,8 @@
                   <span class="help-block ng-hide" ng-show="myForm.adminUser_repassword.$valid && !myForm.adminUser_repassword.$pristine"><span class="glyphicon glyphicon-ok"></span>恭喜您，密码输入正确！</span>
                 </div>
               </div>
+
+
               <div class="form-group" ng-class="{'has-warning':myForm.adminUser_userGroup.$invalid && !myForm.adminUser_userGroup.$pristine,'has-success':myForm.adminUser_userGroup.$valid && !myForm.adminUser_userGroup.$pristine}">
                 <label  class="col-sm-2 control-label">用户组</label>
                 <div class="col-sm-10">
@@ -152,7 +160,6 @@
           data:$.param({
             adminUser_username:$scope.adminUser_username,
             adminUser_nickname:$scope.adminUser_nickname,
-            adminUser_avatar:$scope.adminUser_avatar,
             adminUser_password:$scope.adminUser_password,
             adminUser_repassword:$scope.adminUser_repassword,
             adminUser_userGroup:$scope.adminUser_userGroup,
@@ -209,14 +216,7 @@
 
   });
 
-  app.controller('UploaderController', function($scope, fileReader){
-      $scope.getFile = function () {
-        fileReader.readAsDataUrl($scope.file, $scope)
-          .then(function(result) {
-            $scope.imageSrc = result;
-          });
-      };
-    });
+
 </script>
 <script src="/public/js/backstage/directives.js"></script>
 {% endblock %}
