@@ -151,6 +151,9 @@ router.get('/articles_categories_add',function (req,res,next) {
   res.render('admin/articles_categories_add');
 });
 
-
+//接收文件上传请求
+router.post('/upload',function (req,res,next) {
+  console.log('接收成功');
+});
 
 module.exports=router;
