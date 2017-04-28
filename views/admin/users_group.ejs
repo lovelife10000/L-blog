@@ -1,5 +1,4 @@
-{% extends 'layout.html' %}
-{% block users %}
+<%- include('header') %>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -31,12 +30,12 @@
                 <th>状态</th>
                 <th>操作</th>
               </tr>
-              {% for x in adminUserGroups %}
+              <% adminUserGroups.forEach(function(x){ %>
               <tr>
-                <td>{{x.pid}}</td>
-                <td>{{x.name}}</td>
-                <td>{{x.remark}}</td>
-                <td>{{x.status}}</td>
+                <td><%= x.pid %></td>
+                <td><%= x.name %></td>
+                <td><%= x.remark %></td>
+                <td><%= x.status %></td>
                 <td>
                   <button type="button" class="btn btn-danger">禁用</button>
                   <button type="button" class="btn btn-primary">编辑</button>
@@ -44,7 +43,7 @@
                   <button type="button" class="btn btn-info">投稿分类</button>
                 </td>
               </tr>
-              {% endfor %}
+              <% }); %>
             </table>
           </div>
           <!-- /.box-body -->
@@ -55,4 +54,4 @@
   </section>
 
 </div>
-{% endblock %}
+<%- include('footer') %>

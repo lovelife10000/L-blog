@@ -9,7 +9,7 @@ var swig=require('swig');
 var mongoose=require('mongoose');
 var bodyParser=require('body-parser');
 var Cookies=require('cookies');
-var ejs=require('ejs');
+
 
 //创建app应用
 var app=express();
@@ -23,11 +23,12 @@ app.use(function(req,res,next) {
 app.use('/public',express.static(__dirname+'/public'));
 
 //设置模版引擎
-app.engine('html', swig.renderFile);
+// app.engine('html', swig.renderFile);
 //设置视图文件夹
 app.set('views','./views');
 //设置视图引擎格式
-app.set('view engine','html');
+// app.set('view engine','html');
+app.set('view engine','ejs');
 
 //在开发模式中，取消模版缓存
 swig.setDefaults({cache:false});

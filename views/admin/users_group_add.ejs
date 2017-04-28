@@ -1,5 +1,4 @@
-{% extends 'layout.html' %}
-{% block usersGroupAdd %}
+<%- include('header') %>
 <style>
   .example-modal .modal {
     position: relative;
@@ -86,7 +85,7 @@
   </section>
   <!-- /.content -->
 </div>
-{% include 'modals.html' %}
+
 
 
 
@@ -144,4 +143,4 @@
     });
   });
 </script>
-{% endblock %}
+<%- include('footer') %>

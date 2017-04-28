@@ -1,6 +1,4 @@
-{% extends 'layout.html' %}
-
-{% block usersAdd %}
+<%- include('header') %>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -217,9 +215,9 @@
   <!-- /.content -->
 </div>
 
-{% endblock %}
 
-{% block usersAdd-js %}
+
+
 <script src="/public/js/controllers/users_add.controller.js"></script>
 <script src="/public/js/directives/directives.js"></script>
-{% endblock %}
+<%- include('footer') %>
