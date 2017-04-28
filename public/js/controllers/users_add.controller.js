@@ -94,9 +94,7 @@ app.controller('myCtrl', function ($scope, $http) {
     }
   };
 
-});
-
-$(function () {
+  $scope.logo='111';
 
   $('#adminUser_avatar').uploadify({
 
@@ -108,23 +106,13 @@ $(function () {
     'height': 30,//显示的高度和宽度，默认 height 30；width 120
     'fileTypeDesc': 'Image Files',//上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
     'fileTypeExts': '*.gif; *.jpg; *.png',//允许上传的文件后缀
-    'sizeLimit': 1024 * 1024 * 1,//上传文件大小限制
+    'fileSizeLimit' : '2000KB',//上传文件大小限制
     'auto': true,//选择文件后自动上传
     'multi': false,//设置为true将允许多文件上传
 
-    // 'onUploadSuccess' : function(file, data, response) {//上传成功的回调
-    //   if(data === 'typeError'){
-    //     $.tipsShow({
-    //       message : "文件类型不正确，请重试！",
-    //       type : 'warning',
-    //       callBack : function(){
-    //         return;
-    //       }
-    //     });
-    //   }else {
-    //     callBack(data);
-    //   }
-    // },
+    'onUploadSuccess' : function(file, data, response) {//上传成功的回调
+      $scope.logo=data;
+    },
     //
     // 'onComplete': function(event, queueID, fileObj, response, data) {//当单个文件上传完成后触发
     //   //event:事件对象(the event object)

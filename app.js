@@ -9,6 +9,7 @@ var swig=require('swig');
 var mongoose=require('mongoose');
 var bodyParser=require('body-parser');
 var Cookies=require('cookies');
+var ejs=require('ejs');
 
 //创建app应用
 var app=express();
