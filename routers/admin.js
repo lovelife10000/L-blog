@@ -233,7 +233,7 @@ router.post('/upload', function (req, res, next) {
   });
 
   form.on('end', function () {//解析完毕
-    res.end('/upload/images/'+newFileName);
+    res.end('/public/upload/images/'+newFileName);
   });
 
   form.parse(req, function (error, fields, files) {//解析request对象

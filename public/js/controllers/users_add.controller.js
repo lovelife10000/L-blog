@@ -94,7 +94,7 @@ app.controller('myCtrl', function ($scope, $http) {
     }
   };
 
-  $scope.logo='111';
+  $scope.logo='/public/upload/images/defaultlogo.png';
 
   $('#adminUser_avatar').uploadify({
 
@@ -111,7 +111,7 @@ app.controller('myCtrl', function ($scope, $http) {
     'multi': false,//设置为true将允许多文件上传
 
     'onUploadSuccess' : function(file, data, response) {//上传成功的回调
-      $scope.logo=data;
+      $("#adminUser_avatar_preview").attr("src",data);
     },
     //
     // 'onComplete': function(event, queueID, fileObj, response, data) {//当单个文件上传完成后触发
