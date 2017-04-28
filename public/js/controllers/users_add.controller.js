@@ -20,6 +20,7 @@ app.controller('myCtrl', function ($scope, $http) {
           adminUser_password: $scope.adminUser_password,
           adminUser_repassword: $scope.adminUser_repassword,
           adminUser_userGroup: $scope.adminUser_userGroup,
+          adminUser_status: $scope.adminUser_status,
           adminUser_phone: $scope.adminUser_phone,
           adminUser_email: $scope.adminUser_email,
           adminUser_remark: $scope.adminUser_remark,
@@ -31,26 +32,6 @@ app.controller('myCtrl', function ($scope, $http) {
 
       });
 
-      //发送另外一个请求，处理头像的上传
-      $http({
-        method: 'POST',
-        url: 'users_add/add',
-        data: $.param({
-          adminUser_username: $scope.adminUser_username,
-          adminUser_nickname: $scope.adminUser_nickname,
-          adminUser_password: $scope.adminUser_password,
-          adminUser_repassword: $scope.adminUser_repassword,
-          adminUser_userGroup: $scope.adminUser_userGroup,
-          adminUser_phone: $scope.adminUser_phone,
-          adminUser_email: $scope.adminUser_email,
-          adminUser_remark: $scope.adminUser_remark,
-        }),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).then(function (res) {
-
-      }, function (res) {
-
-      });
 
 
     } else {
@@ -66,6 +47,13 @@ app.controller('myCtrl', function ($scope, $http) {
     {name: '投稿员', id: 5}
   ];
   $scope.adminUser_userGroup = $scope.userGroupOptions[0].id;//设置默认值
+
+
+  $scope.statusOptions = [
+    {name: '启用', id: 1},
+    {name: '禁用', id: 0},
+  ];
+  $scope.adminUser_status = $scope.statusOptions[0].id;//设置默认值
 
   /*
    * 监听对用户名的输入，判断用户名是否已经存在

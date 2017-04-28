@@ -11,6 +11,10 @@ var AdminUserSchema=new mongoose.Schema({
   adminUser_avatar:{ type: String, default: "/upload/images/defaultlogo.png" },
   adminUser_password:String,
   adminUser_repassword:String,
+  adminUser_status:{
+    type:Number,
+    default:1
+  },
   adminUser_userGroup: {
     type : String,
     ref : 'AdminUserGroup'
