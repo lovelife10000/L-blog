@@ -48,7 +48,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label  class="col-sm-2 control-label">父级组ID</label>
+                <label  class="col-sm-2 control-label">父级组</label>
                 <div class="col-sm-10">
                   <select class="form-control" name="pid" ng-model="pid" ng-options="x.id as x.name for x in pidOptions" >
                     <option value="">-- 请选择 --</option>
@@ -101,11 +101,11 @@
     ];
     $scope.status=$scope.statusOptions[0].id;//设置默认值
     $scope.pidOptions = [
-      {name:'无',id:1},
-      {name:'超级管理员',id:2},
-      {name:'网站管理员',id:3},
-      {name:'内容管理员',id:4},
-      {name:'投稿员',id:5}
+      {name:'无',id:0},
+      {name:'超级管理员',id:1},
+      {name:'网站管理员',id:2},
+      {name:'内容管理员',id:3},
+      {name:'投稿员',id:4}
     ];
     $scope.pid=$scope.pidOptions[0].id;//设置默认值
 
@@ -114,10 +114,27 @@
       var pid=$scope.pid;
       var status=$scope.status;
       var remark=$scope.remark;
+      var group_id='超级管理员';
+      switch (name){
+        case '超级管理员':
+          group_id=1;
+          break;
+        case '网站管理员':
+          group_id=2;
+          break;
+        case '内容管理员':
+          group_id=3;
+          break;
+        case '投稿员':
+          group_id=4;
+          break
+
+      }
       $http({
         method:'POST',
         url:'users_group_add/add',
         data:$.param({
+          group_id:group_id,
           name:name,
           pid:pid,
           status:status,

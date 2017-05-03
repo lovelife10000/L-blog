@@ -5,6 +5,7 @@ var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var AdminUserGroupSchema=Schema({
   id:Number,
+  group_id:Number,
   name:String,
   pid:Number,
   status:Number,

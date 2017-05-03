@@ -48,6 +48,7 @@ router.post('/users_group_add/add', function (req, res, next) {
   var pid = req.body.pid;
   var status = req.body.status;
   var remark = req.body.remark;
+  var group_id=req.body.group_id;
   /*
    * 查询数据库
    * */
@@ -61,6 +62,7 @@ router.post('/users_group_add/add', function (req, res, next) {
       });
     } else {
       var adminUserGroup = new AdminUserGroup({
+        group_id:group_id,
         name: name,
         pid: pid,
         status: status,
@@ -83,8 +85,9 @@ router.get('/users', function (req, res, next) {
    * */
   AdminUser.find().then(function (users) {
     console.log(users);
+
     res.render('admin/users', {
-      users: users
+      users: users,
     });
   });
 

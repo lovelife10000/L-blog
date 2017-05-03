@@ -10,6 +10,24 @@ app.controller('myCtrl', function ($scope, $http) {
    * */
   $scope.addAdminUser = function (valid) {
     console.log(valid);
+    var adminUser_userGroup=1;
+
+      switch ($scope.adminUser_userGroup){
+        case 1:
+          adminUser_userGroup= '超级管理员';
+          break;
+        case 2:
+          adminUser_userGroup= '网站管理员';
+          break;
+        case 3:
+          adminUser_userGroup= '内容管理员';
+          break;
+        case 4:
+          adminUser_userGroup= '投稿员';
+          break;
+      }
+
+
     if (valid) {
       $http({
         method: 'POST',
@@ -19,7 +37,7 @@ app.controller('myCtrl', function ($scope, $http) {
           adminUser_nickname: $scope.adminUser_nickname,
           adminUser_password: $scope.adminUser_password,
           adminUser_repassword: $scope.adminUser_repassword,
-          adminUser_userGroup: $scope.adminUser_userGroup,
+          adminUser_userGroup: adminUser_userGroup,
           adminUser_status: $scope.adminUser_status,
           adminUser_phone: $scope.adminUser_phone,
           adminUser_email: $scope.adminUser_email,
@@ -41,10 +59,10 @@ app.controller('myCtrl', function ($scope, $http) {
   };
 
   $scope.userGroupOptions = [
-    {name: '超级管理员', id: 2},
-    {name: '网站管理员', id: 3},
-    {name: '内容管理员', id: 4},
-    {name: '投稿员', id: 5}
+    {name: '超级管理员', id: 1},
+    {name: '网站管理员', id: 2},
+    {name: '内容管理员', id: 3},
+    {name: '投稿员', id: 4}
   ];
   $scope.adminUser_userGroup = $scope.userGroupOptions[0].id;//设置默认值
 

@@ -34,20 +34,22 @@
                 <th>注册时间</th>
                 <th>操作</th>
               </tr>
+              <% users.forEach(function(x){ %>
               <tr>
                 <td>1.</td>
-                <td>Update software</td>
-                <td>状态</td>
-                <td>nickname</td>
-                <td>组1</td>
+                <td><%= x.adminUser_username %></td>
+                <td><%= x.adminUser_status %></td>
+                <td><%= x.adminUser_status %></td>
+                <td><%= x.adminUser_userGroup %></td>
                 <td>999</td>
-                <td>2017年4月21日</td>
+                <td><%= x.date %></td>
                 <td>
                   <button type="button" class="btn btn-primary">编辑</button>
                   <button type="button" class="btn btn-danger">删除</button>
                   <button type="button" class="btn btn-info">投稿分类</button>
                 </td>
               </tr>
+              <% }); %>
             </table>
           </div>
           <!-- /.box-body -->
