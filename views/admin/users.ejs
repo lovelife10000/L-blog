@@ -14,7 +14,7 @@
   </section>
 
 
-  <section class="content">
+  <section class="content" ng-app="myApp" ng-controller="users">
     <div class="row">
       <div class="col-md-12">
         <div class="box">
@@ -34,22 +34,20 @@
                 <th>注册时间</th>
                 <th>操作</th>
               </tr>
-              <% users.forEach(function(x){ %>
-              <tr>
+              <tr ng-repeat="x in data">
                 <td>1.</td>
-                <td><%= x.adminUser_username %></td>
-                <td><%= x.adminUser_status %></td>
-                <td><%= x.adminUser_status %></td>
-                <td><%= x.adminUser_userGroup %></td>
+                <td>{{ x.adminUser_username}}</td>
+                <td>{{ x.adminUser_status }}</td>
+                <td>{{ x.adminUser_status }}</td>
+                <td>{{ x.adminUser_userGroup }}</td>
                 <td>999</td>
-                <td><%= x.date %></td>
+                <td>{{ x.date | date:"yyyy-MM-dd HH:mm:ss"}}</td>
                 <td>
                   <button type="button" class="btn btn-primary">编辑</button>
                   <button type="button" class="btn btn-danger">删除</button>
                   <button type="button" class="btn btn-info">投稿分类</button>
                 </td>
               </tr>
-              <% }); %>
             </table>
           </div>
           <!-- /.box-body -->

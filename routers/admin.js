@@ -84,15 +84,23 @@ router.get('/users', function (req, res, next) {
    * 读取用户数据
    * */
   AdminUser.find().then(function (users) {
-    console.log(users);
-
-    res.render('admin/users', {
-      users: users,
-    });
+    console.log('fdsahoigh'+users);
+    res.render('admin/users');
   });
 
 });
+router.get('/users2', function (req, res, next) {
 
+  /*
+   * 读取用户数据
+   * */
+  AdminUser.find().then(function (users) {
+    console.log('fdsahoigh'+users);
+
+    res.json(users);
+  });
+
+});
 //添加用户
 router.get('/users_add', function (req, res, next) {
   res.render('admin/users_add');

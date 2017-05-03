@@ -23,7 +23,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form name="myForm" class="form-horizontal" ng-app="myApp" ng-controller="myCtrl" onsubmit="return false;">
+          <form name="myForm" class="form-horizontal" ng-app="myApp" ng-controller="usersAdd" onsubmit="return false;">
             <div class="box-body">
               <div class="form-group"
                    ng-class="{'has-warning':myForm.adminUser_username.$invalid && !myForm.adminUser_username.$pristine,'has-success':myForm.adminUser_username.$valid && !myForm.adminUser_username.$pristine,'has-error':isUsernameExist}">
@@ -231,6 +231,5 @@
 
 
 
-<script src="/public/js/controllers/users_add.controller.js"></script>
-<script src="/public/js/directives/directives.js"></script>
+
 <%- include('footer') %>
