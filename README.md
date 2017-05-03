@@ -1,5 +1,8 @@
 # L-blog
 基于nodejs、mongodb、express、angularjs、bootstrap、ejs等搭建的blog内容管理系统
+###-------------------------------------------------------------------------------
+
+![image](https://github.com/lovelife10000/L-blog/raw/master/public/upload/images/Title.png)
 
 # 开发流程
 
