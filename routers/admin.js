@@ -17,6 +17,51 @@ var system = require('../util/system');
 router.get('/', function (req, res, next) {
   res.render('admin/admin');
 });
+/*
+ * 用户登录
+ * */
+router.get('/admin_login',function(req,res,next) {
+  res.render('admin/admin_login');
+});
+router.post('/admin_login',function(req,res,next) {
+  var username=req.body.adminUser_username;
+  var password=req.body.adminUser_password;
+  console.log(username);
+  AdminUser.findOne({
+    adminUser_username:username
+  }).then(function(info) {
+    if(!info){
+      res.json({
+        code:0,
+        msg:'用户名不存在'
+      });
+    }else {
+      if(info.adminUser_password!==password){
+        res.json({
+          code:0,
+          msg:'用户名或密码不正确'
+        });
+      }else {
+        req.cookies.set('loginInfo',JSON.stringify({
+          adminUser_username:username,
+          adminUser_password:password
+        }));
+        res.json({
+          code:1,
+          msg:'登录成功'
+        });
+      }
+    }
+  });
+});
+
+/*
+* 基本信息
+* */
+router.get('/basic_info',function(req,res,next) {
+  res.render('admin/basic_info');
+});
+
 //所有用户组
 router.get('/users_group', function (req, res, next) {
   /*
@@ -37,7 +82,18 @@ router.get('/users_group', function (req, res, next) {
   });
 
 });
+router.get('/users_group2', function (req, res, next) {
 
+  /*
+   * 读取用户数据
+   * */
+  AdminUserGroup.find().then(function (userGroup) {
+    console.log('fdsahoigh'+userGroup);
+
+    res.json(userGroup);
+  });
+
+});
 //添加用户组
 router.get('/users_group_add', function (req, res, next) {
   res.render('admin/users_group_add');
@@ -255,5 +311,8 @@ router.post('/upload', function (req, res, next) {
 
 
 });
+
+
+
 
 module.exports = router;

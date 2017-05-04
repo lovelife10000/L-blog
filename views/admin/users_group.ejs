@@ -13,7 +13,7 @@
     </ol>
   </section>
 
-  <section class="content">
+  <section class="content" ng-app="myApp" ng-controller="usersGroup">
     <div class="row">
       <div class="col-xs-12">
         <div class="box">
@@ -30,12 +30,12 @@
                 <th>状态</th>
                 <th>操作</th>
               </tr>
-              <% adminUserGroups.forEach(function(x){ %>
-              <tr>
-                <td><%= x.pid %></td>
-                <td><%= x.name %></td>
-                <td><%= x.remark %></td>
-                <td><%= x.status %></td>
+
+              <tr ng-repeat="x in data">
+                <td>{{ x.pid }}</td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.remark }}</td>
+                <td>{{ x.status }}</td>
                 <td>
                   <button type="button" class="btn btn-danger">禁用</button>
                   <button type="button" class="btn btn-primary">编辑</button>
@@ -43,7 +43,7 @@
                   <button type="button" class="btn btn-info">投稿分类</button>
                 </td>
               </tr>
-              <% }); %>
+
             </table>
           </div>
           <!-- /.box-body -->

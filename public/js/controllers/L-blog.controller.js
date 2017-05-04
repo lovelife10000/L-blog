@@ -154,5 +154,37 @@ app.controller('users',['$scope','$http',function($scope,$http) {
 
   });
 }]);
+app.controller('usersGroup',['$scope','$http',function($scope,$http) {
+  $http({
+    method:'GET',
+    url:'users_group2',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  }).then(function success(res) {
+    $scope.data=res.data;
+  },function error(res) {
 
+  });
+}]);
+
+app.controller('adminLogin',['$scope','$http',function($scope,$http) {
+
+  $scope.login=function () {
+    $http({
+      method:'POST',
+      url:'admin_login',
+      data:$.param({
+        adminUser_username:$scope.adminUser_username,
+        adminUser_password:$scope.adminUser_password
+      }),
+      headers:{'content-type':'application/x-www-form-urlencoded'}
+    }).then(function success(res) {
+      if(res.data.code===1){
+        window.location.href='basic_info';
+      }
+    },function error(res) {
+
+    });
+  };
+
+}]);
 
