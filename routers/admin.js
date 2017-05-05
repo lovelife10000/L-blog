@@ -21,7 +21,15 @@ router.get('/', function (req, res, next) {
  * 用户登录
  * */
 router.get('/admin_login',function(req,res,next) {
-  res.render('admin/admin_login');
+  console.log(req.userInfo);
+  if(!system.isOwnEmpty(req.userInfo)){
+    //res.location('http://www.baidu.com');
+    res.redirect('basic_info');
+  }else {
+
+    res.render('admin/admin_login');
+  }
+
 });
 router.post('/admin_login',function(req,res,next) {
   var username=req.body.adminUser_username;
@@ -59,10 +67,28 @@ router.post('/admin_login',function(req,res,next) {
 * 基本信息
 * */
 router.get('/basic_info',function(req,res,next) {
-  res.render('admin/basic_info');
+
+  AdminUser.findOne({
+    adminUser_username:req.userInfo.adminUser_username
+  }).then(function(userInfo) {
+    var username=userInfo.adminUser_username;
+    var avatar=userInfo.adminUser_avatar;
+    var email=userInfo.adminUser_email;
+    var date=userInfo.date;
+    res.render('admin/basic_info',{
+      username:username,
+      avatar:avatar,
+      email:email,
+      date:date
+    });
+
+  });
+
 });
 
-//所有用户组
+/*
+* 所有用户组
+* */
 router.get('/users_group', function (req, res, next) {
   /*
    * 查询数据库，获取用户组列表
@@ -88,13 +114,15 @@ router.get('/users_group2', function (req, res, next) {
    * 读取用户数据
    * */
   AdminUserGroup.find().then(function (userGroup) {
-    console.log('fdsahoigh'+userGroup);
+
 
     res.json(userGroup);
   });
 
 });
-//添加用户组
+/*
+* 添加用户组
+* */
 router.get('/users_group_add', function (req, res, next) {
   res.render('admin/users_group_add');
 });
@@ -133,14 +161,16 @@ router.post('/users_group_add/add', function (req, res, next) {
   });
 
 });
-//所有用户
+/*
+* 所有用户
+* */
 router.get('/users', function (req, res, next) {
 
   /*
    * 读取用户数据
    * */
   AdminUser.find().then(function (users) {
-    console.log('fdsahoigh'+users);
+
     res.render('admin/users');
   });
 
@@ -151,13 +181,15 @@ router.get('/users2', function (req, res, next) {
    * 读取用户数据
    * */
   AdminUser.find().then(function (users) {
-    console.log('fdsahoigh'+users);
+
 
     res.json(users);
   });
 
 });
-//添加用户
+/*
+* 添加用户
+* */
 router.get('/users_add', function (req, res, next) {
   res.render('admin/users_add');
 });
@@ -171,7 +203,7 @@ router.post('/users_add/add', function (req, res, next) {
   var adminUser_phone = Number(req.body.adminUser_phone);
   var adminUser_email = req.body.adminUser_email;
   var adminUser_remark = req.body.adminUser_remark;
-  console.log(adminUser_username);
+
 
   /*
    * 查询数据库是否已经存在该用户
@@ -206,34 +238,44 @@ router.post('/users_add/add', function (req, res, next) {
   });
 });
 
-//登录记录
+/*
+* 登录记录
+* */
 router.get('/login_log', function (req, res, next) {
   res.render('admin/login_log');
 });
 
-//所有文章
+/*
+* 所有文章
+* */
 router.get('/articles', function (req, res, next) {
   res.render('admin/articles');
 });
 
-//文章分类
+/*
+* 文章分类
+* */
 router.get('/articles_categories', function (req, res, next) {
   res.render('admin/articles_categories');
 });
 
-//添加分类
+/*
+* 添加分类
+* */
 router.get('/articles_categories_add', function (req, res, next) {
   res.render('admin/articles_categories_add');
 });
 
-//接收文件上传请求
+/*
+* 接收文件上传请求
+* */
 router.post('/upload', function (req, res, next) {
 
   var params = url.parse(req.url, true, false);//获取参数
   var fileType = params.query.type;//获取文件类型
   var fileKey = params.query.key;//获取上传的文件的用途
 
-  // console.log(params);
+
 
   var updatePath = "public/upload/images/";//存放目录
   // var smallImgPath = "public/upload/smallimages/";//存放目录
@@ -249,15 +291,12 @@ router.post('/upload', function (req, res, next) {
 
 
   form.on('field', function (field, value) { //POST 普通数据 不包含文件 field 表单name value 表单value
-    // console.log(field+'-'+value);
-    // console.log(1);
+
     // fields.push([field,value]);
   });
 
   form.on('file', function (field, file) {//上传文件
-    // console.log(field+'-'+file);
-    // console.log(file);
-    // console.log(file.path);
+
     // files.push([field, file]);
     // docs.push(file);
 
@@ -304,9 +343,7 @@ router.post('/upload', function (req, res, next) {
   });
 
   form.parse(req, function (error, fields, files) {//解析request对象
-    // console.log(error);
-    // console.log(fields);
-    // console.log(files);
+
   });
 
 

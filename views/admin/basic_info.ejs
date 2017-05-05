@@ -1,102 +1,194 @@
 <%- include('header') %>
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h1>
-      L-blog
-      <small>登录记录</small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
-      <li><a href="#">用户组管理</a></li>
-      <li class="active">登录记录</li>
-    </ol>
-  </section>
+
+    <section class="content-header">
+        <h1>
+            L-blog
+            <small>基本信息</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
+            <li><a href="#">仪表盘</a></li>
+            <li class="active">基本信息</li>
+        </ol>
+    </section>
 
 
-  <section class="content">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title">登录记录</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body">
-            <table class="table table-hover  table-bordered table-striped">
-              <tr>
-                <th style="width: 10px">ID</th>
-                <th>用户名</th>
-                <th>密码或者错误的密码</th>
-                <th>登录时间</th>
-                <th>IP</th>
-                <th>类型</th>
-              </tr>
-              <tr>
-                <td>1.</td>
-                <td>Update software</td>
-                <td>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-red">55%</span></td>
-                <td>0.0.0.0</td>
-                <td>登录成功</td>
+    <section class="content">
+        <div class="row">
 
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>Clean database</td>
-                <td>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-yellow">70%</span></td>
-                <td>0.0.0.0</td>
-                <td>登录成功</td>
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td>Cron job running</td>
-                <td>
-                  <div class="progress progress-xs progress-striped active">
-                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-light-blue">30%</span></td>
-                <td>0.0.0.0</td>
-                <td>登录成功</td>
-              </tr>
-              <tr>
-                <td>4.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <div class="progress progress-xs progress-striped active">
-                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-green">90%</span></td>
-                <td>0.0.0.0</td>
-                <td>登录成功</td>
-              </tr>
-            </table>
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+            <div class="col-md-6">
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">系统通知</h3>
+                    </div>
+
+
+                    <div class="box-body">
+                        <div class="well"><h4>版本信息</h4>
+                            当前版本: L-blog&nbsp;v1.0.0 发布时间: 20170505 <a href="">检查更新</a></div>
+                        <div class="well">
+
+                            <h4>QQ讨论</h4>
+                            群号：1358180015
+
+                            <h4>信息反馈</h4>
+                            Email：1358180015@qq.com
+
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer"></div>
+
+                </div>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">关于作者</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="well">
+                            <h4>开发作者</h4>
+                            Kevin/web developer
+                            <h4>github</h4>
+                            <a href=https://github.com/lovelife10000">https://github.com/lovelife10000</a>
+
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">用户系统信息</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    <div class="box-body">
+
+
+                        <div class="row ">
+
+
+                            <div class="col-md-3">
+
+                                <img style="width: 100%" src="/public<%= avatar %>" alt="">
+                            </div>
+
+
+                            <div class="col-md-6  ">
+
+                                <h1></h1>
+
+
+                                <p>用户名: <%= username %> </p>
+
+                                <p>邮箱: <%= email %>></p>
+
+                                <p>注册时间: <%= date %>></p>
+
+                                <!--end span8-->
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="row ">
+
+                            <br>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class=" col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-green">
+                                    <div class="inner">
+                                        <h3>
+                                            1篇
+                                        </h3>
+
+                                        <p>
+                                            文章
+                                        </p>
+                                    </div>
+                                    <div class="icon">
+                                        <span class="glyphicon glyphicon-stats"></span>
+                                    </div>
+                                    <a href="/a/index.php?m=admin&amp;c=posts&amp;a=index" class="small-box-footer">
+                                        所有文章 <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+
+                            <div class=" col-xs-6">
+                                <!-- small box -->
+                                <div class="small-box bg-yellow">
+                                    <div class="inner">
+                                        <h3>
+                                            1名
+                                        </h3>
+
+                                        <p>
+                                            注册用户
+                                        </p>
+                                    </div>
+                                    <div class="icon">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </div>
+                                    <a href="/a/index.php?m=admin&amp;c=access&amp;a=index" class="small-box-footer">
+                                        用户管理 <i class="fa fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- ./col -->
+
+                        </div>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+
+                    </div>
+                    <!-- /.box-footer -->
+
+                </div>
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">其他信息</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="well">
+                            <h4>提示</h4>
+                            未完全开发完
+                        </div>
+                        <div class="well">
+                            <h4>获取最新源码</h4>
+                            Github:<a href="https://github.com/lovelife10000/L-blog">https://github.com/lovelife10000/L-blog</a>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+            </div>
+
         </div>
-      </div>
-    </div>
-  </section>
+
+    </section>
 
 </div>
 <%- include('footer') %>

@@ -68,7 +68,17 @@ var system={
     };
   },
 
-
+  isOwnEmpty:function(obj){
+    for(var name
+      in obj)
+    {
+      if(obj.hasOwnProperty(name))
+      {
+        return false;
+      }
+    }
+    return true;
+  }
   
 };
 
