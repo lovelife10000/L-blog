@@ -10,7 +10,7 @@ var bodyParser=require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var settings=require('./util/settings');
-
+var redisStore = require('connect-redis')(session);
 /*
 * 创建app应用
 * */
@@ -26,12 +26,12 @@ app.use(cookieParser());
 * */
 app.use(session({
   secret: settings.SESSION_SECRET,
-  // store: new RedisStore({
-  //   port: settings.redis_port,
-  //   host: settings.redis_host,
-  //   pass : settings.redis_psd,
-  //   ttl: 1800 // 过期时间
-  // }),
+  store: new redisStore({
+    port: settings.REDIS_PORT,
+    host: settings.REDIS_HOST,
+    pass : settings.REDIS_PSD,
+    ttl: 1800 // 过期时间
+  }),
   resave: true,
   //saveUninitialized: true,
   cookie: { maxAge: 60 * 1000 }
@@ -48,10 +48,15 @@ app.use('/',function(req,res,next) {
     try{
       req.userInfo=JSON.parse(req.cookies.loginInfo);
     }
-    catch(err){
+    catch(err){}
+  }
 
-    }
-
+  if(req.session.isVisit) {
+    req.session.isVisit++;
+    res.send('<p>第 ' + req.session.isVisit + '次来到此页面</p>');
+  } else {
+    req.session.isVisit = 1;
+    res.send('欢迎第一次来这里');
   }
 
   next();
