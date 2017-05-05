@@ -8,19 +8,21 @@ var express=require('express');
 var swig=require('swig');
 var mongoose=require('mongoose');
 var bodyParser=require('body-parser');
-var Cookies=require('cookies');
+var cookieParser = require('cookie-parser');
 
 
 //创建app应用
 var app=express();
 
 //设置cookie
+app.use(cookieParser());
 app.use(function(req,res,next) {
-  req.cookies=new Cookies(req,res);
+
+
   req.userInfo={};
-  if(req.cookies.get('loginInfo')){
+  if(req.cookies.loginInfo){
     try{
-      req.userInfo=JSON.parse(req.cookies.get('loginInfo'));
+      req.userInfo=JSON.parse(req.cookies.loginInfo);
     }
     catch(err){
 
@@ -30,6 +32,10 @@ app.use(function(req,res,next) {
 
   next();
 });
+
+
+
+
 //设置静态文件托管
 app.use('/public',express.static(__dirname+'/public'));
 

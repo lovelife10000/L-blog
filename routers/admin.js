@@ -20,43 +20,53 @@ router.get('/', function (req, res, next) {
 /*
  * 用户登录
  * */
-router.get('/admin_login',function(req,res,next) {
+router.get('/admin_login', function (req, res, next) {
   console.log(req.userInfo);
-  if(!system.isOwnEmpty(req.userInfo)){
+  if (!system.isOwnEmpty(req.userInfo)) {
     //res.location('http://www.baidu.com');
     res.redirect('basic_info');
-  }else {
+  } else {
 
     res.render('admin/admin_login');
   }
 
 });
-router.post('/admin_login',function(req,res,next) {
-  var username=req.body.adminUser_username;
-  var password=req.body.adminUser_password;
+router.post('/admin_login', function (req, res, next) {
+  var username = req.body.adminUser_username;
+  var password = req.body.adminUser_password;
   console.log(username);
   AdminUser.findOne({
-    adminUser_username:username
-  }).then(function(info) {
-    if(!info){
+    adminUser_username: username
+  }).then(function (info) {
+    if (!info) {
       res.json({
-        code:0,
-        msg:'用户名不存在'
+        code: 0,
+        msg: '用户名不存在'
       });
-    }else {
-      if(info.adminUser_password!==password){
+    } else {
+      if (info.adminUser_password !== password) {
         res.json({
-          code:0,
-          msg:'用户名或密码不正确'
+          code: 0,
+          msg: '用户名或密码不正确'
         });
-      }else {
-        req.cookies.set('loginInfo',JSON.stringify({
-          adminUser_username:username,
-          adminUser_password:password
-        }));
+      } else {
+
+        //发送cookie到客户端
+        res.cookie('loginInfo', JSON.stringify({
+          adminUser_username: username,
+          adminUser_password: password
+        }), {
+        //   domain: '.example.com',//cookie在什么域名下有效，类型为String,。默认为网站域名
+        //   expires: new Date(Date.now() + 900000),//cookie过期时间，类型为Date。如果没有设置或者设置为0，那么该cookie只在这个这个session有效，即关闭浏览器后，这个cookie会被浏览器删除。
+        //   httpOnly: true,//只能被web server访问，类型Boolean。
+        //   maxAge: 900000,//实现expires的功能，设置cookie过期的时间，类型为String，指明从现在开始，多少毫秒以后，cookie到期。
+        //   path: '/admin',//cookie在什么路径下有效，默认为'/'，类型为String
+        //   secure: false,//只能被HTTPS使用，类型Boolean，默认为false
+        //   signed: false//使用签名，类型Boolean，默认为false。`express会使用req.secret来完成签名，需要cookie-parser配合使用`
+        });
         res.json({
-          code:1,
-          msg:'登录成功'
+          code: 1,
+          msg: '登录成功'
         });
       }
     }
@@ -64,31 +74,33 @@ router.post('/admin_login',function(req,res,next) {
 });
 
 /*
-* 基本信息
-* */
-router.get('/basic_info',function(req,res,next) {
+ * 基本信息
+ * */
+router.get('/basic_info', function (req, res, next) {
 
-  AdminUser.findOne({
-    adminUser_username:req.userInfo.adminUser_username
-  }).then(function(userInfo) {
-    var username=userInfo.adminUser_username;
-    var avatar=userInfo.adminUser_avatar;
-    var email=userInfo.adminUser_email;
-    var date=userInfo.date;
-    res.render('admin/basic_info',{
-      username:username,
-      avatar:avatar,
-      email:email,
-      date:date
-    });
+  // AdminUser.findOne({
+  //   adminUser_username: req.userInfo.adminUser_username
+  // }).then(function (userInfo) {
+  //   var username = userInfo.adminUser_username;
+  //   var avatar = userInfo.adminUser_avatar;
+  //   var email = userInfo.adminUser_email;
+  //   var date = userInfo.date;
+    res.render('admin/basic_info'
+    //   {
+    //   username: username,
+    //   avatar: avatar,
+    //   email: email,
+    //   date: date
+    // }
+    );
 
-  });
+  // });
 
 });
 
 /*
-* 所有用户组
-* */
+ * 所有用户组
+ * */
 router.get('/users_group', function (req, res, next) {
   /*
    * 查询数据库，获取用户组列表
@@ -121,8 +133,8 @@ router.get('/users_group2', function (req, res, next) {
 
 });
 /*
-* 添加用户组
-* */
+ * 添加用户组
+ * */
 router.get('/users_group_add', function (req, res, next) {
   res.render('admin/users_group_add');
 });
@@ -132,7 +144,7 @@ router.post('/users_group_add/add', function (req, res, next) {
   var pid = req.body.pid;
   var status = req.body.status;
   var remark = req.body.remark;
-  var group_id=req.body.group_id;
+  var group_id = req.body.group_id;
   /*
    * 查询数据库
    * */
@@ -146,7 +158,7 @@ router.post('/users_group_add/add', function (req, res, next) {
       });
     } else {
       var adminUserGroup = new AdminUserGroup({
-        group_id:group_id,
+        group_id: group_id,
         name: name,
         pid: pid,
         status: status,
@@ -162,8 +174,8 @@ router.post('/users_group_add/add', function (req, res, next) {
 
 });
 /*
-* 所有用户
-* */
+ * 所有用户
+ * */
 router.get('/users', function (req, res, next) {
 
   /*
@@ -188,8 +200,8 @@ router.get('/users2', function (req, res, next) {
 
 });
 /*
-* 添加用户
-* */
+ * 添加用户
+ * */
 router.get('/users_add', function (req, res, next) {
   res.render('admin/users_add');
 });
@@ -239,42 +251,41 @@ router.post('/users_add/add', function (req, res, next) {
 });
 
 /*
-* 登录记录
-* */
+ * 登录记录
+ * */
 router.get('/login_log', function (req, res, next) {
   res.render('admin/login_log');
 });
 
 /*
-* 所有文章
-* */
+ * 所有文章
+ * */
 router.get('/articles', function (req, res, next) {
   res.render('admin/articles');
 });
 
 /*
-* 文章分类
-* */
+ * 文章分类
+ * */
 router.get('/articles_categories', function (req, res, next) {
   res.render('admin/articles_categories');
 });
 
 /*
-* 添加分类
-* */
+ * 添加分类
+ * */
 router.get('/articles_categories_add', function (req, res, next) {
   res.render('admin/articles_categories_add');
 });
 
 /*
-* 接收文件上传请求
-* */
+ * 接收文件上传请求
+ * */
 router.post('/upload', function (req, res, next) {
 
   var params = url.parse(req.url, true, false);//获取参数
   var fileType = params.query.type;//获取文件类型
   var fileKey = params.query.key;//获取上传的文件的用途
-
 
 
   var updatePath = "public/upload/images/";//存放目录
@@ -339,7 +350,7 @@ router.post('/upload', function (req, res, next) {
   });
 
   form.on('end', function () {//解析完毕
-    res.end('/public/upload/images/'+newFileName);
+    res.end('/public/upload/images/' + newFileName);
   });
 
   form.parse(req, function (error, fields, files) {//解析request对象
@@ -348,8 +359,6 @@ router.post('/upload', function (req, res, next) {
 
 
 });
-
-
 
 
 module.exports = router;
