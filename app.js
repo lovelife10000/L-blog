@@ -26,7 +26,7 @@ app.use(cookieParser());
 * */
 app.use(session({
   secret: settings.SESSION_SECRET,
-  store: new redisStore({
+  store: new redisStore({//session 的存储方式，默认存放在内存中，也可以使用 redis，mongodb 等。express 生态中都有相应模块的支持。
     port: settings.REDIS_PORT,
     host: settings.REDIS_HOST,
     pass : settings.REDIS_PSD,
@@ -51,13 +51,13 @@ app.use('/',function(req,res,next) {
     catch(err){}
   }
 
-  if(req.session.isVisit) {
-    req.session.isVisit++;
-    res.send('<p>第 ' + req.session.isVisit + '次来到此页面</p>');
-  } else {
-    req.session.isVisit = 1;
-    res.send('欢迎第一次来这里');
-  }
+  // if(req.session.isVisit) {
+  //   req.session.isVisit++;
+  //   res.send('<p>第 ' + req.session.isVisit + '次来到此页面</p>');
+  // } else {
+  //   req.session.isVisit = 1;
+  //   res.send('欢迎第一次来这里');
+  // }
 
   next();
 });
