@@ -19,6 +19,7 @@ var system = require('../util/system');
 * */
 router.get(["/manage",'/manage/*'],function(req,res,next){
   console.log(req.session.adminlogined);
+  console.log(req.session.userInfo);
   if(req.session.adminlogined){
     next();
   }else{
@@ -30,12 +31,12 @@ router.get(["/manage",'/manage/*'],function(req,res,next){
  * */
 router.get('/', function (req, res, next) {
 
-  // if (!system.isOwnEmpty(req.userInfo)) {
-  //   res.redirect('/admin/manage');
-  // } else {
+  if (req.session.adminlogined) {
+    res.redirect('/admin/manage');
+  } else {
 
     res.render('admin/admin_login');
-  // }
+  }
 
 });
 router.post('/admin_login', function (req, res, next) {
@@ -59,6 +60,15 @@ router.post('/admin_login', function (req, res, next) {
         });
       } else {
         req.session.adminlogined = true;
+        req.session.userInfo={};
+
+        if(req.cookies.loginInfo){
+
+          try{
+            req.session.userInfo=JSON.parse(req.cookies.loginInfo);
+          }
+          catch(err){}
+        }
         //发送cookie到客户端
         res.cookie('loginInfo', JSON.stringify({
           adminUser_username: username,
@@ -97,7 +107,7 @@ router.get('/manage', function (req, res, next) {
 router.get('/manage/basic_info', function (req, res, next) {
 
   AdminUser.findOne({
-    adminUser_username: req.userInfo.adminUser_username
+    adminUser_username: req.session.userInfo.adminUser_username
   }).then(function (userInfo) {
     var username = userInfo.adminUser_username;
     var avatar = userInfo.adminUser_avatar;
