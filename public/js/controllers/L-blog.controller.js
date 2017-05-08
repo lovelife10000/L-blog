@@ -31,7 +31,7 @@ app.controller('usersAdd', function ($scope, $http) {
     if (valid) {
       $http({
         method: 'POST',
-        url: 'users_add/add',
+        url: 'admin/users_add/add',
         data: $.param({
           adminUser_username: $scope.adminUser_username,
           adminUser_nickname: $scope.adminUser_nickname,
@@ -171,7 +171,7 @@ app.controller('adminLogin',['$scope','$http',function($scope,$http) {
   $scope.login=function () {
     $http({
       method:'POST',
-      url:'admin_login',
+      url:'admin/admin_login',
       data:$.param({
         adminUser_username:$scope.adminUser_username,
         adminUser_password:$scope.adminUser_password
@@ -179,7 +179,7 @@ app.controller('adminLogin',['$scope','$http',function($scope,$http) {
       headers:{'content-type':'application/x-www-form-urlencoded'}
     }).then(function success(res) {
       if(res.data.code===1){
-        window.location.href='basic_info';
+        window.location.href='admin/manage';
       }
     },function error(res) {
 
