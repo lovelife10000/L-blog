@@ -94,9 +94,9 @@ router.post('/admin_login', function (req, res, next) {
 * 管理页首页
 * */
 router.get('/manage', function (req, res, next) {
-    console.log(req.session.userInfo);
-
-    res.render('admin/manage',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+    // console.log(req.session.userInfo);
+res.redirect('/admin/manage/basic_info');
+    // res.render('admin/manage',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
 
 
 });
