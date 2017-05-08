@@ -2,7 +2,9 @@
  * Created by v_lljunli on 2017/4/27.
  */
 var app = angular.module('myApp', []);
-
+/*
+ * 添加用户
+ * */
 app.controller('usersAdd', function ($scope, $http) {
 
   /*
@@ -10,22 +12,22 @@ app.controller('usersAdd', function ($scope, $http) {
    * */
   $scope.addAdminUser = function (valid) {
     console.log(valid);
-    var adminUser_userGroup=1;
+    var adminUser_userGroup = 1;
 
-      switch ($scope.adminUser_userGroup){
-        case 1:
-          adminUser_userGroup= '超级管理员';
-          break;
-        case 2:
-          adminUser_userGroup= '网站管理员';
-          break;
-        case 3:
-          adminUser_userGroup= '内容管理员';
-          break;
-        case 4:
-          adminUser_userGroup= '投稿员';
-          break;
-      }
+    switch ($scope.adminUser_userGroup) {
+      case 1:
+        adminUser_userGroup = '超级管理员';
+        break;
+      case 2:
+        adminUser_userGroup = '网站管理员';
+        break;
+      case 3:
+        adminUser_userGroup = '内容管理员';
+        break;
+      case 4:
+        adminUser_userGroup = '投稿员';
+        break;
+    }
 
 
     if (valid) {
@@ -49,7 +51,6 @@ app.controller('usersAdd', function ($scope, $http) {
       }, function (res) {
 
       });
-
 
 
     } else {
@@ -100,24 +101,24 @@ app.controller('usersAdd', function ($scope, $http) {
     }
   };
 
-  $scope.logo='/public/upload/images/defaultlogo.png';
+  $scope.logo = '/public/upload/images/defaultlogo.png';
 
   $('#adminUser_avatar').uploadify({
 
     'swf': '/public/plugins/uploadify/uploadify.swf',//指定swf文件
-    'uploader': '/admin/upload' + '?adminId='+'adminUser_username'+'&type='+'images'+'&key='+'adminUser_avatar',//后台处理的页面
+    'uploader': '/admin/upload' + '?adminId=' + 'adminUser_username' + '&type=' + 'images' + '&key=' + 'adminUser_avatar',//后台处理的页面
     'buttonText': '上传图片',//按钮显示的文字
     'buttonClass': 'uploadify-btn-default',//按钮显示的文字
     'width': 100,//显示的高度和宽度，默认 height 30；width 120
     'height': 30,//显示的高度和宽度，默认 height 30；width 120
     'fileTypeDesc': 'Image Files',//上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
     'fileTypeExts': '*.gif; *.jpg; *.png',//允许上传的文件后缀
-    'fileSizeLimit' : '2000KB',//上传文件大小限制
+    'fileSizeLimit': '2000KB',//上传文件大小限制
     'auto': true,//选择文件后自动上传
     'multi': false,//设置为true将允许多文件上传
 
-    'onUploadSuccess' : function(file, data, response) {//上传成功的回调
-      $("#adminUser_avatar_preview").attr("src",data);
+    'onUploadSuccess': function (file, data, response) {//上传成功的回调
+      $("#adminUser_avatar_preview").attr("src", data);
     },
     //
     // 'onComplete': function(event, queueID, fileObj, response, data) {//当单个文件上传完成后触发
@@ -141,50 +142,90 @@ app.controller('usersAdd', function ($scope, $http) {
   });
 
 });
-
-app.controller('users',['$scope','$http',function($scope,$http) {
+/*
+ * 所有用户
+ * */
+app.controller('users', ['$scope', '$http', function ($scope, $http) {
   $http({
-    method:'GET',
-    url:'users2',
+    method: 'GET',
+    url: 'users2',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   }).then(function success(res) {
-    $scope.data=res.data;
+    $scope.data = res.data;
     console.log($scope.data);
-  },function error(res) {
+  }, function error(res) {
 
   });
 }]);
-app.controller('usersGroup',['$scope','$http',function($scope,$http) {
+/*
+ * 所有用户组
+ * */
+app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
   $http({
-    method:'GET',
-    url:'users_group2',
+    method: 'GET',
+    url: 'users_group2',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   }).then(function success(res) {
-    $scope.data=res.data;
-  },function error(res) {
+    $scope.data = res.data;
+  }, function error(res) {
 
   });
 }]);
+/*
+ * 用户登录
+ * */
+app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
 
-app.controller('adminLogin',['$scope','$http',function($scope,$http) {
-
-  $scope.login=function () {
+  $scope.login = function () {
     $http({
-      method:'POST',
-      url:'admin/admin_login',
-      data:$.param({
-        adminUser_username:$scope.adminUser_username,
-        adminUser_password:$scope.adminUser_password
+      method: 'POST',
+      url: 'admin/admin_login',
+      data: $.param({
+        adminUser_username: $scope.adminUser_username,
+        adminUser_password: $scope.adminUser_password
       }),
-      headers:{'content-type':'application/x-www-form-urlencoded'}
+      headers: {'content-type': 'application/x-www-form-urlencoded'}
     }).then(function success(res) {
-      if(res.data.code===1){
-        window.location.href='admin/manage';
+      if (res.data.code === 1) {
+        window.location.href = 'admin/manage';
       }
-    },function error(res) {
+    }, function error(res) {
 
     });
   };
 
 }]);
+/*
+ * 添加分类
+ * */
+app.controller('categoriesAdd', ['$scope', '$http', function ($scope, $http) {
+  $scope.cateParentOptions = [
+    {name: '无', id: 0},
+    {name: '一级分类', id: 1},
+    {name: '二级分类', id: 2},
+    {name: '三级分类', id: 3},
 
+  ];
+  $scope.cate_parent = $scope.cateParentOptions[1].id;//设置默认值
+  $scope.categoriesAdd = function () {
+    if ($scope.myForm.$valid) {
+      $http({
+        method: 'POST',
+        url: 'articles_categories_add',
+        data: $.param({
+          cate_name: $scope.cate_name,
+          cate_slug: $scope.cate_slug,
+          cate_order: $scope.cate_order,
+          cate_parent: $scope.cate_parent,
+          cate_remark: $scope.cate_remark
+        }),
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      }).then(function success(res) {
+
+      }, function error(res) {
+
+      });
+    }
+
+  };
+}]);
