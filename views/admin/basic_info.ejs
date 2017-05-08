@@ -3,12 +3,12 @@
 
     <section class="content-header">
         <h1>
-            L-blog
+            <%= blogName %>
             <small>基本信息</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
-            <li><a href="#">仪表盘</a></li>
+            <li><a href="#"><%= category %></a></li>
             <li class="active">基本信息</li>
         </ol>
     </section>
@@ -80,7 +80,7 @@
 
                             <div class="col-md-3">
 
-                                <img style="width: 100%" src="/public<%= avatar %>" alt="">
+                                <img style="width: 100%" src="/public" alt="">
                             </div>
 
 
@@ -91,9 +91,9 @@
 
                                 <p>用户名: <%= username %> </p>
 
-                                <p>邮箱: <%= email %></p>
+                                <p>邮箱: </p>
 
-                                <p>注册时间: <%= date %></p>
+                                <p>注册时间: </p>
 
                                 <!--end span8-->
 

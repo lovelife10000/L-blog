@@ -34,7 +34,7 @@ router.get('/', function (req, res, next) {
     res.redirect('/admin/manage');
   } else {
 
-    res.render('admin/admin_login',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+    res.render('admin/admin_login');
   }
 
 });
@@ -112,15 +112,13 @@ router.get('/manage/basic_info', function (req, res, next) {
     var avatar = userInfo.adminUser_avatar;
     var email = userInfo.adminUser_email;
     var date = userInfo.date;
-    res.render('admin/basic_info',
-      {
-        username: username,
-        avatar: avatar,
-        email: email,
-        date: date
-      }
-    );
-
+    res.render('admin/basic_info',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+    // {
+    //   username: username,
+    //     avatar: avatar,
+    //   email: email,
+    //   date: date
+    // }
   });
 
 });
@@ -134,7 +132,7 @@ router.get('/manage/users_group', function (req, res, next) {
    * */
   AdminUserGroup.find().then(function (adminUserGroups) {
     if (adminUserGroups) {
-      res.render('admin/users_group',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+      res.render('admin/users_group',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.USERS_MANAGE[1],settings.ALL_USERS_GROUP[1]));
     } else {
       res.json('用户组不存在');
     }
@@ -157,7 +155,7 @@ router.get('/manage/users_group2', function (req, res, next) {
  * 添加用户组
  * */
 router.get('/manage/users_group_add', function (req, res, next) {
-  res.render('admin/users_group_add',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+  res.render('admin/users_group_add',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.USERS_MANAGE[1],settings.ALL_USERS_GROUP_ADD[1]));
 });
 router.post('/manage/users_group_add/add', function (req, res, next) {
   var name = req.body.name;
@@ -203,7 +201,7 @@ router.get('/manage/users', function (req, res, next) {
    * */
   AdminUser.find().then(function (users) {
 
-    res.render('admin/users',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+    res.render('admin/users',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.USERS_MANAGE[1],settings.ALL_USERS[1]));
   });
 
 });
@@ -223,7 +221,7 @@ router.get('/manage/users2', function (req, res, next) {
  * 添加用户
  * */
 router.get('/manage/users_add', function (req, res, next) {
-  res.render('admin/users_add',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+  res.render('admin/users_add',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.USERS_MANAGE[1],settings.ALL_USERS_ADD[1]));
 });
 router.post('/manage/users_add/add', function (req, res, next) {
   var adminUser_username = req.body.adminUser_username;
@@ -274,28 +272,28 @@ router.post('/manage/users_add/add', function (req, res, next) {
  * 登录记录
  * */
 router.get('/manage/login_log', function (req, res, next) {
-  res.render('admin/login_log',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+  res.render('admin/login_log',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.USERS_MANAGE[1],settings.LOGIN_LOG[1]));
 });
 
 /*
  * 所有文章
  * */
 router.get('/manage/articles', function (req, res, next) {
-  res.render('admin/articles',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+  res.render('admin/articles',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.ARTICLES_MANAGE[1],settings.ALL_ARTICLES[1]));
 });
 
 /*
  * 文章分类
  * */
 router.get('/manage/articles_categories', function (req, res, next) {
-  res.render('admin/articles_categories',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+  res.render('admin/articles_categories',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.ARTICLES_MANAGE[1],settings.ARTICLES_CATEGORY[1]));
 });
 
 /*
  * 添加分类
  * */
 router.get('/manage/articles_categories_add', function (req, res, next) {
-  res.render('admin/articles_categories_add',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+  res.render('admin/articles_categories_add',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.ARTICLES_MANAGE[1],settings.ARTICLES_CATEGORY_ADD[1]));
 });
 
 /*
