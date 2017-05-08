@@ -19,3 +19,4 @@
 - 使用更加安全的session
 下周任务，完成如何使用cookie-parser、express-session、redis、connect-redis实现对用户状态的存取。
 - 添加文章分类功能
+- 添加文章功能
