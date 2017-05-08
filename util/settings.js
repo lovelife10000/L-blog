@@ -37,6 +37,7 @@ module.exports={
   ALL_ARTICLES:['allArticles','所有文章'],
   ARTICLES_CATEGORY:['articles_category','文章分类'],
   ARTICLES_CATEGORY_ADD:['articlesCategoryAdd','添加分类'],
+  ARTICLES_ADD:['articles_add','写文章'],
 
 
 
