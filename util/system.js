@@ -5,7 +5,9 @@ var fs = require('fs');
 
 var system={
 
-  //获取文件真实类型
+  /*
+  * 获取文件真实类型
+  * */
   getFileMimeType:function (filePath) {
     var buffer = new Buffer(8);
     var fd = fs.openSync(filePath, 'r');
@@ -67,7 +69,9 @@ var system={
       mimeType : mimetype
     };
   },
-
+  /*
+  * 判断对象是否有非继承属性
+  * */
   isOwnEmpty:function(obj){
     for(var name
       in obj)
@@ -78,7 +82,19 @@ var system={
       }
     }
     return true;
-  }
+  },
+
+  /*
+  * 统一渲染模版提供的参数
+  * */
+  renderItem:function (username,blogName,category,item) {
+    return{
+      username:username,
+      blogName:blogName,
+      category:category,
+      item:item,
+    }
+  },
   
 };
 
