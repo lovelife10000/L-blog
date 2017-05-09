@@ -1,162 +1,265 @@
 <%- include('header') %>
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h1>
-      <%= blogName %>
-      <small>添加分类</small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
-      <li><a href="#"><%= category %></a></li>
-      <li class="active">添加分类</li>
-    </ol>
-  </section>
 
-  <!-- Main content -->
-  <section class="content" ng-app="myApp" ng-controller="categoriesAdd">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="box box-info">
-          <div class="box-header with-border">
-            <h3 class="box-title">添加分类</h3>
-          </div>
-          <!-- /.box-header -->
-          <!-- form start -->
-          <form class="form-horizontal" name="myForm">
-            <div class="box-body">
-              <div class="form-group" ng-class="{'has-warning':myForm.cate_name.$invalid && !myForm.cate_name.$pristine,'has-success':myForm.cate_name.$valid && !myForm.cate_name.$pristine,'has-error':isUsernameExist}">
-                <label for="username" class="col-sm-2 control-label">文章标题</label>
-
-                <div class="col-sm-10">
-                  <input type="text" name="cate_name" ng-model="cate_name" class="form-control" id="cate_name" placeholder="请输入用户名"  ng-minlength="2" ng-maxlength="6" ng-pattern="/[\u4e00-\u9fa5]/" required>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_name.$invalid && !myForm.cate_name.$pristine"><span
-                            class="glyphicon glyphicon-remove"></span>对不起，分类名称格式不正确！</span>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_name.$valid && !myForm.cate_name.$pristine && !isUsernameExist"><span
-                            class="glyphicon glyphicon-ok"></span>恭喜您，分类名称可用！</span>
-                </div>
-              </div>
-              <div class="form-group" ng-class="{'has-warning':myForm.cate_slug.$invalid && !myForm.cate_slug.$pristine,'has-success':myForm.cate_slug.$valid && !myForm.cate_slug.$pristine,'has-error':isUsernameExist}">
-                <label for="nickname" class="col-sm-2 control-label">来源</label>
-
-                <div class="col-sm-10">
-                  <input type="text" name="cate_slug" ng-model="cate_slug" class="form-control" id="cate_slug" placeholder="请输入别名"  ng-pattern="/^[a-zA-Z]\w{1,19}$/" required>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_slug.$invalid && !myForm.cate_slug.$pristine"><span
-                            class="glyphicon glyphicon-remove"></span>对不起，别名格式不正确！</span>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_slug.$valid && !myForm.cate_slug.$pristine && !isUsernameExist"><span
-                            class="glyphicon glyphicon-ok"></span>恭喜您，别名可用！</span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">是否显示</label>
-                <div class="col-sm-10">
-
-                </div>
-              </div>
-              <div class="form-group" ng-class="{'has-warning':myForm.cate_order.$invalid && !myForm.cate_order.$pristine,'has-success':myForm.cate_order.$valid && !myForm.cate_order.$pristine,'has-error':isUsernameExist}">
-                <label for="password" class="col-sm-2 control-label">TAG标签</label>
-
-                <div class="col-sm-10">
-                  <input type="password" name="cate_order" ng-model="cate_order" class="form-control" id="password" placeholder="请输入排序数字"  ng-pattern="/^\d{1,4}$/" required>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_order.$invalid && !myForm.cate_order.$pristine"><span
-                            class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_order.$valid && !myForm.cate_order.$pristine && !isUsernameExist"><span
-                            class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>
-                </div>
-              </div>
-              <div class="form-group" ng-class="{'has-warning':myForm.cate_parent.$invalid && !myForm.cate_parent.$pristine,'has-success':myForm.cate_parent.$valid && !myForm.cate_parent.$pristine,'has-error':isUsernameExist}">
-                <label  class="col-sm-2 control-label">缩略图</label>
-                <div class="col-sm-10">
-                  <select class="form-control" name="cate_parent" ng-model="cate_parent" ng-options="x.id as x.name for x in cateParentOptions" required>
-                    <option value="">-- 请选择 --</option>
-                  </select>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_parent.$invalid && !myForm.cate_parent.$pristine"><span
-                            class="glyphicon glyphicon-remove"></span>对不起，您必须选择一项！</span>
-                </div>
-              </div>
+    <section class="content-header">
+        <h1>
+            <%= blogName %>
+            <small><%= item %></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
+            <li><a href="#"><%= category %></a></li>
+            <li class="active"><%= item %></li>
+        </ol>
+    </section>
 
 
-              <div class="form-group" ng-class="{'has-warning':myForm.cate_remark.$invalid && !myForm.cate_remark.$pristine,'has-success':myForm.cate_remark.$valid && !myForm.cate_remark.$pristine,'has-error':isUsernameExist}">
-                <label  class="col-sm-2 control-label">文章分类</label>
-                <div class="col-sm-10">
-                  <textarea name="cate_remark" ng-model="cate_remark" class="form-control" rows="3" placeholder="请输入备注信息" ng-minlength="6" ng-maxlength="30"  required></textarea>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_remark.$invalid && !myForm.cate_remark.$pristine"><span
-                            class="glyphicon glyphicon-remove"></span>对不起，备注格式不正确！</span>
-                  <span class="help-block ng-hide"
-                        ng-show="myForm.cate_remark.$valid && !myForm.cate_remark.$pristine && !isUsernameExist"><span
-                            class="glyphicon glyphicon-ok"></span>恭喜您，备注可用！</span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">关键字</label>
-                <div class="col-sm-10">
+    <section class="content" ng-app="myApp" ng-controller="categoriesAdd">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">添加分类</h3>
+                    </div>
 
-                </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">内容摘要</label>
-                <div class="col-sm-10">
+                    <form class="form-horizontal" name="myForm">
+                        <div class="box-body">
 
-                </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">文档类型</label>
-                <div class="col-sm-10">
 
-                </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">点击数</label>
-                <div class="col-sm-10">
+                            <!--<div class="form-group"-->
+                                 <!--ng-class="{'has-warning':myForm.post_title.$invalid && !myForm.post_title.$pristine,'has-success':myForm.post_title.$valid && !myForm.post_title.$pristine,'has-error':isUsernameExist}">-->
+                                <!--<label for="post_title" class="col-sm-2 control-label">文章标题</label>-->
 
-                </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">作者</label>
-                <div class="col-sm-10">
+                                <!--<div class="col-sm-10">-->
+                                    <!--<input type="text" name="post_title" ng-model="post_title" class="form-control"-->
+                                           <!--id="post_title" placeholder="请输入文章标题" ng-minlength="5" ng-maxlength="30"-->
+                                           <!--required>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_title.$invalid && !myForm.post_title.$pristine"><span-->
+                                                <!--class="glyphicon glyphicon-remove"></span>对不起，文章标题格式不正确！</span>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_title.$valid && !myForm.post_title.$pristine && !isUsernameExist"><span-->
+                                                <!--class="glyphicon glyphicon-ok"></span>恭喜您，文章标题可用！</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
 
+
+                            <!--<div class="form-group"-->
+                                 <!--ng-class="{'has-warning':myForm.post_from.$invalid && !myForm.post_from.$pristine,'has-success':myForm.post_from.$valid && !myForm.post_from.$pristine,'has-error':isUsernameExist}">-->
+                                <!--<label for="post_from" class="col-sm-2 control-label">来源</label>-->
+
+                                <!--<div class="col-sm-10">-->
+                                    <!--<input type="text" name="post_from" ng-model="post_from" class="form-control"-->
+                                           <!--id="post_from" placeholder="请输入来源" required>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_from.$invalid && !myForm.post_from.$pristine"><span-->
+                                                <!--class="glyphicon glyphicon-remove"></span>对不起，来源格式不正确！</span>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_from.$valid && !myForm.post_from.$pristine && !isUsernameExist"><span-->
+                                                <!--class="glyphicon glyphicon-ok"></span>恭喜您，来源可用！</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">是否显示</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<div class="radio">-->
+                                        <!--<label>-->
+                                            <!--<input type="radio" name="post_display" ng-model="post_display" id="" value="option1" checked>-->
+                                            <!--显示-->
+                                        <!--</label>-->
+                                        <!--<label>-->
+                                            <!--<input type="radio" name="post_display" ng-model="post_display" id="" value="option1" >-->
+                                            <!--隐藏-->
+                                        <!--</label>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group"-->
+                                 <!--ng-class="{'has-warning':myForm.post_tags.$invalid && !myForm.post_tags.$pristine,'has-success':myForm.post_tags.$valid && !myForm.post_tags.$pristine,'has-error':isUsernameExist}">-->
+                                <!--<label for="post_tags" class="col-sm-2 control-label">TAG标签</label>-->
+
+                                <!--<div class="col-sm-8">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" name="post_tags" ng-model="post_tags" class="form-control">-->
+                                        <!--<div class="input-group-btn">-->
+                                            <!--<button type="button" class="btn btn-default dropdown-toggle"-->
+                                                    <!--data-toggle="dropdown">选择-->
+                                                <!--<span class="fa fa-caret-down"></span></button>-->
+                                            <!--<ul class="dropdown-menu">-->
+                                                <!--<li><a href="#">标签1</a></li>-->
+                                                <!--<li><a href="#">标签2</a></li>-->
+                                                <!--<li><a href="#">标签3</a></li>-->
+                                                <!--<li><a href="#">标签4</a></li>-->
+                                            <!--</ul>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-2">-->
+                                    <!--<a href="#addContentTags" role="button" class="btn btn-link"-->
+                                       <!--data-toggle="modal"><span class="fa fa-tags" aria-hidden="true"></span>新标签</a>-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">缩略图</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<img src="{{logo}}" alt="" class="img-circle col-sm-4"-->
+                                         <!--id="adminUser_avatar_preview"/>-->
+                                    <!--<p id="adminUser_avatar"></p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group"-->
+                                 <!--ng-class="{'has-warning':myForm.post_category.$invalid && !myForm.post_category.$pristine,'has-success':myForm.post_category.$valid && !myForm.post_category.$pristine,'has-error':isUsernameExist}">-->
+                                <!--<label class="col-sm-2 control-label">文章分类</label>-->
+                                <!--<div class="col-sm-10">-->
+
+
+                                    <!--<select class="form-control" name="cate_parent" ng-model="cate_parent"-->
+                                            <!--ng-options="x.id as x.name for x in cateParentOptions" required>-->
+                                        <!--<option value="">&#45;&#45; 请选择 &#45;&#45;</option>-->
+                                    <!--</select>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_category.$invalid && !myForm.post_category.$pristine"><span-->
+                                                <!--class="glyphicon glyphicon-remove"></span>对不起，您必须选择一项！</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">关键字</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<input type="password" name="post_keywords" ng-model="post_keywords" class="form-control"-->
+                                           <!--id="" placeholder="请输入关键字">-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_keywords.$invalid && !myForm.post_keywords.$pristine"><span-->
+                                                <!--class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_keywords.$valid && !myForm.post_keywords.$pristine && !isUsernameExist"><span-->
+                                                <!--class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">内容摘要</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<input type="password" name="post_discription" ng-model="post_discription" class="form-control"-->
+                                           <!--id="password" placeholder="请输入内容摘要" required>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_discription.$invalid && !myForm.post_discription.$pristine"><span-->
+                                                <!--class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_discription.$valid && !myForm.post_discription.$pristine && !isUsernameExist"><span-->
+                                                <!--class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">文档类型</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<div class="radio">-->
+                                        <!--<label>-->
+                                            <!--<input type="radio" name="post_type" id="" value="option1" checked>-->
+                                            <!--文章-->
+                                        <!--</label>-->
+                                        <!--<label>-->
+                                            <!--<input type="radio" name="post_type" id="" value="option2">-->
+                                            <!--页面-->
+                                        <!--</label>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">点击数</label>-->
+                                <!--<div class="col-sm-10">-->
+                                    <!--<input type="text" name="post_view" ng-model="post_view" class="form-control"-->
+                                           <!--id="" placeholder="请输入点击数" ng-pattern="/^\d{1,4}$/">-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_view.$invalid && !myForm.post_view.$pristine"><span-->
+                                                <!--class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>-->
+                                    <!--<span class="help-block ng-hide"-->
+                                          <!--ng-show="myForm.post_view.$valid && !myForm.post_view.$pristine && !isUsernameExist"><span-->
+                                                <!--class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label">作者</label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<div class="input-group">-->
+                                        <!--<input type="text" name="post_author" ng-model="post_author" class="form-control">-->
+                                        <!--<div class="input-group-btn">-->
+                                            <!--<button type="button" class="btn btn-default dropdown-toggle"-->
+                                                    <!--data-toggle="dropdown">选择-->
+                                                <!--<span class="fa fa-caret-down"></span></button>-->
+                                            <!--<ul class="dropdown-menu">-->
+                                                <!--<li><a href="#">作者1</a></li>-->
+                                                <!--<li><a href="#">作者2</a></li>-->
+                                            <!--</ul>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">文章内容</label>
+                                <div class="col-sm-10">
+                                    <!-- 加载编辑器的容器 -->
+                                    <script id="container" name="content" type="text/plain"></script>
+                                    <!-- 配置文件 -->
+                                    <script src="/public/plugins/ueditor/ueditor.config.js"></script>
+                                    <!-- 编辑器源码文件 -->
+                                    <script src="/public/plugins/ueditor/ueditor.all.js"></script>
+                                    <!-- 实例化编辑器 -->
+                                    <script type="text/javascript">
+                                        var ue = UE.getEditor('container', {
+                                            initialFrameWidth: '100%'
+
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-info pull-right" ng-click="categoriesAdd()">发布
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
-              </div>
-              <div class="form-group">
-                <label  class="col-sm-2 control-label">文章内容</label>
-                <div class="col-sm-10">
-                  <!-- 加载编辑器的容器 -->
-                  <script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
-    </script>
-                  <!-- 配置文件 -->
-                  <script type="text/javascript" src="/public/plugins/ueditor-utf8-node/ueditor.config.js"></script>
-                  <!-- 编辑器源码文件 -->
-                  <script type="text/javascript" src="/public/plugins/ueditor-utf8-node/ueditor.all.js"></script>
-                  <!-- 实例化编辑器 -->
-                  <script type="text/javascript">
-                    var ue = UE.getEditor('container');
-                  </script>
-                </div>
-              </div>
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-              <button type="submit" class="btn btn-default">取消</button>
-              <button type="submit" class="btn btn-info pull-right" ng-click="categoriesAdd()">添加分类</button>
-            </div>
-            <!-- /.box-footer -->
-          </form>
+
         </div>
-      </div>
-      <!--/.col (right) -->
-    </div>
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
+
+    </section>
+
 
 </div>
 <%- include('footer') %>
