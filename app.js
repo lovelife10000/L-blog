@@ -124,10 +124,10 @@ app.use("/plugins/ueditor/ue", ueditor(path.join(__dirname, 'public'), function 
     var file_url = imgDir;//默认图片上传地址
     /*其他上传格式的地址*/
     if (ActionType === 'uploadfile') {
-      file_url = '/files/ueditor/'; //附件
+      file_url = '/upload/files/'; //附件
     }
     if (ActionType === 'uploadvideo') {
-      file_url = '/videos/ueditor/'; //视频
+      file_url = '/upload/videos/'; //视频
     }
     res.ue_up(file_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
     res.setHeader('Content-Type', 'text/html');
