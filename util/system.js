@@ -3,12 +3,12 @@
  */
 var fs = require('fs');
 
-var system={
+var system = {
 
   /*
-  * 获取文件真实类型
-  * */
-  getFileMimeType:function (filePath) {
+   * 获取文件真实类型
+   * */
+  getFileMimeType: function (filePath) {
     var buffer = new Buffer(8);
     var fd = fs.openSync(filePath, 'r');
     fs.readSync(fd, buffer, 0, 8, 0);
@@ -20,7 +20,7 @@ var system={
     var typeCode = head_1 + head_2 + head_3 + head_4;
     var filetype = '';
     var mimetype;
-    switch (typeCode){
+    switch (typeCode) {
       case 'ffd8ffe1':
         filetype = 'jpg';
         mimetype = ['image/jpeg', 'image/pjpeg'];
@@ -64,20 +64,18 @@ var system={
 
     fs.closeSync(fd);
 
-    return   {
-      fileType : filetype,
-      mimeType : mimetype
+    return {
+      fileType: filetype,
+      mimeType: mimetype
     };
   },
   /*
-  * 判断对象是否有非继承属性
-  * */
-  isOwnEmpty:function(obj){
-    for(var name
-      in obj)
-    {
-      if(obj.hasOwnProperty(name))
-      {
+   * 判断对象是否有非继承属性
+   * */
+  isOwnEmpty: function (obj) {
+    for (var name
+      in obj) {
+      if (obj.hasOwnProperty(name)) {
         return false;
       }
     }
@@ -85,17 +83,17 @@ var system={
   },
 
   /*
-  * 统一渲染模版提供的参数
-  * */
-  renderItem:function (username,blogName,category,item) {
-    return{
-      username:username,
-      blogName:blogName,
-      category:category,
-      item:item,
+   * 统一渲染模版提供的参数
+   * */
+  renderItem: function (userInfo, blogName, category, item) {
+    return {
+      userInfo: userInfo,
+      blogName: blogName,
+      category: category,
+      item: item,
     }
   },
-  
+
 };
 
-module.exports=system;
+module.exports = system;

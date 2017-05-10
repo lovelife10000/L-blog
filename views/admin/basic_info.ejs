@@ -80,7 +80,7 @@
 
                             <div class="col-md-3">
 
-                                <img style="width: 100%" src="/public" alt="">
+                                <img style="width: 100%" src="<%= userInfo.avatar %>" alt="">
                             </div>
 
 
@@ -89,13 +89,11 @@
                                 <h1></h1>
 
 
-                                <p>用户名: <%= username %> </p>
+                                <p>用户名: <%= userInfo.username %> </p>
 
-                                <p>邮箱: </p>
+                                <p>邮箱: <%= userInfo.email %></p>
 
-                                <p>注册时间: </p>
-
-                                <!--end span8-->
+                                <p>注册时间: <%= userInfo.date %></p>
 
 
                             </div>

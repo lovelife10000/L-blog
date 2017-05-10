@@ -118,7 +118,12 @@ router.get('/manage/basic_info', function (req, res, next) {
     var avatar = userInfo.adminUser_avatar;
     var email = userInfo.adminUser_email;
     var date = userInfo.date;
-    res.render('admin/basic_info', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
+    res.render('admin/basic_info', system.renderItem({
+      username:username,
+      avatar:avatar,
+      email:email,
+      date:date,
+    }, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
     // {
     //   username: username,
     //     avatar: avatar,
