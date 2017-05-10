@@ -5,12 +5,8 @@
 /*
  * 所有用户 组
  * */
-app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
-  $http({
-    method: 'GET',
-    url: 'users_group2',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  }).then(function success(res) {
+app.controller('usersGroup', ['$scope', '$http','usersGroupService', function ($scope, $http,usersGroupService) {
+  usersGroupService.get().then(function success(res) {
     $scope.data = res.data;
   }, function error(res) {
 

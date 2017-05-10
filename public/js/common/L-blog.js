@@ -22,6 +22,84 @@ app.factory('adminLoginService', ['$http', function ($http) {
   }
 }]);
 /**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('categoriesAddService',['$http',function ($http) {
+  return{
+    get:function (cate_name,cate_slug,cate_order,cate_parent,cate_remark) {
+      return $http({
+        method: 'POST',
+        url: 'articles_categories_add',
+        data: $.param({
+          cate_name: cate_name,
+          cate_slug: cate_slug,
+          cate_order: cate_order,
+          cate_parent: cate_parent,
+          cate_remark: cate_remark
+        }),
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('usersService',['$http',function ($http) {
+  return {
+    get:function () {
+      return $http({
+        method: 'GET',
+        url: 'users_get',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('usersAddService',['$http',function ($http) {
+  return {
+    get:function (username,nickname,password,repassword,userGroup,status,phone,email,remark) {
+      return $http({
+        method: 'POST',
+        url: 'admin/users_add/add',
+        data: $.param({
+          adminUser_username: username,
+          adminUser_nickname: nickname,
+          adminUser_password: password,
+          adminUser_repassword: repassword,
+          adminUser_userGroup: userGroup,
+          adminUser_status: status,
+          adminUser_phone: phone,
+          adminUser_email: email,
+          adminUser_remark: remark
+        }),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('usersGroupService',['$http',function ($http) {
+  return {
+    get:function () {
+      return $http({
+        method: 'GET',
+        url: 'users_group_get',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
  * Created by v_lljunli on 2017/4/25.
  */
 /*
@@ -55,9 +133,6 @@ app.directive('pwCheck', [function () {
 app.controller('adminLogin', ['$scope', '$http', 'adminLoginService', function ($scope,$http, adminLoginService) {
 
   $scope.login = function () {
-    console.log(1);
-    console.log($scope.adminUser_username,$scope.adminUser_password);
-    console.log(adminLoginService.get($scope.adminUser_username,$scope.adminUser_password));
     adminLoginService.get($scope.adminUser_username,$scope.adminUser_password).then(function success(res) {
       if (res.data.code === 1) {
         window.location.href = 'admin/manage';
@@ -94,7 +169,7 @@ app.controller('articlesAdd', ['$scope', '$http', function ($scope, $http) {
 /*
  * 添加分类
  * */
-app.controller('categoriesAdd', ['$scope', '$http', function ($scope, $http) {
+app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', function ($scope, $http,categoriesAddService) {
   $scope.cateParentOptions = [
     {name: '无', id: 0},
     {name: '一级分类', id: 1},
@@ -105,18 +180,7 @@ app.controller('categoriesAdd', ['$scope', '$http', function ($scope, $http) {
   $scope.cate_parent = $scope.cateParentOptions[1].id;//设置默认值
   $scope.categoriesAdd = function () {
     if ($scope.myForm.$valid) {
-      $http({
-        method: 'POST',
-        url: 'articles_categories_add',
-        data: $.param({
-          cate_name: $scope.cate_name,
-          cate_slug: $scope.cate_slug,
-          cate_order: $scope.cate_order,
-          cate_parent: $scope.cate_parent,
-          cate_remark: $scope.cate_remark
-        }),
-        headers: {'content-type': 'application/x-www-form-urlencoded'}
-      }).then(function success(res) {
+        categoriesAddService.get($scope.cate_name,$scope.cate_slug,$scope.cate_order,$scope.cate_parent,$scope.cate_remark).then(function success(res) {
 
       }, function error(res) {
 
@@ -132,12 +196,8 @@ app.controller('categoriesAdd', ['$scope', '$http', function ($scope, $http) {
 /*
  * 所有用户
  * */
-app.controller('users', ['$scope', '$http', function ($scope, $http) {
-  $http({
-    method: 'GET',
-    url: 'users2',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  }).then(function success(res) {
+app.controller('users', ['$scope', '$http','usersService', function ($scope, $http,usersService) {
+  usersService.get().then(function success(res) {
     $scope.data = res.data;
     console.log($scope.data);
   }, function error(res) {
@@ -151,13 +211,13 @@ app.controller('users', ['$scope', '$http', function ($scope, $http) {
 /*
  * 添加用户
  * */
-app.controller('usersAdd', function ($scope, $http) {
+app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope, $http,usersAddService) {
 
   /*
    * 提交数据
    * */
   $scope.addAdminUser = function (valid) {
-    console.log(valid);
+
     var adminUser_userGroup = 1;
 
     switch ($scope.adminUser_userGroup) {
@@ -177,22 +237,7 @@ app.controller('usersAdd', function ($scope, $http) {
 
 
     if (valid) {
-      $http({
-        method: 'POST',
-        url: 'admin/users_add/add',
-        data: $.param({
-          adminUser_username: $scope.adminUser_username,
-          adminUser_nickname: $scope.adminUser_nickname,
-          adminUser_password: $scope.adminUser_password,
-          adminUser_repassword: $scope.adminUser_repassword,
-          adminUser_userGroup: adminUser_userGroup,
-          adminUser_status: $scope.adminUser_status,
-          adminUser_phone: $scope.adminUser_phone,
-          adminUser_email: $scope.adminUser_email,
-          adminUser_remark: $scope.adminUser_remark,
-        }),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).then(function (res) {
+        usersAddService.get($scope.adminUser_username,$scope.adminUser_nickname,$scope.adminUser_password,$scope.adminUser_repassword,adminUser_userGroup,$scope.adminUser_status,$scope.adminUser_phone,$scope.adminUser_email,$scope.adminUser_remark).then(function (res) {
 
       }, function (res) {
 
@@ -287,7 +332,7 @@ app.controller('usersAdd', function ($scope, $http) {
 
   });
 
-});
+}]);
 /**
  * Created by v_lljunli on 2017/5/10.
  */
@@ -295,12 +340,8 @@ app.controller('usersAdd', function ($scope, $http) {
 /*
  * 所有用户 组
  * */
-app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
-  $http({
-    method: 'GET',
-    url: 'users_group2',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-  }).then(function success(res) {
+app.controller('usersGroup', ['$scope', '$http','usersGroupService', function ($scope, $http,usersGroupService) {
+  usersGroupService.get().then(function success(res) {
     $scope.data = res.data;
   }, function error(res) {
 

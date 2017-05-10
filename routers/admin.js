@@ -145,7 +145,7 @@ router.get('/manage/users_group', function (req, res, next) {
   });
 
 });
-router.get('/manage/users_group2', function (req, res, next) {
+router.get('/manage/users_group_get', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -211,7 +211,7 @@ router.get('/manage/users', function (req, res, next) {
   });
 
 });
-router.get('/manage/users2', function (req, res, next) {
+router.get('/manage/users_get', function (req, res, next) {
 
   /*
    * 读取用户数据

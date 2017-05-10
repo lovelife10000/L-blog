@@ -5,13 +5,13 @@
 /*
  * 添加用户
  * */
-app.controller('usersAdd', function ($scope, $http) {
+app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope, $http,usersAddService) {
 
   /*
    * 提交数据
    * */
   $scope.addAdminUser = function (valid) {
-    console.log(valid);
+
     var adminUser_userGroup = 1;
 
     switch ($scope.adminUser_userGroup) {
@@ -31,22 +31,7 @@ app.controller('usersAdd', function ($scope, $http) {
 
 
     if (valid) {
-      $http({
-        method: 'POST',
-        url: 'admin/users_add/add',
-        data: $.param({
-          adminUser_username: $scope.adminUser_username,
-          adminUser_nickname: $scope.adminUser_nickname,
-          adminUser_password: $scope.adminUser_password,
-          adminUser_repassword: $scope.adminUser_repassword,
-          adminUser_userGroup: adminUser_userGroup,
-          adminUser_status: $scope.adminUser_status,
-          adminUser_phone: $scope.adminUser_phone,
-          adminUser_email: $scope.adminUser_email,
-          adminUser_remark: $scope.adminUser_remark,
-        }),
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-      }).then(function (res) {
+        usersAddService.get($scope.adminUser_username,$scope.adminUser_nickname,$scope.adminUser_password,$scope.adminUser_repassword,adminUser_userGroup,$scope.adminUser_status,$scope.adminUser_phone,$scope.adminUser_email,$scope.adminUser_remark).then(function (res) {
 
       }, function (res) {
 
@@ -141,4 +126,4 @@ app.controller('usersAdd', function ($scope, $http) {
 
   });
 
-});
+}]);
