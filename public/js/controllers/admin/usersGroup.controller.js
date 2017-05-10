@@ -3,7 +3,7 @@
  */
 
 /*
- * 所有用户组
+ * 所有用户 组
  * */
 app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
   $http({

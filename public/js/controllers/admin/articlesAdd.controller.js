@@ -6,8 +6,8 @@
  * */
 app.controller('articlesAdd', ['$scope', '$http', function ($scope, $http) {
   $scope.articleAdd = function () {
-    var html='';
-    ue.ready(function() {
+    var html = '';
+    ue.ready(function () {
       html = ue.getContent();
       console.log(html);
     });

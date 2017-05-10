@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       //   separator: ';'
       // },
       dist: {
-        src: ['public/js/controllers/admin/*.js','public/js/directives/admin/*.js','public/js/filters/admin/*.js','public/js/services/admin/*.js'],
+        src: ['public/js/services/admin/*.js','public/js/directives/admin/*.js','public/js/filters/admin/*.js','public/js/controllers/admin/*.js'],
         dest: 'public/js/common/L-blog.js'
       }
     },
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 
 
     watch: {
-      files: ['public/js/controllers/admin/*.js','public/js/directives/admin/*.js','public/js/filters/admin/*.js','public/js/services/admin/*.js'],
+      files: ['public/js/services/admin/*.js','public/js/directives/admin/*.js','public/js/filters/admin/*.js','public/js/controllers/admin/*.js'],
       tasks: ['concat','uglify']
     }
 

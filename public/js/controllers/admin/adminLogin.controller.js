@@ -1,28 +1,26 @@
 /**
  * Created by v_lljunli on 2017/5/10.
  */
-var app = angular.module('myApp', []);
+
 /*
- * 用户登录1
+ * 用户登录
  * */
-app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
+app.controller('adminLogin', ['$scope', '$http', 'adminLoginService', function ($scope,$http, adminLoginService) {
 
   $scope.login = function () {
-    $http({
-      method: 'POST',
-      url: 'admin/admin_login',
-      data: $.param({
-        adminUser_username: $scope.adminUser_username,
-        adminUser_password: $scope.adminUser_password
-      }),
-      headers: {'content-type': 'application/x-www-form-urlencoded'}
-    }).then(function success(res) {
+    console.log(1);
+    console.log($scope.adminUser_username,$scope.adminUser_password);
+    console.log(adminLoginService.get($scope.adminUser_username,$scope.adminUser_password));
+    adminLoginService.get($scope.adminUser_username,$scope.adminUser_password).then(function success(res) {
       if (res.data.code === 1) {
         window.location.href = 'admin/manage';
       }
     }, function error(res) {
 
     });
+
+
+
   };
 
 }]);

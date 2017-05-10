@@ -2,27 +2,72 @@
  * Created by v_lljunli on 2017/5/10.
  */
 var app = angular.module('myApp', []);
+app.factory('adminLoginService', ['$http', function ($http) {
+  return {
+    get: function (username,password) {
+      console.log(2);
+      return $http({
+        method: 'POST',
+        url: 'admin/admin_login',
+        data: $.param({
+          adminUser_username: username,
+          adminUser_password: password
+        }),
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      });
+    },
+    find:function () {
+      console.log(3);
+    },
+  }
+}]);
+/**
+ * Created by v_lljunli on 2017/4/25.
+ */
 /*
- * 用户登录1
+* L-blog 自定义指令
+* */
+
+//确认密码一致校验
+app.directive('pwCheck', [function () {
+  return {
+    require: 'ngModel',
+    link: function (scope, elem, attrs, ctrl) {
+      var firstPassword = '#' + attrs.pwCheck;
+      elem.add(firstPassword).on('keyup', function () {
+        scope.$apply(function () {
+          var v = elem.val()===$(firstPassword).val();
+          ctrl.$setValidity('pwmatch', v);
+        });
+      });
+    }
+  }
+}]);
+
+
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+
+/*
+ * 用户登录
  * */
-app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
+app.controller('adminLogin', ['$scope', '$http', 'adminLoginService', function ($scope,$http, adminLoginService) {
 
   $scope.login = function () {
-    $http({
-      method: 'POST',
-      url: 'admin/admin_login',
-      data: $.param({
-        adminUser_username: $scope.adminUser_username,
-        adminUser_password: $scope.adminUser_password
-      }),
-      headers: {'content-type': 'application/x-www-form-urlencoded'}
-    }).then(function success(res) {
+    console.log(1);
+    console.log($scope.adminUser_username,$scope.adminUser_password);
+    console.log(adminLoginService.get($scope.adminUser_username,$scope.adminUser_password));
+    adminLoginService.get($scope.adminUser_username,$scope.adminUser_password).then(function success(res) {
       if (res.data.code === 1) {
         window.location.href = 'admin/manage';
       }
     }, function error(res) {
 
     });
+
+
+
   };
 
 }]);
@@ -34,8 +79,8 @@ app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
  * */
 app.controller('articlesAdd', ['$scope', '$http', function ($scope, $http) {
   $scope.articleAdd = function () {
-    var html='';
-    ue.ready(function() {
+    var html = '';
+    ue.ready(function () {
       html = ue.getContent();
       console.log(html);
     });
@@ -248,7 +293,7 @@ app.controller('usersAdd', function ($scope, $http) {
  */
 
 /*
- * 所有用户组
+ * 所有用户 组
  * */
 app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
   $http({
@@ -261,89 +306,3 @@ app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
 
   });
 }]);
-/**
- * Created by v_lljunli on 2017/4/25.
- */
-/*
-* L-blog 自定义指令
-* */
-
-//确认密码一致校验
-app.directive('pwCheck', [function () {
-  return {
-    require: 'ngModel',
-    link: function (scope, elem, attrs, ctrl) {
-      var firstPassword = '#' + attrs.pwCheck;
-      elem.add(firstPassword).on('keyup', function () {
-        scope.$apply(function () {
-          var v = elem.val()===$(firstPassword).val();
-          ctrl.$setValidity('pwmatch', v);
-        });
-      });
-    }
-  }
-}]);
-
-
-/**
- * Created by v_lljunli on 2017/4/25.
- */
-/*
-* L-blog 自定义指令
-* */
-
-//确认密码一致校验
-app.directive('pwCheck', [function () {
-  return {
-    require: 'ngModel',
-    link: function (scope, elem, attrs, ctrl) {
-      var firstPassword = '#' + attrs.pwCheck;
-      elem.add(firstPassword).on('keyup', function () {
-        scope.$apply(function () {
-          var v = elem.val()===$(firstPassword).val();
-          ctrl.$setValidity('pwmatch', v);
-        });
-      });
-    }
-  }
-}]);
-
-
-/**
- * Created by v_lljunli on 2017/4/27.
- */
-app.factory('fileReader', ["$q", "$log", function($q, $log){
-    var onLoad = function(reader, deferred, scope) {
-      return function () {
-        scope.$apply(function () {
-          deferred.resolve(reader.result);
-        });
-      };
-    };
-
-    var onError = function (reader, deferred, scope) {
-      return function () {
-        scope.$apply(function () {
-          deferred.reject(reader.result);
-        });
-      };
-    };
-
-    var getReader = function(deferred, scope) {
-      var reader = new FileReader();
-      reader.onload = onLoad(reader, deferred, scope);
-      reader.onerror = onError(reader, deferred, scope);
-      return reader;
-    };
-
-    var readAsDataURL = function (file, scope) {
-      var deferred = $q.defer();
-      var reader = getReader(deferred, scope);
-      reader.readAsDataURL(file);
-      return deferred.promise;
-    };
-
-    return {
-      readAsDataUrl: readAsDataURL
-    };
-  }]);
