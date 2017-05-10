@@ -3,7 +3,7 @@
  */
 var app = angular.module('myApp', []);
 /*
- * 用户登录
+ * 用户登录1
  * */
 app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
 

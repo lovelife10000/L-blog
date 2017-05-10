@@ -3,7 +3,7 @@
  */
 var app = angular.module('myApp', []);
 /*
- * 用户登录
+ * 用户登录1
  * */
 app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
 
@@ -25,7 +25,8 @@ app.controller('adminLogin', ['$scope', '$http', function ($scope, $http) {
     });
   };
 
-}]);;/**
+}]);
+/**
  * Created by v_lljunli on 2017/4/27.
  */
 /*
@@ -40,7 +41,8 @@ app.controller('articlesAdd', ['$scope', '$http', function ($scope, $http) {
     });
 
   };
-}]);;/**
+}]);
+/**
  * Created by v_lljunli on 2017/5/10.
  */
 
@@ -77,7 +79,8 @@ app.controller('categoriesAdd', ['$scope', '$http', function ($scope, $http) {
     }
 
   };
-}]);;/**
+}]);
+/**
  * Created by v_lljunli on 2017/5/10.
  */
 
@@ -95,7 +98,8 @@ app.controller('users', ['$scope', '$http', function ($scope, $http) {
   }, function error(res) {
 
   });
-}]);;/**
+}]);
+/**
  * Created by v_lljunli on 2017/5/10.
  */
 
@@ -238,7 +242,8 @@ app.controller('usersAdd', function ($scope, $http) {
 
   });
 
-});;/**
+});
+/**
  * Created by v_lljunli on 2017/5/10.
  */
 
@@ -255,7 +260,8 @@ app.controller('usersGroup', ['$scope', '$http', function ($scope, $http) {
   }, function error(res) {
 
   });
-}]);;/**
+}]);
+/**
  * Created by v_lljunli on 2017/4/25.
  */
 /*
@@ -278,7 +284,8 @@ app.directive('pwCheck', [function () {
   }
 }]);
 
-;/**
+
+/**
  * Created by v_lljunli on 2017/4/25.
  */
 /*
@@ -301,7 +308,8 @@ app.directive('pwCheck', [function () {
   }
 }]);
 
-;/**
+
+/**
  * Created by v_lljunli on 2017/4/27.
  */
 app.factory('fileReader', ["$q", "$log", function($q, $log){
