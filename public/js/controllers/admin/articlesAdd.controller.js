@@ -1,7 +1,6 @@
 /**
  * Created by v_lljunli on 2017/4/27.
  */
-var app = angular.module('myApp', []);
 /*
  * 添加文章
  * */
