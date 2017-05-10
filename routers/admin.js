@@ -335,10 +335,24 @@ router.post('/manage/articles_categories_add',function(req,res,next) {
   }
 );
 /*
+* 获取所有分类
+* */
+router.get('/manage/articles_manage/categories_get',function (req,res,next) {
+
+  Category.find({
+
+  }).then(function (info) {
+    res.json(info);
+  });
+});
+/*
 * 写文章
 * */
 router.get('/manage/articles_add', function (req, res, next) {
   res.render('admin/articles_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
+});
+router.post('/manage/articles_add',function (req,res,next) {
+  console.log(req.body);
 });
 /*
  * 接收文件上传请求

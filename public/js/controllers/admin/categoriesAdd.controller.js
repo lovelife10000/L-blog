@@ -14,6 +14,18 @@ app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', funct
 
   ];
   $scope.cate_parent = $scope.cateParentOptions[1].id;//设置默认值
+  /*
+   * 获取所有分类数据
+   * */
+  categoriesAddService.getCategories().then(function success(res) {
+    console.log(res.data);
+  },function error(res) {
+
+  });
+
+
+
+
   $scope.categoriesAdd = function () {
     if ($scope.myForm.$valid) {
         categoriesAddService.get($scope.cate_name,$scope.cate_slug,$scope.cate_order,$scope.cate_parent,$scope.cate_remark).then(function success(res) {

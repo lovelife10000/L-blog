@@ -24,6 +24,35 @@ app.factory('adminLoginService', ['$http', function ($http) {
 /**
  * Created by v_lljunli on 2017/5/10.
  */
+app.factory('articlesAddService',['$http',function ($http) {
+  return{
+    get:function (title,from,display,tags,img,parent,keywords,discription,type,view,author,content) {
+      $http({
+        method:'POST',
+        url:'admin/manage/articles_add',
+        data:$.param({
+          post_title:title,
+          post_from:from,
+          post_display:display,
+          post_tags:tags,
+          post_img:img,
+          cate_parent:parent,
+          post_keywords:keywords,
+          post_discription:discription,
+          post_type:type,
+          post_view:view,
+          post_author:author,
+          post_content:content
+        }),
+        headers:{'content-type':'applicatin/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
 app.factory('categoriesAddService',['$http',function ($http) {
   return{
     get:function (cate_name,cate_slug,cate_order,cate_parent,cate_remark) {
@@ -37,6 +66,17 @@ app.factory('categoriesAddService',['$http',function ($http) {
           cate_parent: cate_parent,
           cate_remark: cate_remark
         }),
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+    /*
+    * 获取所有分类数据
+    * */
+    getCategories:function () {
+      return $http({
+        method:'GET',
+        url:'articles_manage/categories_get',
         headers: {'content-type': 'application/x-www-form-urlencoded'}
       });
     },
@@ -152,13 +192,39 @@ app.controller('adminLogin', ['$scope', '$http', 'adminLoginService', function (
 /*
  * 添加文章
  * */
-app.controller('articlesAdd', ['$scope', '$http', function ($scope, $http) {
+app.controller('articlesAdd', ['$scope', '$http','articlesAddService', function ($scope, $http,articlesAddService) {
+
+
   $scope.articleAdd = function () {
-    var html = '';
-    ue.ready(function () {
-      html = ue.getContent();
-      console.log(html);
-    });
+
+    if(myForm.$valid){
+      var postContent = '';
+      ue.ready(function () {
+        postContent = ue.getContent();
+        console.log(postContent);
+      });
+
+
+      articlesAddService.get(
+        $scope.post_title,
+        $scope.post_title,
+        $scope.post_from,
+        $scope.post_display,
+        $scope.post_tags,
+        $scope.post_img,
+        $scope.cate_parent,
+        $scope.post_keywords,
+        $scope.post_discription,
+        $scope.post_type,
+        $scope.post_view,
+        $scope.post_author,
+        $scope.post_content).then(function success(res) {
+
+      },function error(res) {
+
+      });
+    }
+
 
   };
 }]);
@@ -178,6 +244,18 @@ app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', funct
 
   ];
   $scope.cate_parent = $scope.cateParentOptions[1].id;//设置默认值
+  /*
+   * 获取所有分类数据
+   * */
+  categoriesAddService.getCategories().then(function success(res) {
+    console.log(res.data);
+  },function error(res) {
+
+  });
+
+
+
+
   $scope.categoriesAdd = function () {
     if ($scope.myForm.$valid) {
         categoriesAddService.get($scope.cate_name,$scope.cate_slug,$scope.cate_order,$scope.cate_parent,$scope.cate_remark).then(function success(res) {

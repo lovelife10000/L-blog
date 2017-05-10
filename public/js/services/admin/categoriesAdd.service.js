@@ -18,5 +18,16 @@ app.factory('categoriesAddService',['$http',function ($http) {
       });
     },
 
+    /*
+    * 获取所有分类数据
+    * */
+    getCategories:function () {
+      return $http({
+        method:'GET',
+        url:'articles_manage/categories_get',
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
   };
 }]);

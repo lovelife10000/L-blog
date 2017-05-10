@@ -18,6 +18,8 @@ var PostSchema=Schema({
   post_tags:String,
   post_keywords:String,
   post_discription:String,
+  post_img:String,
+  post_content:String,
 });
 var Post=mongoose.model('Posts',PostSchema);
 module.exports=Post;
