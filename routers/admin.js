@@ -101,9 +101,37 @@ router.post('/admin_login', function (req, res, next) {
  * */
 router.get('/manage', function (req, res, next) {
   // console.log(req.session.userInfo);
-  res.redirect('/admin/manage/basic_info');
+  res.redirect('/admin/manage/panel/admin_index');
   // res.render('admin/manage',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
 
+
+});
+
+/*
+ * 仪表盘首页
+ * */
+router.get('/manage/panel/admin_index', function (req, res, next) {
+
+  AdminUser.findOne({
+    adminUser_username: req.session.userInfo.adminUser_username
+  }).then(function (userInfo) {
+    var username = userInfo.adminUser_username;
+    var avatar = userInfo.adminUser_avatar;
+    var email = userInfo.adminUser_email;
+    var date = userInfo.date;
+    res.render('admin/admin_index', system.renderItem({
+      username:username,
+      avatar:avatar,
+      email:email,
+      date:date,
+    }, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
+    // {
+    //   username: username,
+    //     avatar: avatar,
+    //   email: email,
+    //   date: date
+    // }
+  });
 
 });
 /*
