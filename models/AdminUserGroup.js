@@ -9,7 +9,8 @@ var AdminUserGroupSchema=Schema({
   name:String,
   pid:Number,
   status:Number,
-  remark:String
+  remark:String,
+  power:String
 });
 var AdminUserGroup=mongoose.model('AdminUserGroup',AdminUserGroupSchema);
 module.exports=AdminUserGroup;

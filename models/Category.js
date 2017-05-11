@@ -9,7 +9,8 @@ var CategorySchema=Schema({
   cate_slug:String,
   cate_name:String,
   cate_order:Number,
-  cate_remark:String
+  cate_remark:String,
+  uid:Number,
 
 });
 var Category=mongoose.model('Categories',CategorySchema);
