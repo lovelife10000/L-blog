@@ -16,11 +16,17 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
    * 权限分配
    * */
   $scope.setPower = function () {
-    console.log(1);
+    console.log($scope.userGroup);
 
-    // $('#myModal').modal({
-    //   keyboard: true
-    // });
+
+  };
+  /*
+  *获取用户组
+  * */
+  $scope.getUserGroup=function (name) {
+
+    $scope.userGroup=name;
+
   };
 
 
@@ -98,7 +104,7 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
 
           ]
         },
-     
+
 
         {name: "标签管理"},
         {name: "评论管理"},
@@ -202,3 +208,13 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
 
 
 }]);
+
+
+
+// {
+//   "_id" : "HyTg8VQUe",
+//   "name" : "管理员",
+//   "power" : "[\"sysTemManage:true\",\"sysTemManage_user:true\",\"sysTemManage_user_add:true\",\"sysTemManage_user_view:true\",\"sysTemManage_user_modify:true\",\"sysTemManage_user_del:true\",\"sysTemManage_uGroup:true\",\"sysTemManage_uGroup_add:true\",\"sysTemManage_uGroup_view:true\",\"sysTemManage_uGroup_modify:true\",\"sysTemManage_uGroup_del:true\",\"sysTemManage_ads:true\",\"sysTemManage_ads_add:true\",\"sysTemManage_ads_view:true\",\"sysTemManage_ads_modify:true\",\"sysTemManage_ads_del:true\",\"sysTemManage_files:true\",\"sysTemManage_files_view:true\",\"sysTemManage_files_modify:true\",\"sysTemManage_files_del:true\",\"sysTemManage_data:true\",\"sysTemManage_data_1:true\",\"sysTemManage_data_1_view:true\",\"sysTemManage_data_1_backup:true\",\"sysTemManage_data_1_del:true\",\"sysTemManage_logs:true\",\"sysTemManage_logs_view:true\",\"sysTemManage_logs_del:true\",\"contentManage:true\",\"contentManage_content:true\",\"contentManage_content_add:true\",\"contentManage_content_view:true\",\"contentManage_content_top:true\",\"contentManage_content_modify:true\",\"contentManage_content_del:true\",\"contentManage_cateGory:true\",\"contentManage_cateGory_add:true\",\"contentManage_cateGory_view:true\",\"contentManage_cateGory_modify:true\",\"contentManage_cateGory_del:true\",\"contentManage_tag:true\",\"contentManage_tag_add:true\",\"contentManage_tag_view:true\",\"contentManage_tag_modify:true\",\"contentManage_tag_del:true\",\"contentManage_temp:true\",\"contentManage_temp_1:true\",\"contentManage_temp_1_add:true\",\"contentManage_temp_1_import:true\",\"contentManage_temp_1_view:true\",\"contentManage_temp_1_modify:true\",\"contentManage_temp_1_del:true\",\"contentManage_tpItem_add:true\",\"contentManage_tpItem_del:true\",\"contentManage_temp_2:true\",\"contentManage_temp_2_view:true\",\"contentManage_temp_2_modify:true\",\"contentManage_msg:true\",\"contentManage_msg_view:true\",\"contentManage_msg_add:true\",\"contentManage_msg_del:true\",\"contentManage_notice:true\",\"contentManage_notice_1:true\",\"contentManage_notice_1_add:true\",\"contentManage_notice_1_view:true\",\"contentManage_notice_1_modify:true\",\"contentManage_notice_1_del:true\",\"contentManage_notice_2:true\",\"contentManage_notice_2_view:true\",\"contentManage_notice_2_del:true\",\"contentManage_notice_3:true\",\"contentManage_notice_3_view:true\",\"contentManage_notice_3_modify:true\",\"contentManage_notice_3_del:true\",\"userManage:true\",\"userManage_user:true\",\"userManage_user_view:true\",\"userManage_user_modify:true\",\"userManage_user_del:true\"]",
+//   "date" : ISODate("2017-01-11T04:35:01.449Z"),
+//   "__v" : 0
+// }
