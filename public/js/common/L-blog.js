@@ -541,7 +541,7 @@ app.controller('usersGroup', ['$scope', '$http','usersGroupService', function ($
   };
 
   var zNodes =[
-    { name:"系统管理", open:true,
+    { name:"用户管理", open:true,
       children: [
         { name:"用户组管理",
           children: [

@@ -335,6 +335,12 @@ router.post('/manage/articles_categories_add',function(req,res,next) {
   }
 );
 /*
+* 菜单管理
+* */
+router.get('/manage/doc/menu', function (req, res, next) {
+  res.render('admin/menu', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
+});
+/*
 * 获取所有分类
 * */
 router.get('/manage/articles_manage/categories_get',function (req,res,next) {

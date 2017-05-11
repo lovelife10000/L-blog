@@ -195,92 +195,152 @@
         <li class="treeview">
           <a href="#"><i class="fa fa-dashboard"></i><span>仪表盘</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="/admin/manage/basic_info"><i class="fa fa-circle-o"></i>基本信息</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>用户信息</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>修改密码</a></li>
+            <li><a href="/admin/manage/basic_info"><i class="fa fa-angle-double-right"></i>基本信息</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>用户信息</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>修改密码</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-users"></i><span>用户管理</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="/admin/manage/users_group"><i class="fa fa-circle-o"></i>所有用户组</a></li>
-            <li><a href="/admin/manage/users_group_add"><i class="fa fa-circle-o"></i>添加用户组</a></li>
-            <li><a href="/admin/manage/users"><i class="fa fa-circle-o"></i>所有用户</a></li>
-            <li><a href="/admin/manage/users_add"><i class="fa fa-circle-o"></i>添加用户</a></li>
-            <li><a href="/admin/manage/login_log"><i class="fa fa-circle-o"></i>登录记录</a></li>
+            <li>
+              <a href="#"> <i class="fa fa-angle-double-right"></i>用户组管理
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/admin/manage/users_group"> 所有用户组</a></li>
+                <li>
+                  <a href="/admin/manage/users_group_add"> 添加用户组
+                    <!--<span class="pull-right-container">-->
+                      <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    <!--</span>-->
+                  </a>
+                  <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>-->
+                  <!--</ul>-->
+                </li>
+              </ul>
+            </li>
+
+            <li><a href="/admin/manage/users"><i class="fa fa-angle-double-right"></i>所有用户</a></li>
+            <li><a href="/admin/manage/users_add"><i class="fa fa-angle-double-right"></i>添加用户</a></li>
+
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-sticky-note-o"></i><span>文章管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <a href="#"><i class="fa fa-sticky-note-o"></i><span>文档管理</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="/admin/manage/articles"><i class="fa fa-circle-o"></i>所有文章</a></li>
-            <li><a href="/admin/manage/articles_categories"><i class="fa fa-circle-o"></i>文章分类</a></li>
-            <li><a href="/admin/manage/articles_categories_add"><i class="fa fa-circle-o"></i>添加分类</a></li>
-            <li><a href="/admin/manage/articles_add"><i class="fa fa-circle-o"></i>写文章</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>待审核</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>未通过</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>已发布</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>草稿箱</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>回收站</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>标签管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>评论管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>消息管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>菜单管理</a></li>
+            <li>
+              <a href="#"> <i class="fa fa-angle-double-right"></i>分类管理
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/admin/manage/articles_categories"> 文档分类</a></li>
+                <li><a href="/admin/manage/articles_categories_add">添加分类</a></li>
+                <li><a href="/admin/manage/doc/menu">菜单管理</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#"> <i class="fa fa-angle-double-right"></i>文章管理
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/admin/manage/articles_add">写文章</a></li>
+                <li><a href="/admin/manage/articles">所有文章</a></li>
+                <li><a href="#">待审核</a></li>
+                <li><a href="#">未通过</a></li>
+                <li><a href="#">已发布</a></li>
+                <li><a href="#">草稿箱</a></li>
+                <li><a href="#">回收站</a></li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#"> <i class="fa fa-angle-double-right"></i>页面管理
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/admin/manage/articles_add">写页面</a></li>
+                <li><a href="/admin/manage/articles">所有页面</a></li>
+                <li><a href="#">待审核</a></li>
+                <li><a href="#">未通过</a></li>
+                <li><a href="#">已发布</a></li>
+                <li><a href="#">草稿箱</a></li>
+                <li><a href="#">回收站</a></li>
+              </ul>
+            </li>
+
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>标签管理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>评论管理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>消息管理</a></li>
+
           </ul>
         </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-file-photo-o"></i><span>文件管理</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>媒体管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>文件备份</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>文件恢复</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>媒体管理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>文件备份</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>文件恢复</a></li>
 
           </ul>
         </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-database"></i><span>数据管理</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>数据库备份入</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>数据库导入</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>数据库压缩</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>数据库优化</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>缓存清理</a></li>
+            <li>
+              <a href="#"> <i class="fa fa-circle"></i>数据库管理
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#">数据库备份入</a></li>
+                <li><a href="#">数据库导入</a></li>
+                <li><a href="#">数据库压缩</a></li>
+                <li><a href="#">数据库优化</a></li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>缓存清理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>数据统计</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-window-maximize"></i><span>定制中心</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>主题管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>插件管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>钩子管理</a></li>
-
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>主题管理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>插件管理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>钩子管理</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>广告管理</a></li>
           </ul>
         </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-gavel"></i><span>工具管理</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>系统日志</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>数据统计</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>广告管理</a></li>
 
-          </ul>
-        </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-cog"></i><span>系统设置</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>站点设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>用户设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>文章设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>附件设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>安全设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>数据库设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>缓存设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>邮件设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>社交登录设置</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>开发者选项</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>在线更新</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>系统信息</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>BUG反馈</a></li>
+            <li><a href="/admin/manage/login_log"><i class="fa fa-angle-double-right"></i>系统日志</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>站点设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>文章设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>附件设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>安全设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>数据库设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>缓存设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>邮件设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>社交登录设置</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>开发者选项</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>在线更新</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>系统信息</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>BUG反馈</a></li>
           </ul>
         </li>
 
