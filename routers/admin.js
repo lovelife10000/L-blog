@@ -335,10 +335,16 @@ router.post('/manage/articles_categories_add',function(req,res,next) {
   }
 );
 /*
-* 菜单管理
+* 编辑菜单
 * */
-router.get('/manage/doc/menu', function (req, res, next) {
-  res.render('admin/menu', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
+router.get('/manage/doc/menu/edit', function (req, res, next) {
+  res.render('admin/menu_edit', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
+});
+/*
+ * 菜单位置
+ * */
+router.get('/manage/doc/menu/location', function (req, res, next) {
+  res.render('admin/menu_location', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
 * 获取所有分类
@@ -441,6 +447,28 @@ router.post('/manage/upload', function (req, res, next) {
 
 
 });
+/*
+* 站点设置
+* */
+router.get('/manage/settings/website', function (req, res, next) {
+  res.render('admin/website', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
+});
+
+/*
+ * 阅读设置
+ * */
+router.get('/manage/settings/read', function (req, res, next) {
+  res.render('admin/read', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
+});
+
+/*
+ * 附件设置
+ * */
+router.get('/manage/settings/files', function (req, res, next) {
+  res.render('admin/files', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
+});
+
+
 
 
 
