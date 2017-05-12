@@ -33,6 +33,7 @@
               </tr>
 
               <tr ng-repeat="x in data">
+
                 <td>{{ x.pid }}</td>
                 <td>{{ x.name }}</td>
                 <td>{{ x.remark }}</td>
@@ -43,6 +44,7 @@
                   <button type="button" class="btn btn-warning btn-xs btn-flat" data-toggle="modal" data-target="#myModal" ng-click="getUserGroup(x.name)">权限分配</button>
                   <button type="button" class="btn btn-info btn-xs btn-flat">投稿分类</button>
                 </td>
+
               </tr>
 
             </table>

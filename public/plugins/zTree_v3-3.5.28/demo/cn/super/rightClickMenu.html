@@ -107,6 +107,7 @@
 		}
 		function checkTreeNode(checked) {
 			var nodes = zTree.getSelectedNodes();
+			console.log(nodes);
 			if (nodes && nodes.length>0) {
 				zTree.checkNode(nodes[0], checked, true);
 			}

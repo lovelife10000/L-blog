@@ -24,9 +24,9 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   };
   var zNodes = [
     {
-      id:'panel', pId:0,name: "仪表盘", open: true,checked:true,
+      id:'panel', pId:0,name: "仪表盘", open: true,
       children: [
-        {id:'panel_index', pId:'panel',name: "仪表盘首页",checked:true,},
+        {id:'panel_index', pId:'panel',name: "仪表盘首页",},
         {id:'basic_info', pId:'panel',name: "基本信息"},
         {id:'password_modify', pId:'panel',name: "修改密码"},
 
@@ -156,7 +156,7 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   var code;
   var zTree;
   var zTreeNodeArray=[];
-  var zTreeArray={};
+  var zTreeObj={};
   function setCheck() {
     zTree = $.fn.zTree.getZTreeObj("treeDemo"),
       py = $("#py").attr("checked") ? "p" : "",
@@ -209,10 +209,10 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
     zTreeNodeArray=zTree.transformToArray(zTree.getNodes());
     for(var i=0; i<zTreeNodeArray.length;i++){
       //zTreeArray.push(zTreeNodeArray[i].id+':'+zTreeNodeArray[i].checked);
-       zTreeArray[zTreeNodeArray[i].id]=zTreeNodeArray[i].checked;
+       zTreeObj[zTreeNodeArray[i].id]=zTreeNodeArray[i].checked;
     }
 
-    usersGroupService.modify($scope.userGroup,zTreeArray).then(function success(res) {
+    usersGroupService.modify($scope.userGroup,zTreeObj).then(function success(res) {
       
     },function error(res) {
 
@@ -220,10 +220,46 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
 
   };
   /*
-  *点击权限分配，获取所选择的用户组
+  *点击权限分配，获取所选择的用户组,并勾选相应的权限
   * */
   $scope.getUserGroup=function (name) {
+
+    //获取所选择的用户组的权限数据
     $scope.userGroup=name;
+    var data=$scope.data;
+    var power;
+    for(var j=0;j<data.length;j++){
+      if(data[j].name==name){
+        power=JSON.parse(data[j].power);
+      }
+    }
+    console.log(power);
+
+    function trueOrFalse(data) {
+      if(data==='true'){
+        data=true;
+      }else if(data==='false'){
+        data=false;
+      }
+      return data;
+    }
+
+    zTreeNodeArray=zTree.transformToArray(zTree.getNodes());
+
+
+
+    for (var i=0, l=zTreeNodeArray.length; i < l; i++) {
+      zTreeNodeArray[i].checked=trueOrFalse(power[zTreeNodeArray[i].id]);
+    }
+    // var nodes = zTree.transformTozTreeNodes(zTreeNodeArray);
+    // console.log(nodes);
+    console.log(zTreeNodeArray);
+    for(var m=0;m<zTreeNodeArray.length;m++){
+      zTree.checkNode(zTreeNodeArray[m],zTreeNodeArray[m].checked,  true);
+    }
+
+
+
   };
 
 
