@@ -524,9 +524,10 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
  * */
 app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function ($scope, $http, usersGroupService) {
 
+  getUserGroup();
 
   /*
-   * ztree
+   * ztree插件配置
    * */
   var setting = {
     check: {
@@ -709,16 +710,20 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   /*
   * 获取用户组数据
   * */
-  usersGroupService.get().then(function success(res) {
-    $scope.data = res.data;
-  }, function error(res) {
+  function getUserGroup() {
+    usersGroupService.get().then(function success(res) {
+      $scope.data = res.data;
+    }, function error(res) {
 
-  });
+    });
+
+  }
+
 
   /*
-   * 权限分配
+   * 权限分配提交
    * */
-  $scope.setPower = function () {
+  $scope.powerCommit = function () {
 
     // console.log(zTree.getChangeCheckedNodes());
     // console.log(zTree.getNodes());
@@ -739,18 +744,50 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   /*
   *点击权限分配，获取所选择的用户组,并勾选相应的权限
   * */
-  $scope.getUserGroup=function (name) {
+  $scope.setPower=function (name) {
+    $scope.userGroup=name;
+    var data;
+    var power;
+
 
     //获取所选择的用户组的权限数据
-    $scope.userGroup=name;
-    var data=$scope.data;
-    var power;
-    for(var j=0;j<data.length;j++){
-      if(data[j].name==name){
-        power=JSON.parse(data[j].power);
+    usersGroupService.get().then(function success(res) {
+      $scope.data = res.data;
+      data=$scope.data;
+      for(var j=0;j<data.length;j++){
+        if(data[j].name==name){
+          power=JSON.parse(data[j].power);
+        }
       }
-    }
-    console.log(power);
+
+
+      zTreeNodeArray=zTree.transformToArray(zTree.getNodes());
+
+
+
+      for (var i=0, l=zTreeNodeArray.length; i < l; i++) {
+        zTreeNodeArray[i].checked=trueOrFalse(power[zTreeNodeArray[i].id]);
+      }
+      // var nodes = zTree.transformTozTreeNodes(zTreeNodeArray);
+      // console.log(nodes);
+      //console.log(zTreeNodeArray);
+      for(var m=0;m<zTreeNodeArray.length;m++){
+        zTree.checkNode(zTreeNodeArray[m],zTreeNodeArray[m].checked,  true);
+      }
+
+
+
+    }, function error(res) {
+
+    });
+
+
+
+
+
+
+
+
 
     function trueOrFalse(data) {
       if(data==='true'){
@@ -761,19 +798,6 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
       return data;
     }
 
-    zTreeNodeArray=zTree.transformToArray(zTree.getNodes());
-
-
-
-    for (var i=0, l=zTreeNodeArray.length; i < l; i++) {
-      zTreeNodeArray[i].checked=trueOrFalse(power[zTreeNodeArray[i].id]);
-    }
-    // var nodes = zTree.transformTozTreeNodes(zTreeNodeArray);
-    // console.log(nodes);
-    console.log(zTreeNodeArray);
-    for(var m=0;m<zTreeNodeArray.length;m++){
-      zTree.checkNode(zTreeNodeArray[m],zTreeNodeArray[m].checked,  true);
-    }
 
 
 
