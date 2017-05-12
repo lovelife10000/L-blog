@@ -191,6 +191,19 @@ router.get('/manage/users_group_get', function (req, res, next) {
 
 });
 /*
+* 权限分配
+* */
+router.post('/manage/users_group/users_group_modify',function (req,res,next) {
+   AdminUserGroup.update({
+     name:req.body.name
+   },{
+     power:JSON.stringify(req.body.power)
+   }).then(function (info) {
+
+   });
+});
+
+/*
  * 添加用户组
  * */
 router.get('/manage/users_group_add', function (req, res, next) {
