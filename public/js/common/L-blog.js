@@ -532,12 +532,16 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   var setting = {
     check: {
       enable: true,
-      chkboxType: {"Y": "p", "N": "s"}
+      chkStyle: "checkbox",
+      chkboxType: { "Y" : "ps", "N" : "ps" }
     },
     data: {
       simpleData: {
         enable: true
       }
+    },
+    callback: {
+
     }
   };
   var zNodes = [
