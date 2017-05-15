@@ -222,7 +222,11 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
     }
 
     usersGroupService.modify($scope.userGroup,zTreeObj).then(function success(res) {
-      
+      if(res.data.code===1){
+        $('#users_group_modal').modal('hide');
+      }else {
+
+      }
     },function error(res) {
 
     });
@@ -232,6 +236,7 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   *点击权限分配，获取所选择的用户组,并勾选相应的权限
   * */
   $scope.setPower=function (name) {
+    console.log(1);
     $scope.userGroup=name;
     var data;
     var power;

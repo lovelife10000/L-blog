@@ -193,12 +193,23 @@ router.get('/manage/users_group_get', function (req, res, next) {
 /*
 * 权限分配
 * */
-router.post('/manage/users_group/users_group_modify',function (req,res,next) {
+router.post('/manage/users_group/users_group_modify_power',function (req,res,next) {
    AdminUserGroup.update({
      name:req.body.name
    },{
      power:JSON.stringify(req.body.power)
    }).then(function (info) {
+     if(info){
+       res.json({
+         code:1,
+         msg:'权限修改成功'
+       });
+     }else {
+       res.json({
+         code:0,
+         msg:'权限修改失败'
+       });
+     }
 
    });
 });

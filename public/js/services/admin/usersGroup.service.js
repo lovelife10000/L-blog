@@ -21,7 +21,7 @@ app.factory('usersGroupService', ['$http', function ($http) {
     modify: function (name,power) {
       return $http({
         method: 'POST',
-        url: 'users_group/users_group_modify',
+        url: 'users_group/users_group_modify_power',
         data:$.param({
           name:name,
           power:power

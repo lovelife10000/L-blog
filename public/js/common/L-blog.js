@@ -8,7 +8,7 @@ app.factory('adminLoginService', ['$http', function ($http) {
       console.log(2);
       return $http({
         method: 'POST',
-        url: 'admin/admin_login',
+        url:  'admin/admin_login',
         data: $.param({
           adminUser_username: username,
           adminUser_password: password
@@ -147,7 +147,7 @@ app.factory('usersGroupService', ['$http', function ($http) {
     modify: function (name,power) {
       return $http({
         method: 'POST',
-        url: 'users_group/users_group_modify',
+        url: 'users_group/users_group_modify_power',
         data:$.param({
           name:name,
           power:power
@@ -739,7 +739,11 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
     }
 
     usersGroupService.modify($scope.userGroup,zTreeObj).then(function success(res) {
-      
+      if(res.data.code===1){
+        $('#users_group_modal').modal('hide');
+      }else {
+
+      }
     },function error(res) {
 
     });
@@ -749,6 +753,7 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
   *点击权限分配，获取所选择的用户组,并勾选相应的权限
   * */
   $scope.setPower=function (name) {
+    console.log(1);
     $scope.userGroup=name;
     var data;
     var power;
