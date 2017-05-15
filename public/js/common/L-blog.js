@@ -147,7 +147,7 @@ app.factory('usersGroupService', ['$http', function ($http) {
     modify: function (name,power) {
       return $http({
         method: 'POST',
-        url: 'users_group/users_group_modify_power',
+        url: 'users_group/modify_power',
         data:$.param({
           name:name,
           power:power
@@ -155,6 +155,31 @@ app.factory('usersGroupService', ['$http', function ($http) {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },
+
+    forbidden:function (name) {
+      return $http({
+        method: 'POST',
+        data:$.param({
+          name:name
+        }),
+        url: 'users_group/forbidden',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+    startUseing:function (name) {
+      return $http({
+        method: 'POST',
+        data:$.param({
+          name:name
+        }),
+        url: 'users_group/start_useing',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+
+
 
   };
 }]);
@@ -811,6 +836,30 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
 
 
   };
+
+  /*
+  * 禁用用户组
+  * */
+  $scope.forbidden=function (name) {
+    usersGroupService.forbidden(name).then(function success() {
+      getUserGroup();
+    },function error() {
+
+    });
+  };
+
+  /*
+  * 启用用户组
+  * */
+  $scope.startUseing=function (name) {
+    usersGroupService.startUseing(name).then(function success() {
+      getUserGroup();
+    },function error() {
+
+    });
+  };
+
+
 
 
 

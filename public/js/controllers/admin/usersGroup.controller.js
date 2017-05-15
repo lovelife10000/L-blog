@@ -295,6 +295,30 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
 
   };
 
+  /*
+  * 禁用用户组
+  * */
+  $scope.forbidden=function (name) {
+    usersGroupService.forbidden(name).then(function success() {
+      getUserGroup();
+    },function error() {
+
+    });
+  };
+
+  /*
+  * 启用用户组
+  * */
+  $scope.startUseing=function (name) {
+    usersGroupService.startUseing(name).then(function success() {
+      getUserGroup();
+    },function error() {
+
+    });
+  };
+
+
+
 
 
 

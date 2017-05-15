@@ -193,13 +193,13 @@ router.get('/manage/users_group_get', function (req, res, next) {
 /*
 * 权限分配
 * */
-router.post('/manage/users_group/users_group_modify_power',function (req,res,next) {
+router.post('/manage/users_group/modify_power',function (req,res,next) {
    AdminUserGroup.update({
      name:req.body.name
    },{
      power:JSON.stringify(req.body.power)
    }).then(function (info) {
-     if(info){
+     if(info.ok===1){
        res.json({
          code:1,
          msg:'权限修改成功'
@@ -213,7 +213,46 @@ router.post('/manage/users_group/users_group_modify_power',function (req,res,nex
 
    });
 });
+/*
+* 禁用用户组
+* */
+router.post('/manage/users_group/forbidden',function (req,res,next) {
 
+  AdminUserGroup.update({
+    name:req.body.name
+  },{
+    status:0
+  }).then(function (info) {
+
+    if(info.ok===1){
+      res.json({
+        code:1,
+        msg:'禁用成功'
+      });
+    }
+
+  });
+});
+/*
+ * 启用用户组
+ * */
+router.post('/manage/users_group/start_useing',function (req,res,next) {
+  
+  AdminUserGroup.update({
+    name:req.body.name
+  },{
+    status:1
+  }).then(function (info) {
+
+    if(info.ok===1){
+      res.json({
+        code:1,
+        msg:'启用成功'
+      });
+    }
+
+  });
+});
 /*
  * 添加用户组
  * */
