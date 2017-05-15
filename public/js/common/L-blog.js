@@ -788,6 +788,7 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService','usersGroup
   * 获取用户组数据
   * */
   function getUserGroup() {
+
     usersGroupService.get().then(function success(res) {
       $scope.data = res.data;
     }, function error(res) {

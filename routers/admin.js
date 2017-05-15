@@ -72,6 +72,16 @@ router.post('/admin_login', function (req, res, next) {
         req.session.adminlogined = true;
         req.session.username=username;
 
+        /*
+         * 根据用户名一次性查询用户数据
+         * */
+        AdminUser.findOne({
+          adminUser_username:username
+        }).then(function (info) {
+          req.session.userInfo=info;
+        });
+        console.log(req.session.userInfo);
+
 
         /*
         * 把session保存到redis中
