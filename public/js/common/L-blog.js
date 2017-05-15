@@ -8,7 +8,7 @@ app.factory('adminLoginService', ['$http', function ($http) {
       console.log(2);
       return $http({
         method: 'POST',
-        url:  'admin/admin_login',
+        url:  '/admin/admin_login',
         data: $.param({
           adminUser_username: username,
           adminUser_password: password
@@ -82,6 +82,28 @@ app.factory('categoriesAddService',['$http',function ($http) {
     },
 
   };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/15.
+ */
+var app2=angular.module('header',[]);
+app2.factory('headerCtrlService', ['$http', function ($http) {
+  return {
+    logout: function () {
+
+      return $http({
+        method:'POST',
+        url:'/admin/manage/logout',
+        // data:$.param({
+        //
+        // }),
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+      });
+    },
+
+
+
+  }
 }]);
 /**
  * Created by v_lljunli on 2017/5/10.
@@ -259,7 +281,7 @@ app.controller('adminLogin', ['$scope', '$http', 'adminLoginService', function (
   $scope.login = function () {
     adminLoginService.get($scope.adminUser_username,$scope.adminUser_password).then(function success(res) {
       if (res.data.code === 1) {
-        window.location.href = 'admin/manage';
+        window.location.href = '/admin/manage';
       }
     }, function error(res) {
 
@@ -349,6 +371,20 @@ app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', funct
       });
     }
 
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/15.
+ */
+
+app2.controller('headerCtrl',['$scope','$http','headerCtrlService',function ($scope,$http,headerCtrlService) {
+  $scope.logout=function () {
+    console.log(1);
+    headerCtrlService.logout().then(function success(res) {
+      
+    },function error(res) {
+
+    });
   };
 }]);
 /**
