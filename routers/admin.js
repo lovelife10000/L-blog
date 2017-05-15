@@ -12,6 +12,7 @@ var moment = require('moment');
 var gm = require('gm');
 var system = require('../util/system');
 var settings = require('../util/settings');
+var cache = require('../util/cache');
 
 /*
 * 数据模型
@@ -35,7 +36,6 @@ router.get(["/manage", '/manage/*'], function (req, res, next) {
  * */
 router.get('/', function (req, res, next) {
 
-  console.log(req.session.adminlogined);
   if (req.session.adminlogined) {
     res.redirect('/admin/manage');
   } else {
@@ -70,29 +70,35 @@ router.post('/admin_login', function (req, res, next) {
         });
       } else {
         req.session.adminlogined = true;
-        req.session.username = '';
+        req.session.username=username;
 
-        if (req.cookies.username) {
+        /*
+        * 把session保存到redis中
+        * */
+        cache.set(settings.SESSION_SECRET+'_siteTemplate',1,1000 * 60 * 60 * 24);
 
-          try {
-            req.session.username = JSON.parse(req.cookies.username);
-          }
-          catch (err) {
-          }
-        }
+
+        // if (req.cookies.username) {
+        //
+        //   try {
+        //     req.session.username = JSON.parse(req.cookies.username);
+        //   }
+        //   catch (err) {
+        //   }
+        // }
         //发送cookie到客户端
-        res.cookie('username', JSON.stringify({
-          adminUser_username: username,
-          // adminUser_password: password
-        }), {
-          //   domain: '.example.com',//cookie在什么域名下有效，类型为String,。默认为网站域名
-          //   expires: new Date(Date.now() + 900000),//cookie过期时间，类型为Date。如果没有设置或者设置为0，那么该cookie只在这个这个session有效，即关闭浏览器后，这个cookie会被浏览器删除。
-          //   httpOnly: true,//只能被web server访问，类型Boolean。
-          //  maxAge: 10000,//实现expires的功能，设置cookie过期的时间，类型为String，指明从现在开始，多少毫秒以后，cookie到期。
-          //   path: '/admin',//cookie在什么路径下有效，默认为'/'，类型为String
-          //   secure: false,//只能被HTTPS使用，类型Boolean，默认为false
-          //   signed: false//使用签名，类型Boolean，默认为false。`express会使用req.secret来完成签名，需要cookie-parser配合使用`
-        });
+        // res.cookie('username', JSON.stringify({
+        //   adminUser_username: username,
+        //   // adminUser_password: password
+        // }), {
+        //   //   domain: '.example.com',//cookie在什么域名下有效，类型为String,。默认为网站域名
+        //   //   expires: new Date(Date.now() + 900000),//cookie过期时间，类型为Date。如果没有设置或者设置为0，那么该cookie只在这个这个session有效，即关闭浏览器后，这个cookie会被浏览器删除。
+        //   //   httpOnly: true,//只能被web server访问，类型Boolean。
+        //   //  maxAge: 10000,//实现expires的功能，设置cookie过期的时间，类型为String，指明从现在开始，多少毫秒以后，cookie到期。
+        //   //   path: '/admin',//cookie在什么路径下有效，默认为'/'，类型为String
+        //   //   secure: false,//只能被HTTPS使用，类型Boolean，默认为false
+        //   //   signed: false//使用签名，类型Boolean，默认为false。`express会使用req.secret来完成签名，需要cookie-parser配合使用`
+        // });
         res.json({
           code: 1,
           msg: '登录成功'
@@ -106,17 +112,19 @@ router.post('/admin_login', function (req, res, next) {
 * 用户退出
 * */
 router.post('/manage/logout',function (req,res,next) {
-
+  //console.log(req.session.adminlogined);
   req.session.adminlogined = false;
-
+  //console.log(req.session.adminlogined);
 });
 /*
  * 管理页首页
  * */
 router.get('/manage', function (req, res, next) {
   // console.log(req.session.userInfo);
+
   res.redirect('/admin/manage/panel/admin_index');
   // res.render('admin/manage',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));
+
 
 
 });
@@ -127,7 +135,7 @@ router.get('/manage', function (req, res, next) {
 router.get('/manage/panel/admin_index', function (req, res, next) {
 
   AdminUser.findOne({
-    adminUser_username: req.session.username.adminUser_username
+    adminUser_username: req.session.username
   }).then(function (userInfo) {
     var username = userInfo.adminUser_username;
     var avatar = userInfo.adminUser_avatar;
