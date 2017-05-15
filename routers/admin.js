@@ -34,14 +34,14 @@ router.get(["/manage", '/manage/*'], function (req, res, next) {
  * 用户登录
  * */
 router.get('/', function (req, res, next) {
-  
+
   console.log(req.session.adminlogined);
   if (req.session.adminlogined) {
     res.redirect('/admin/manage');
   } else {
 
     res.redirect('/admin/admin_login');
-    //res.render('admin/admin_login');
+
   }
 
 });
@@ -107,7 +107,7 @@ router.post('/admin_login', function (req, res, next) {
 * */
 router.post('/manage/logout',function (req,res,next) {
 
-  //req.session.adminlogined = false;
+  req.session.adminlogined = false;
 
 });
 /*
