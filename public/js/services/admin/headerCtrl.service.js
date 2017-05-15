@@ -7,11 +7,8 @@ app2.factory('headerCtrlService', ['$http', function ($http) {
     logout: function () {
 
       return $http({
-        method:'POST',
+        method:'GET',
         url:'/admin/manage/logout',
-        // data:$.param({
-        //
-        // }),
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
     },

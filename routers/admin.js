@@ -72,6 +72,7 @@ router.post('/admin_login', function (req, res, next) {
         req.session.adminlogined = true;
         req.session.username=username;
 
+
         /*
         * 把session保存到redis中
         * */
@@ -111,16 +112,20 @@ router.post('/admin_login', function (req, res, next) {
 /*
 * 用户退出
 * */
-router.post('/manage/logout',function (req,res,next) {
-  //console.log(req.session.adminlogined);
+router.get('/manage/logout',function (req,res,next) {
   req.session.adminlogined = false;
-  //console.log(req.session.adminlogined);
+
+  //因为你现在的这个页面是/admin/manage/panel/panel_index，而get（'/manage/logout'），所以重定向无效，改用前端location
+  res.json({
+    code:1,
+    msg:'退出成功'
+  });
 });
 /*
  * 管理页首页
  * */
 router.get('/manage', function (req, res, next) {
-  // console.log(req.session.userInfo);
+
 
   res.redirect('/admin/manage/panel/admin_index');
   // res.render('admin/manage',system.renderItem(req.session.userInfo.adminUser_username,settings.BLOG_NAME,settings.PANEL[1],settings.BASIC_INFO[1]));

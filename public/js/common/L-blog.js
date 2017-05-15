@@ -92,11 +92,8 @@ app2.factory('headerCtrlService', ['$http', function ($http) {
     logout: function () {
 
       return $http({
-        method:'POST',
+        method:'GET',
         url:'/admin/manage/logout',
-        // data:$.param({
-        //
-        // }),
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
       });
     },
@@ -380,9 +377,11 @@ app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', funct
 
 app2.controller('headerCtrl',['$scope','$http','headerCtrlService',function ($scope,$http,headerCtrlService) {
   $scope.logout=function () {
-    console.log(1);
+
     headerCtrlService.logout().then(function success(res) {
-      
+      if(res.data.code===1){
+        window.location.href='/admin';
+      }
     },function error(res) {
 
     });
