@@ -34,9 +34,6 @@ app.controller('usersGroupAdd',['$scope','$http','usersGroupAddService',function
       case '内容管理员':
         group_id=3;
         break;
-      case '投稿员':
-        group_id=4;
-        break
 
     }
     usersGroupAddService.get(group_id,name,pid,status,remark).then(function(res) {

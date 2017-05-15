@@ -237,7 +237,7 @@ router.post('/manage/users_group/forbidden',function (req,res,next) {
  * 启用用户组
  * */
 router.post('/manage/users_group/start_useing',function (req,res,next) {
-  
+
   AdminUserGroup.update({
     name:req.body.name
   },{
@@ -248,6 +248,28 @@ router.post('/manage/users_group/start_useing',function (req,res,next) {
       res.json({
         code:1,
         msg:'启用成功'
+      });
+    }
+
+  });
+});
+/*
+* 用户组编辑
+* */
+router.post('/manage/users_group/edit',function (req,res,next) {
+  AdminUserGroup.update({
+    name:req.body.name
+  },{
+    group_id:req.body.group_id,
+    name:req.body.name,
+    pid:req.body.pid,
+    remark:req.body.remark
+  }).then(function (info) {
+
+    if(info.ok===1){
+      res.json({
+        code:1,
+        msg:'修改成功'
       });
     }
 

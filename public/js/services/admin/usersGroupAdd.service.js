@@ -21,5 +21,20 @@ app.factory('usersGroupAddService', ['$http', function ($http) {
       });
     },
 
+
+    edit:function (id,name,pid,remark) {
+      return $http({
+        method:'POST',
+        url:'users_group/edit',
+        data:$.param({
+          group_id:id,
+          name:name,
+          pid:pid,
+          remark:remark
+        }),
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+      });
+    },
+
   }
 }]);

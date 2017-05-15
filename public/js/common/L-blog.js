@@ -206,6 +206,21 @@ app.factory('usersGroupAddService', ['$http', function ($http) {
       });
     },
 
+
+    edit:function (id,name,pid,remark) {
+      return $http({
+        method:'POST',
+        url:'users_group/edit',
+        data:$.param({
+          group_id:id,
+          name:name,
+          pid:pid,
+          remark:remark
+        }),
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+      });
+    },
+
   }
 }]);
 /**
@@ -372,9 +387,6 @@ app.controller('usersGroupAdd',['$scope','$http','usersGroupAddService',function
       case '内容管理员':
         group_id=3;
         break;
-      case '投稿员':
-        group_id=4;
-        break
 
     }
     usersGroupAddService.get(group_id,name,pid,status,remark).then(function(res) {
@@ -547,7 +559,7 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
 /*
  * 所有用户组
  * */
-app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function ($scope, $http, usersGroupService) {
+app.controller('usersGroup', ['$scope', '$http', 'usersGroupService','usersGroupAddService', function ($scope, $http, usersGroupService,usersGroupAddService) {
 
   getUserGroup();
 
@@ -859,6 +871,52 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService', function (
     });
   };
 
+  /*
+  * 点击编辑
+  * */
+  $scope.edit=function (user) {
+    $scope.user=user;
+    $scope.pidOptions = [
+      {name:'无',id:0},
+      {name:'超级管理员',id:1},
+      {name:'网站管理员',id:2},
+      {name:'内容管理员',id:3},
+    ];
+    $scope.pid=$scope.user.pid;//设置默认值
+  };
+  /*
+  * 编辑提交
+  * */
+  $scope.editCommit=function (user) {
+    var name=user.name;
+    var pid=user.pid;
+    var remark=user.remark;
+    var group_id='超级管理员';
+    switch (name){
+      case '超级管理员':
+        group_id=1;
+        break;
+      case '网站管理员':
+        group_id=2;
+        break;
+      case '内容管理员':
+        group_id=3;
+        break;
+      default:
+        group_id=4;
+
+
+    }
+    usersGroupAddService.edit(group_id,name,pid,remark).then(function(res) {
+      if(res.data.code===1){
+        $('#myModal').modal({
+          keyboard: true
+        });
+      }
+    },function(res) {
+
+    });
+  };
 
 
 
