@@ -64,7 +64,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
-  // grunt.registerTask('test', ['jshint', 'qunit']);
+  //grunt.registerTask('test', ['concat','uglify','watch']);
 
   //默认的任务
   grunt.registerTask('default', ['concat','uglify','watch']);

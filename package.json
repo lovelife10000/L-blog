@@ -27,6 +27,7 @@
     "mongoose": "^4.9.5",
     "redis": "^2.7.1",
     "swig": "^1.4.2",
+    "ua-parser-js": "^0.7.12",
     "ueditor": "^1.2.2"
   },
   "devDependencies": {

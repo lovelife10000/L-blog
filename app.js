@@ -14,6 +14,10 @@ var redisStore = require('connect-redis')(session);
 var path = require('path');
 var ueditor = require("ueditor");
 /*
+ * 数据模型
+ * */
+var AdminUser = require('./models/AdminUser');
+/*
  * 创建app应用
  * */
 var app = express();
@@ -24,8 +28,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
-
-
 
 
 /*
@@ -48,7 +50,6 @@ app.use(session({
   //saveUninitialized: true,
   cookie: {maxAge: 30 * 60 * 1000}
 }));
-
 
 
 /*
@@ -78,39 +79,61 @@ app.set('view engine', 'ejs');
  * 配置body-parser
  * */
 app.use(bodyParser.urlencoded({extended: true}));
-/**********************************模块路由部分由下面开始********************************************/
+/*
+ * 数据库配置
+ * */
+
+var database_path = '';
+var database_port = '';
+var database_name = '';
+var database_username = '';
+var database_password = '';
+app.use('/install/start', function (req, res, next) {
+
+
+  database_path = req.body.database_path;
+  database_port = req.body.database_port;
+  database_name = req.body.database_name;
+  database_username = req.body.database_username;
+  database_password = req.body.database_password;
+
+
+  mongoose.connect('mongodb://' +database_username+':'+database_password+'@'+ database_path + ':' + database_port + '/' + database_name, function (err) {
+    if (err) {
+      console.log('数据库连接失败');
+    } else {
+      console.log('数据库连接成功');
+      /*
+      * 保存用户名和密码
+      * */
+      var user=new AdminUser({
+        adminUser_username:req.body.adminUser_username,
+        adminUser_password:req.body.adminUser_password
+      });
+      user.save();
+
+    }
+
+  });
+
+});
 /*
  * 所有请求访问入口
  * */
 app.use('/', function (req, res, next) {
 
 
-  // req.session.userInfo={};
-  //
-  // if(req.cookies.loginInfo){
-  //
-  //   try{
-  //     req.session.userInfo=JSON.parse(req.cookies.loginInfo);
-  //   }
-  //   catch(err){}
-  // }
-
-  // if(req.session.isVisit) {
-  //   req.session.isVisit++;
-  //   res.send('<p>第 ' + req.session.isVisit + '次来到此页面</p>');
-  // } else {
-  //   req.session.isVisit = 1;
-  //   res.send('欢迎第一次来这里');
-  // }
-
   next();
 });
+
 /*
  * 创建模块
  * */
+app.use('/install', require('./routers/install'));
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/index'));
+
 
 /*
  * 配置ueditor路由
@@ -131,7 +154,7 @@ app.use("/plugins/ueditor/ue", ueditor(path.join(__dirname, 'public'), function 
     }
     res.ue_up(file_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
     res.setHeader('Content-Type', 'text/html');
-  }else if (req.query.action === 'listimage') {//  客户端发起图片列表请求
+  } else if (req.query.action === 'listimage') {//  客户端发起图片列表请求
     var dir_url = imgDir;
     res.ue_list(dir_url); // 客户端会列出 dir_url 目录下的所有图片
   }
@@ -141,20 +164,21 @@ app.use("/plugins/ueditor/ue", ueditor(path.join(__dirname, 'public'), function 
     res.redirect('/plugins/ueditor/nodejs/config.json');
   }
 }));
+
 /*
- * 尝试测试数据库是否联通
+ * 监听端口
  * */
-mongoose.connect('mongodb://localhost:27017/blog', function (err) {
-  if (err) {
-    console.log('数据库连接失败');
-  } else {
-    console.log('数据库连接成功');
-    //监听http请求
-    app.listen(8082);
-  }
-});
-
-
+// mongoose.connect('mongodb://localhost:27017/blog', function (err) {
+//   if (err) {
+//     console.log('数据库连接失败');
+//   } else {
+//     console.log('数据库连接成功');
+//     //监听http请求
+//     app.listen(8082);
+//   }
+// });
+//
+app.listen(8082);
 
 
 
