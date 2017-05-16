@@ -71,16 +71,9 @@ router.post('/admin_login', function (req, res, next) {
       } else {
         req.session.adminlogined = true;
         req.session.username=username;
+        req.session.userInfo=info;
 
-        /*
-         * 根据用户名一次性查询用户数据
-         * */
-        AdminUser.findOne({
-          adminUser_username:username
-        }).then(function (info) {
-          req.session.userInfo=info;
-        });
-        console.log(req.session.userInfo);
+
 
 
         /*
@@ -208,7 +201,7 @@ router.get('/manage/users_group', function (req, res, next) {
    * */
   AdminUserGroup.find().then(function (adminUserGroups) {
     if (adminUserGroups) {
-      res.render('admin/users_group', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_GROUP[1]));
+      res.render('admin/users_group', system.renderItem(req.session.username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_GROUP[1]));
     } else {
       res.json('用户组不存在');
     }

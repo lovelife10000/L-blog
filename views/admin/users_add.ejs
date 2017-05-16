@@ -1,5 +1,5 @@
 <%- include('header') %>
-<div class="content-wrapper">
+<div class="content-wrapper" ng-controller="usersAdd">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -23,7 +23,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form name="myForm" class="form-horizontal" ng-app="myApp" ng-controller="usersAdd" onsubmit="return false;">
+          <form name="myForm" class="form-horizontal"   onsubmit="return false;">
             <div class="box-body">
               <div class="form-group"
                    ng-class="{'has-warning':myForm.adminUser_username.$invalid && !myForm.adminUser_username.$pristine,'has-success':myForm.adminUser_username.$valid && !myForm.adminUser_username.$pristine,'has-error':isUsernameExist}">

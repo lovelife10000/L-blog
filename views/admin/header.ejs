@@ -16,12 +16,12 @@
   <script src="/js/common/bootstrap.js"></script>
   <script src="/js/common/app.js"></script>
 </head>
-<body class="skin-blue sidebar-mini hold-transition">
+<body class="skin-blue sidebar-mini hold-transition" ng-app="myApp">
 
 <div class="wrapper">
 
   <!--头部-->
-  <header class="main-header" ng-app="header" ng-controller="headerCtrl">
+  <header class="main-header">
     <a href="../../index2.html" class="logo">
       L-blog博客管理系统
     </a>
@@ -124,7 +124,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/images/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><%= userInfo.username %></span>
+              <span class="hidden-xs"><%= username %></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -174,7 +174,7 @@
           <img src="/images/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><%= userInfo.username %></p>
+          <p><%= username %></p>
 
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>

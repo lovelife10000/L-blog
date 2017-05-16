@@ -1,5 +1,5 @@
 <%- include('header') %>
-<div class="content-wrapper">
+<div class="content-wrapper" ng-controller="admin">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -23,7 +23,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" ng-app="myApp" ng-controller="myCtrl" onsubmit="return false;">
+                    <form class="form-horizontal"  onsubmit="return false;">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">组名称</label>

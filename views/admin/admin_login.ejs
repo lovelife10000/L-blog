@@ -16,13 +16,13 @@
   <script src="/js/common/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page"  ng-app="myApp" ng-controller="adminLogin" >
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>L-blog</b></a>
   </div>
   <!-- /.login-logo -->
-  <div class="login-box-body" ng-app="myApp" ng-controller="adminLogin" >
+  <div class="login-box-body">
     <p class="login-box-msg">填写用户名及密码</p>
 
     <form action="admin_login" method="post" onsubmit="return false;">

@@ -86,8 +86,8 @@ app.factory('categoriesAddService',['$http',function ($http) {
 /**
  * Created by v_lljunli on 2017/5/15.
  */
-var app2=angular.module('header',[]);
-app2.factory('headerCtrlService', ['$http', function ($http) {
+
+app.factory('headerCtrlService', ['$http', function ($http) {
   return {
     logout: function () {
 
@@ -375,7 +375,7 @@ app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', funct
  * Created by v_lljunli on 2017/5/15.
  */
 
-app2.controller('headerCtrl',['$scope','$http','headerCtrlService',function ($scope,$http,headerCtrlService) {
+app.controller('headerCtrl',['$scope','$http','headerCtrlService',function ($scope,$http,headerCtrlService) {
   $scope.logout=function () {
 
     headerCtrlService.logout().then(function success(res) {
