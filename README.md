@@ -30,3 +30,4 @@
  2.get和post请求区别，post请求无法使用重定向
  3.get请求里的重定向是有条件的，只有当前浏览器url地址是get请求的地址时，才有效，要不然得用location，这是redirect和location的区别
 - 制作后台用户注册页
+- mongodb 设置管理员，测试mongoose连接数据库功能
