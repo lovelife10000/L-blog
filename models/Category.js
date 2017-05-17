@@ -5,7 +5,7 @@ var mongoose=require('mongoose');
 var Schema=mongoose.Schema;
 var CategorySchema=Schema({
   cate_id:Number,
-  cate_parent:Number,
+  cate_parent:String,
   cate_slug:String,
   cate_name:String,
   cate_order:Number,

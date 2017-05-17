@@ -1,7 +1,7 @@
 /**
  * Created by v_lljunli on 2017/5/10.
  */
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngSanitize']);
 app.factory('adminLoginService', ['$http', function ($http) {
   return {
     get: function (username,password) {
@@ -53,12 +53,17 @@ app.factory('articlesAddService',['$http',function ($http) {
 /**
  * Created by v_lljunli on 2017/5/10.
  */
-app.factory('categoriesAddService',['$http',function ($http) {
-  return{
-    get:function (cate_name,cate_slug,cate_order,cate_parent,cate_remark) {
+app.factory('categoriesAddService', ['$http', function ($http) {
+  return {
+    get: function (cate_name, cate_slug, cate_order, cate_parent, cate_remark) {
+      console.log(cate_name);
+      console.log(cate_slug);
+      console.log(cate_order);
+      console.log(cate_parent);
+      console.log(cate_remark);
       return $http({
         method: 'POST',
-        url: 'articles_categories_add',
+        url: 'add',
         data: $.param({
           cate_name: cate_name,
           cate_slug: cate_slug,
@@ -66,17 +71,17 @@ app.factory('categoriesAddService',['$http',function ($http) {
           cate_parent: cate_parent,
           cate_remark: cate_remark
         }),
-        headers:  {'content-type': 'application/x-www-form-urlencoded'}
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
       });
     },
 
     /*
-    * 获取所有分类数据
-    * */
-    getCategories:function () {
+     * 获取所有分类数据
+     * */
+    getCategories: function () {
       return $http({
-        method:'GET',
-        url:'get',
+        method: 'GET',
+        url: 'get',
         headers: {'content-type': 'application/x-www-form-urlencoded'}
       });
     },
@@ -267,6 +272,15 @@ app.directive('pwCheck', [function () {
 
 
 /**
+ * Created by v_lljunli on 2017/5/17.
+ */
+app.filter('trustHtml', function ($sce) {
+  return function (input) {
+    return $sce.trustAsHtml(input);
+  }
+});
+//$sce是angularJS自带的安全处理模块，$sce.trustAsHtml(input)方法便是将数据内容以html的形式进行解析并返 回  。
+/**
  * Created by v_lljunli on 2017/5/10.
  */
 
@@ -339,7 +353,7 @@ app.controller('articlesAdd', ['$scope', '$http','articlesAddService', function 
 /*
  * 添加分类
  * */
-app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', function ($scope, $http,categoriesAddService) {
+app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService','$sce', function ($scope, $http,categoriesAddService,$sce) {
 
   /*
    * 获取所有分类数据
@@ -348,20 +362,46 @@ app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', funct
     console.log(res.data);
     var data=res.data;
     var dataFormat=[];
-    for(var i=0;i<data.length;i++){
-      dataFormat.push({
-        name:data[i].cate_name,
-        id:0
-      });
+    var firstCate=[];
+    var secondCate=[];
+    for(var j=0;j<data.length;j++){
+      if(data[j].cate_parent===''){
+        firstCate.push({
+          name:data[j].cate_name,
+          id:data[j].cate_slug
+        });
+      }
+
     }
-    dataFormat.unshift({
+console.log(firstCate);
+    for(var m=0;m<firstCate.length;m++){
+      for(var z=0;z<data.length;z++){
+        console.log(1);
+        if(firstCate[m].id===data[z].cate_parent){
+          firstCate.splice(m+1,0,{
+            name:''+'└'+data[z].cate_name,
+            id:data[z].cate_slug
+          });
+
+        }
+
+      }
+    }
+    console.log(firstCate);
+    // for(var i=0;i<data.length;i++){
+    //   dataFormat.push({
+    //     name:data[i].cate_name,
+    //     id:data[i].cate_slug
+    //   });
+    // }
+    firstCate.unshift({
       name:'无',
-      id:0
+      id:''
     });
     /*
      * 设置默认值
      * */
-    $scope.cateParentOptions = dataFormat;
+    $scope.cateParentOptions = firstCate;
     console.log($scope.cateParentOptions);
     $scope.cate_parent = $scope.cateParentOptions[1].id;
   },function error(res) {
