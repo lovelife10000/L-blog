@@ -1,10 +1,10 @@
 /**
- * Created by v_lljunli on 2017/5/10.
+ * Created by v_lljunli on 2017/5/17.
  */
-app.factory('articlesAddService',['$http',function ($http) {
+app.factory('categoriesAllService',['$http',function ($http) {
   return{
     get:function (title,from,display,tags,img,parent,keywords,discription,type,view,author,content) {
-      return $http({
+      $http({
         method:'POST',
         url:'admin/manage/articles_add',
         data:$.param({
@@ -24,6 +24,19 @@ app.factory('articlesAddService',['$http',function ($http) {
         headers:{'content-type':'applicatin/x-www-form-urlencoded'}
       });
     },
+
+    /*
+     * 获取所有分类数据
+     * */
+    getCategories: function () {
+      return $http({
+        method: 'GET',
+        url: 'get',
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      });
+    },
+
+
 
   };
 }]);
