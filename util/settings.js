@@ -33,10 +33,10 @@ module.exports={
   ALL_USERS_ADD:['allUsersAdd','添加用户'],
   LOGIN_LOG:['loginLog','登录记录'],
 
-  ARTICLES_MANAGE:['articlesManage','文章管理'],
+  ARTICLES_MANAGE:['articlesManage','文档管理'],
   ALL_ARTICLES:['allArticles','所有文章'],
-  ARTICLES_CATEGORY:['articles_category','文章分类'],
-  ARTICLES_CATEGORY_ADD:['articlesCategoryAdd','添加分类'],
+  CATEGORIES_ALL:['categories_all','所有分类'],
+  ARTICLES_CATEGORY_ADD:['CategoriesAdd','添加分类'],
   ARTICLES_ADD:['articles_add','写文章'],
 
 

@@ -436,26 +436,42 @@ router.get('/manage/panel/login_log', function (req, res, next) {
 });
 
 /*
- * 所有文章
+ * 所有文档
  * */
-router.get('/manage/doc_manage/articles_manage/all', function (req, res, next) {
-  res.render('admin/articles', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ALL_ARTICLES[1]));
+router.get('/manage/document_manage/all', function (req, res, next) {
+  res.render('admin/document_all', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ALL_ARTICLES[1]));
 });
 
 /*
- * 文章分类
+ * 所有分类
  * */
-router.get('/manage/doc_manage/categories_manage/categories', function (req, res, next) {
-  res.render('admin/articles_categories', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
+router.get('/manage/document_manage/categories_manage/all', function (req, res, next) {
+  res.render('admin/categories_all', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.CATEGORIES_ALL[1]));
 });
+/*
+* 获取分类
+* */
+router.get('/manage/document_manage/categories_manage/get', function (req, res, next) {
 
+  Category.find().then(function (info) {
+    res.json(info);
+
+  });
+
+
+});
 /*
  * 添加分类
  * */
-router.get('/manage/doc_manage/categories_manage/add', function (req, res, next) {
-  res.render('admin/articles_categories_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY_ADD[1]));
+router.get('/manage/document_manage/categories_manage/add', function (req, res, next) {
+
+
+    res.render('admin/categories_add', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY_ADD[1]));
+
+
+
 });
-router.post('/manage/doc_manage/categories_manage/add',function(req,res,next) {
+router.post('/manage/document_manage/categories_manage/add',function(req,res,next) {
     Category.findOne({
       cate_name:req.body.cate_name
     }).then(function(info) {
@@ -486,19 +502,19 @@ router.post('/manage/doc_manage/categories_manage/add',function(req,res,next) {
 /*
 * 编辑菜单
 * */
-router.get('/manage/doc_manage/menu_manage/edit', function (req, res, next) {
+router.get('/manage/document_manage/menu_manage/edit', function (req, res, next) {
   res.render('admin/menu_edit', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
  * 菜单位置
  * */
-router.get('/manage/doc_manage/menu_manage/location', function (req, res, next) {
+router.get('/manage/document_manage/menu_manage/location', function (req, res, next) {
   res.render('admin/menu_location', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
 * 获取所有文章分类
 * */
-router.get('/manage/doc_manage/categories_manage/get',function (req,res,next) {
+router.get('/manage/document_manage/categories_manage/get',function (req,res,next) {
 
   Category.find({
 
@@ -507,12 +523,12 @@ router.get('/manage/doc_manage/categories_manage/get',function (req,res,next) {
   });
 });
 /*
-* 写文章
+* 写文档
 * */
-router.get('/manage/doc_manage/articles_manage/write', function (req, res, next) {
-  res.render('admin/articles_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
+router.get('/manage/document_manage/write', function (req, res, next) {
+  res.render('admin/document_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
-router.post('/manage/doc_manage/articles_manage/write',function (req,res,next) {
+router.post('/manage/document_manage/articles_manage/write',function (req,res,next) {
   //console.log(req.body);
 });
 /*

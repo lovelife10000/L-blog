@@ -4,12 +4,12 @@
   <section class="content-header">
     <h1>
       <%= blogName %>
-      <small>文章分类</small>
+      <small><%= item %></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
       <li><a href="#"><%= category %></a></li>
-      <li class="active">文章分类</li>
+      <li class="active"><%= item %></li>
     </ol>
   </section>
 
@@ -26,7 +26,7 @@
             <table class="table table-bordered">
               <tr>
                 <th style="width: 10px"><input type="checkbox" class="minimal"></th>
-                <th>分类ID</th>
+                <th>分类名称</th>
                 <th>名称</th>
                 <th>别名</th>
                 <th>结构</th>
@@ -47,8 +47,8 @@
                 <td>888</td>
                 <td>888</td>
                 <td>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-danger">删除</button>
+                  <button type="button" class="btn btn-primary btn-xs btn-flat">编辑</button>
+                  <button type="button" class="btn btn-danger btn-xs btn-flat">删除</button>
                 </td>
               </tr>
               <tr>

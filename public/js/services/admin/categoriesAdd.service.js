@@ -14,7 +14,7 @@ app.factory('categoriesAddService',['$http',function ($http) {
           cate_parent: cate_parent,
           cate_remark: cate_remark
         }),
-        headers: {'content-type': 'application/x-www-form-urlencoded'}
+        headers:  {'content-type': 'application/x-www-form-urlencoded'}
       });
     },
 
@@ -24,7 +24,7 @@ app.factory('categoriesAddService',['$http',function ($http) {
     getCategories:function () {
       return $http({
         method:'GET',
-        url:'articles_manage/categories_get',
+        url:'get',
         headers: {'content-type': 'application/x-www-form-urlencoded'}
       });
     },

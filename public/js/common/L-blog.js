@@ -66,7 +66,7 @@ app.factory('categoriesAddService',['$http',function ($http) {
           cate_parent: cate_parent,
           cate_remark: cate_remark
         }),
-        headers: {'content-type': 'application/x-www-form-urlencoded'}
+        headers:  {'content-type': 'application/x-www-form-urlencoded'}
       });
     },
 
@@ -76,7 +76,7 @@ app.factory('categoriesAddService',['$http',function ($http) {
     getCategories:function () {
       return $http({
         method:'GET',
-        url:'articles_manage/categories_get',
+        url:'get',
         headers: {'content-type': 'application/x-www-form-urlencoded'}
       });
     },
@@ -340,22 +340,34 @@ app.controller('articlesAdd', ['$scope', '$http','articlesAddService', function 
  * 添加分类
  * */
 app.controller('categoriesAdd', ['$scope', '$http','categoriesAddService', function ($scope, $http,categoriesAddService) {
-  $scope.cateParentOptions = [
-    {name: '无', id: 0},
-    {name: '一级分类', id: 1},
-    {name: '二级分类', id: 2},
-    {name: '三级分类', id: 3},
 
-  ];
-  $scope.cate_parent = $scope.cateParentOptions[1].id;//设置默认值
   /*
    * 获取所有分类数据
    * */
   categoriesAddService.getCategories().then(function success(res) {
     console.log(res.data);
+    var data=res.data;
+    var dataFormat=[];
+    for(var i=0;i<data.length;i++){
+      dataFormat.push({
+        name:data[i].cate_name,
+        id:0
+      });
+    }
+    dataFormat.unshift({
+      name:'无',
+      id:0
+    });
+    /*
+     * 设置默认值
+     * */
+    $scope.cateParentOptions = dataFormat;
+    console.log($scope.cateParentOptions);
+    $scope.cate_parent = $scope.cateParentOptions[1].id;
   },function error(res) {
 
   });
+
 
 
 
