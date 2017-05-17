@@ -8,7 +8,7 @@ app.factory('adminLoginService', ['$http', function ($http) {
       console.log(2);
       return $http({
         method: 'POST',
-        url:  '/admin/admin_login',
+        url:  '/admin/login',
         data: $.param({
           adminUser_username: username,
           adminUser_password: password
@@ -110,7 +110,7 @@ app.factory('usersService',['$http',function ($http) {
     get:function () {
       return $http({
         method: 'GET',
-        url: 'users_get',
+        url: 'get',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },
@@ -181,18 +181,18 @@ app.factory('usersGroupService', ['$http', function ($http) {
         data:$.param({
           name:name
         }),
-        url: 'users_group/forbidden',
+        url: 'forbidden',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },
 
-    startUseing:function (name) {
+    startUsing:function (name) {
       return $http({
         method: 'POST',
         data:$.param({
           name:name
         }),
-        url: 'users_group/start_useing',
+        url: 'start_using',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },
@@ -900,8 +900,8 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService','usersGroup
   /*
   * 启用用户组
   * */
-  $scope.startUseing=function (name) {
-    usersGroupService.startUseing(name).then(function success() {
+  $scope.startUsing=function (name) {
+    usersGroupService.startUsing(name).then(function success() {
       getUserGroup();
     },function error() {
 

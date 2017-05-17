@@ -32,7 +32,7 @@ router.get(["/manage", '/manage/*'], function (req, res, next) {
   }
 });
 /*
- * 用户登录
+ * 后台用户登录302重定向
  * */
 router.get('/', function (req, res, next) {
 
@@ -40,16 +40,16 @@ router.get('/', function (req, res, next) {
     res.redirect('/admin/manage');
   } else {
 
-    res.redirect('/admin/admin_login');
+    res.redirect('/admin/login');
 
   }
 
 });
-router.get('/admin_login', function (req, res, next) {
+router.get('/login', function (req, res, next) {
   res.render('admin/admin_login');
 
 });
-router.post('/admin_login', function (req, res, next) {
+router.post('/login', function (req, res, next) {
   var username = req.body.adminUser_username;
   var password = req.body.adminUser_password;
 
@@ -57,6 +57,7 @@ router.post('/admin_login', function (req, res, next) {
     adminUser_username: username,
     adminUser_password: password
   }).then(function (info) {
+
     if (!info) {
       res.json({
         code: 0,
@@ -200,7 +201,7 @@ router.get('/manage/panel/basic_info', function (req, res, next) {
 /*
  * 所有用户组
  * */
-router.get('/manage/user_manage/users_group', function (req, res, next) {
+router.get('/manage/users_manage/users_group_manage/all', function (req, res, next) {
   /*
    * 查询数据库，获取用户组列表
    * */console.log(req.session.userInfo);
@@ -213,7 +214,7 @@ router.get('/manage/user_manage/users_group', function (req, res, next) {
   });
 
 });
-router.get('/manage/user_manage/users_group_get', function (req, res, next) {
+router.get('/manage/users_manage/users_group_manage/users_group_get', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -228,7 +229,7 @@ router.get('/manage/user_manage/users_group_get', function (req, res, next) {
 /*
 * 权限分配
 * */
-router.post('/manage/user_manage/users_group/modify_power',function (req,res,next) {
+router.post('/manage/users_manage/users_group_manage/modify_power',function (req,res,next) {
    AdminUserGroup.update({
      name:req.body.name
    },{
@@ -251,7 +252,7 @@ router.post('/manage/user_manage/users_group/modify_power',function (req,res,nex
 /*
 * 禁用用户组
 * */
-router.post('/manage/user_manage/users_group/forbidden',function (req,res,next) {
+router.post('/manage/users_manage/users_group_manage/forbidden',function (req,res,next) {
 
   AdminUserGroup.update({
     name:req.body.name
@@ -271,7 +272,7 @@ router.post('/manage/user_manage/users_group/forbidden',function (req,res,next) 
 /*
  * 启用用户组
  * */
-router.post('/manage/user_manage/users_group/start_useing',function (req,res,next) {
+router.post('/manage/users_manage/users_group_manage/start_using',function (req,res,next) {
 
   AdminUserGroup.update({
     name:req.body.name
@@ -291,7 +292,7 @@ router.post('/manage/user_manage/users_group/start_useing',function (req,res,nex
 /*
 * 用户组编辑
 * */
-router.post('/manage/user_manage/users_group/edit',function (req,res,next) {
+router.post('/manage/users_manage/users_group_manage/edit',function (req,res,next) {
   AdminUserGroup.update({
     name:req.body.name
   },{
@@ -313,10 +314,10 @@ router.post('/manage/user_manage/users_group/edit',function (req,res,next) {
 /*
  * 添加用户组
  * */
-router.get('/manage/user_manage/users_group_add', function (req, res, next) {
+router.get('/manage/users_manage/users_group_manage/add', function (req, res, next) {
   res.render('admin/users_group_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_GROUP_ADD[1]));
 });
-router.post('/manage/users_group_add/add', function (req, res, next) {
+router.post('/manage/users_manage/users_group_manage/add', function (req, res, next) {
   var name = req.body.name;
   var pid = req.body.pid;
   var status = req.body.status;
@@ -353,7 +354,7 @@ router.post('/manage/users_group_add/add', function (req, res, next) {
 /*
  * 所有用户
  * */
-router.get('/manage/user_manage/users', function (req, res, next) {
+router.get('/manage/users_manage/all', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -364,7 +365,7 @@ router.get('/manage/user_manage/users', function (req, res, next) {
   });
 
 });
-router.get('/manage/user_manage/users_get', function (req, res, next) {
+router.get('/manage/users_manage/get', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -379,10 +380,10 @@ router.get('/manage/user_manage/users_get', function (req, res, next) {
 /*
  * 添加用户
  * */
-router.get('/manage/user_manage/users_add', function (req, res, next) {
+router.get('/manage/users_manage/add', function (req, res, next) {
   res.render('admin/users_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_ADD[1]));
 });
-router.post('/manage/user_manage/users_add/add', function (req, res, next) {
+router.post('/manage/users_manage/add', function (req, res, next) {
   var adminUser_username = req.body.adminUser_username;
   var adminUser_nickname = adminUser_nickname;
   var adminUser_avatar = req.body.adminUser_avatar;
@@ -437,24 +438,24 @@ router.get('/manage/panel/login_log', function (req, res, next) {
 /*
  * 所有文章
  * */
-router.get('/manage/doc_manage/articles', function (req, res, next) {
+router.get('/manage/doc_manage/articles_manage/all', function (req, res, next) {
   res.render('admin/articles', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ALL_ARTICLES[1]));
 });
 
 /*
  * 文章分类
  * */
-router.get('/manage/doc_manage/articles_categories', function (req, res, next) {
+router.get('/manage/doc_manage/categories_manage/categories', function (req, res, next) {
   res.render('admin/articles_categories', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 
 /*
  * 添加分类
  * */
-router.get('/manage/doc_manage/articles_categories_add', function (req, res, next) {
+router.get('/manage/doc_manage/categories_manage/add', function (req, res, next) {
   res.render('admin/articles_categories_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY_ADD[1]));
 });
-router.post('/manage/articles_categories_add',function(req,res,next) {
+router.post('/manage/doc_manage/categories_manage/add',function(req,res,next) {
     Category.findOne({
       cate_name:req.body.cate_name
     }).then(function(info) {
@@ -485,19 +486,19 @@ router.post('/manage/articles_categories_add',function(req,res,next) {
 /*
 * 编辑菜单
 * */
-router.get('/manage/doc_manage//menu/edit', function (req, res, next) {
+router.get('/manage/doc_manage/menu_manage/edit', function (req, res, next) {
   res.render('admin/menu_edit', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
  * 菜单位置
  * */
-router.get('/manage/doc_manage//menu/location', function (req, res, next) {
+router.get('/manage/doc_manage/menu_manage/location', function (req, res, next) {
   res.render('admin/menu_location', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
-* 获取所有分类
+* 获取所有文章分类
 * */
-router.get('/manage/doc_manage/articles_manage/categories_get',function (req,res,next) {
+router.get('/manage/doc_manage/categories_manage/get',function (req,res,next) {
 
   Category.find({
 
@@ -508,11 +509,11 @@ router.get('/manage/doc_manage/articles_manage/categories_get',function (req,res
 /*
 * 写文章
 * */
-router.get('/manage/doc_manage/articles_add', function (req, res, next) {
+router.get('/manage/doc_manage/articles_manage/write', function (req, res, next) {
   res.render('admin/articles_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
-router.post('/manage/doc_manage/articles_add',function (req,res,next) {
-  console.log(req.body);
+router.post('/manage/doc_manage/articles_manage/write',function (req,res,next) {
+  //console.log(req.body);
 });
 /*
  * 接收文件上传请求

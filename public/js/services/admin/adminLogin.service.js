@@ -8,7 +8,7 @@ app.factory('adminLoginService', ['$http', function ($http) {
       console.log(2);
       return $http({
         method: 'POST',
-        url:  '/admin/admin_login',
+        url:  '/admin/login',
         data: $.param({
           adminUser_username: username,
           adminUser_password: password

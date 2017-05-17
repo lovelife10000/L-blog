@@ -310,8 +310,8 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService','usersGroup
   /*
   * 启用用户组
   * */
-  $scope.startUseing=function (name) {
-    usersGroupService.startUseing(name).then(function success() {
+  $scope.startUsing=function (name) {
+    usersGroupService.startUsing(name).then(function success() {
       getUserGroup();
     },function error() {
 

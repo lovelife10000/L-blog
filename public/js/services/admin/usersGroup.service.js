@@ -36,18 +36,18 @@ app.factory('usersGroupService', ['$http', function ($http) {
         data:$.param({
           name:name
         }),
-        url: 'users_group/forbidden',
+        url: 'forbidden',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },
 
-    startUseing:function (name) {
+    startUsing:function (name) {
       return $http({
         method: 'POST',
         data:$.param({
           name:name
         }),
-        url: 'users_group/start_useing',
+        url: 'start_using',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },

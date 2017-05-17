@@ -6,7 +6,7 @@ app.factory('usersService',['$http',function ($http) {
     get:function () {
       return $http({
         method: 'GET',
-        url: 'users_get',
+        url: 'get',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       });
     },

@@ -5,7 +5,7 @@ var express=require('express');
 var router=express.Router();
 
 router.get('/',function (req,res,next) {
-  res.render('index/index');
+  res.render('index/default/templates/index');
 });
 
 module.exports=router;

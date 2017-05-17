@@ -57,6 +57,7 @@ app.use(session({
  * */
 //app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views/index')));
 /*
  * 设置模版引擎
  * */
@@ -172,17 +173,17 @@ app.use("/plugins/ueditor/ue", ueditor(path.join(__dirname, 'public'), function 
 /*
  * 监听端口
  * */
-// mongoose.connect('mongodb://localhost:27017/blog', function (err) {
-//   if (err) {
-//     console.log('数据库连接失败');
-//   } else {
-//     console.log('数据库连接成功');
-//     //监听http请求
-//     app.listen(8082);
-//   }
-// });
-//
-app.listen(8082);
+mongoose.connect('mongodb://admin:admin@localhost:27017/blog', function (err) {
+  if (err) {
+    console.log('数据库连接失败');
+  } else {
+    console.log('数据库连接成功');
+    //监听http请求
+    app.listen(8082);
+  }
+});
+
+// app.listen(8082);
 
 
 
