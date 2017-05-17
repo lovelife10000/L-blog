@@ -97,7 +97,7 @@ app.use('/install/start', function (req, res, next) {
   database_username = req.body.database_username;
   database_password = req.body.database_password;
 
-
+  console.log('mongodb://' +database_username+':'+database_password+'@'+ database_path + ':' + database_port + '/' + database_name);
   mongoose.connect('mongodb://' +database_username+':'+database_password+'@'+ database_path + ':' + database_port + '/' + database_name, function (err) {
     if (err) {
       console.log('数据库连接失败');

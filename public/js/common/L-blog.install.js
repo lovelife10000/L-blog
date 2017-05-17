@@ -55,6 +55,6 @@ install.controller('websiteSettings', ['$scope', '$http', function ($scope, $htt
 //   { user: "admin",
 //     customData:{description:"superuser"},
 // pwd: "admin",
-//   roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
+//   roles: [ { role: "readWrite", db: "blog" } ]
 // }
 // )
