@@ -123,7 +123,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/images/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><%= username %></span>
+              <span class="hidden-xs"><%= userInfo.adminUser_username %></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -173,7 +173,7 @@
           <img src="/images/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><%= username %></p>
+          <p><%= userInfo.adminUser_username %></p>
 
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -197,7 +197,7 @@
             <li><a href="/admin/manage/panel/admin_index">仪表盘首页</a></li>
 
 
-            <li><a href="/admin/manage/basic_info"> 基本信息</a></li>
+            <li><a href="/admin/manage/panel/basic_info"> 基本信息</a></li>
 
             <li><a href="/admin/manage/panel/edit_password"> 修改密码</a></li>
           </ul>
@@ -212,9 +212,9 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/admin/manage/users_group"> 所有用户组</a></li>
+                <li><a href="/admin/manage/user_manage/users_group_manage/all"> 所有用户组</a></li>
                 <li>
-                  <a href="/admin/manage/users_group_add"> 添加用户组
+                  <a href="/admin/manage/user_manage/users_group_manage/add"> 添加用户组
                     <!--<span class="pull-right-container">-->
                       <!--<i class="fa fa-angle-left pull-right"></i>-->
                     <!--</span>-->
@@ -227,8 +227,8 @@
               </ul>
             </li>
 
-            <li><a href="/admin/manage/users"> 所有用户</a></li>
-            <li><a href="/admin/manage/users_add"> 添加用户</a></li>
+            <li><a href="/admin/manage/user_manage/users"> 所有用户</a></li>
+            <li><a href="/admin/manage/user_manage/users_add"> 添加用户</a></li>
 
           </ul>
         </li>
@@ -242,8 +242,8 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/admin/manage/articles_categories"> 文档分类</a></li>
-                <li><a href="/admin/manage/articles_categories_add">添加分类</a></li>
+                <li><a href="/admin/manage/doc_manage/categories_manage/categories"> 文档分类</a></li>
+                <li><a href="/admin/manage/doc_manage/categories_manage/categories_add">添加分类</a></li>
 
 
               </ul>
@@ -255,8 +255,8 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/admin/manage/doc/menu/edit">编辑菜单</a></li>
-                <li><a href="/admin/manage/doc/menu/location">菜单位置</a></li>
+                <li><a href="/admin/manage/doc_manage/menu_manage/edit">编辑菜单</a></li>
+                <li><a href="/admin/manage/doc_manage/menu_manage/location">菜单位置</a></li>
 
               </ul>
             </li>
@@ -267,21 +267,21 @@
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/admin/manage/articles_add">写文章</a></li>
-                <li><a href="/admin/manage/articles">所有文章</a></li>
-                <li><a href="/admin/manage/doc/articles/wait">待审核</a></li>
-                <li><a href="/admin/manage/doc/articles/no_access">未通过</a></li>
-                <li><a href="/admin/manage/doc/articles/published">已发布</a></li>
-                <li><a href="/admin/manage/doc/articles/draft">草稿箱</a></li>
-                <li><a href="/admin/manage/doc/articles/recycle">回收站</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/write">写文章</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/all">所有文章</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/wait">待审核</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/no_access">未通过</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/published">已发布</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/draft">草稿箱</a></li>
+                <li><a href="/admin/manage/doc_manage/articles_manage/recycle">回收站</a></li>
               </ul>
             </li>
 
 
 
-            <li><a href="/admin/manage/doc/tags"> 标签管理</a></li>
-            <li><a href="/admin/manage/doc/comments"> 评论管理</a></li>
-            <li><a href="/admin/manage/doc/message"> 消息管理</a></li>
+            <li><a href="/admin/manage/doc_manage/tags_manage"> 标签管理</a></li>
+            <li><a href="/admin/manage/doc_manage/comments_manage"> 评论管理</a></li>
+            <li><a href="/admin/manage/doc_manage/message_manage"> 消息管理</a></li>
 
           </ul>
         </li>

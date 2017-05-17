@@ -85,9 +85,9 @@ var system = {
   /*
    * 统一渲染模版提供的参数
    * */
-  renderItem: function (username, blogName, category, item) {
+  renderItem: function (userInfo, blogName, category, item) {
     return {
-      username: username,
+      userInfo: userInfo,
       blogName: blogName,
       category: category,
       item: item,

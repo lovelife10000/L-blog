@@ -142,73 +142,78 @@ router.get('/manage', function (req, res, next) {
  * */
 router.get('/manage/panel/admin_index', function (req, res, next) {
 
-  AdminUser.findOne({
-    adminUser_username: req.session.username
-  }).then(function (userInfo) {
-    var username = userInfo.adminUser_username;
-    var avatar = userInfo.adminUser_avatar;
-    var email = userInfo.adminUser_email;
-    var date = userInfo.date;
-    res.render('admin/admin_index', system.renderItem({
-      username:username,
-      avatar:avatar,
-      email:email,
-      date:date,
-    }, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
-    // {
-    //   username: username,
-    //     avatar: avatar,
-    //   email: email,
-    //   date: date
-    // }
-  });
+  // AdminUser.findOne({
+  //   adminUser_username: req.session.username
+  // }).then(function (userInfo) {
+  //   var username = userInfo.adminUser_username;
+  //   var avatar = userInfo.adminUser_avatar;
+  //   var email = userInfo.adminUser_email;
+  //   var date = userInfo.date;
+  //   res.render('admin/admin_index', system.renderItem({
+  //     username:username,
+  //     avatar:avatar,
+  //     email:email,
+  //     date:date,
+  //   }, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
+  //   // {
+  //   //   username: username,
+  //   //     avatar: avatar,
+  //   //   email: email,
+  //   //   date: date
+  //   // }
+  // });
+
+  res.render('admin/admin_index', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
 
 });
 /*
  * 基本信息
  * */
-router.get('/manage/basic_info', function (req, res, next) {
+router.get('/manage/panel/basic_info', function (req, res, next) {
 
-  AdminUser.findOne({
-    adminUser_username: req.session.userInfo.adminUser_username
-  }).then(function (userInfo) {
-    var username = userInfo.adminUser_username;
-    var avatar = userInfo.adminUser_avatar;
-    var email = userInfo.adminUser_email;
-    var date = userInfo.date;
-    res.render('admin/basic_info', system.renderItem({
-      username:username,
-      avatar:avatar,
-      email:email,
-      date:date,
-    }, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
-    // {
-    //   username: username,
-    //     avatar: avatar,
-    //   email: email,
-    //   date: date
-    // }
-  });
+  // AdminUser.findOne({
+  //   adminUser_username: req.session.userInfo.adminUser_username
+  // }).then(function (userInfo) {
+  //   var username = userInfo.adminUser_username;
+  //   var avatar = userInfo.adminUser_avatar;
+  //   var email = userInfo.adminUser_email;
+  //   var date = userInfo.date;
+  //   res.render('admin/basic_info', system.renderItem({
+  //     username:username,
+  //     avatar:avatar,
+  //     email:email,
+  //     date:date,
+  //   }, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
+  //   // {
+  //   //   username: username,
+  //   //     avatar: avatar,
+  //   //   email: email,
+  //   //   date: date
+  //   // }
+  // });
+
+  res.render('admin/basic_info', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.PANEL[1], settings.BASIC_INFO[1]));
+
 
 });
 
 /*
  * 所有用户组
  * */
-router.get('/manage/users_group', function (req, res, next) {
+router.get('/manage/user_manage/users_group', function (req, res, next) {
   /*
    * 查询数据库，获取用户组列表
-   * */
+   * */console.log(req.session.userInfo);
   AdminUserGroup.find().then(function (adminUserGroups) {
     if (adminUserGroups) {
-      res.render('admin/users_group', system.renderItem(req.session.username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_GROUP[1]));
+      res.render('admin/users_group', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_GROUP[1]));
     } else {
       res.json('用户组不存在');
     }
   });
 
 });
-router.get('/manage/users_group_get', function (req, res, next) {
+router.get('/manage/user_manage/users_group_get', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -223,7 +228,7 @@ router.get('/manage/users_group_get', function (req, res, next) {
 /*
 * 权限分配
 * */
-router.post('/manage/users_group/modify_power',function (req,res,next) {
+router.post('/manage/user_manage/users_group/modify_power',function (req,res,next) {
    AdminUserGroup.update({
      name:req.body.name
    },{
@@ -246,7 +251,7 @@ router.post('/manage/users_group/modify_power',function (req,res,next) {
 /*
 * 禁用用户组
 * */
-router.post('/manage/users_group/forbidden',function (req,res,next) {
+router.post('/manage/user_manage/users_group/forbidden',function (req,res,next) {
 
   AdminUserGroup.update({
     name:req.body.name
@@ -266,7 +271,7 @@ router.post('/manage/users_group/forbidden',function (req,res,next) {
 /*
  * 启用用户组
  * */
-router.post('/manage/users_group/start_useing',function (req,res,next) {
+router.post('/manage/user_manage/users_group/start_useing',function (req,res,next) {
 
   AdminUserGroup.update({
     name:req.body.name
@@ -286,7 +291,7 @@ router.post('/manage/users_group/start_useing',function (req,res,next) {
 /*
 * 用户组编辑
 * */
-router.post('/manage/users_group/edit',function (req,res,next) {
+router.post('/manage/user_manage/users_group/edit',function (req,res,next) {
   AdminUserGroup.update({
     name:req.body.name
   },{
@@ -308,7 +313,7 @@ router.post('/manage/users_group/edit',function (req,res,next) {
 /*
  * 添加用户组
  * */
-router.get('/manage/users_group_add', function (req, res, next) {
+router.get('/manage/user_manage/users_group_add', function (req, res, next) {
   res.render('admin/users_group_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_GROUP_ADD[1]));
 });
 router.post('/manage/users_group_add/add', function (req, res, next) {
@@ -348,7 +353,7 @@ router.post('/manage/users_group_add/add', function (req, res, next) {
 /*
  * 所有用户
  * */
-router.get('/manage/users', function (req, res, next) {
+router.get('/manage/user_manage/users', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -359,7 +364,7 @@ router.get('/manage/users', function (req, res, next) {
   });
 
 });
-router.get('/manage/users_get', function (req, res, next) {
+router.get('/manage/user_manage/users_get', function (req, res, next) {
 
   /*
    * 读取用户数据
@@ -374,10 +379,10 @@ router.get('/manage/users_get', function (req, res, next) {
 /*
  * 添加用户
  * */
-router.get('/manage/users_add', function (req, res, next) {
+router.get('/manage/user_manage/users_add', function (req, res, next) {
   res.render('admin/users_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.ALL_USERS_ADD[1]));
 });
-router.post('/manage/users_add/add', function (req, res, next) {
+router.post('/manage/user_manage/users_add/add', function (req, res, next) {
   var adminUser_username = req.body.adminUser_username;
   var adminUser_nickname = adminUser_nickname;
   var adminUser_avatar = req.body.adminUser_avatar;
@@ -425,28 +430,28 @@ router.post('/manage/users_add/add', function (req, res, next) {
 /*
  * 登录记录
  * */
-router.get('/manage/login_log', function (req, res, next) {
+router.get('/manage/panel/login_log', function (req, res, next) {
   res.render('admin/login_log', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.LOGIN_LOG[1]));
 });
 
 /*
  * 所有文章
  * */
-router.get('/manage/articles', function (req, res, next) {
+router.get('/manage/doc_manage/articles', function (req, res, next) {
   res.render('admin/articles', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ALL_ARTICLES[1]));
 });
 
 /*
  * 文章分类
  * */
-router.get('/manage/articles_categories', function (req, res, next) {
+router.get('/manage/doc_manage/articles_categories', function (req, res, next) {
   res.render('admin/articles_categories', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 
 /*
  * 添加分类
  * */
-router.get('/manage/articles_categories_add', function (req, res, next) {
+router.get('/manage/doc_manage/articles_categories_add', function (req, res, next) {
   res.render('admin/articles_categories_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY_ADD[1]));
 });
 router.post('/manage/articles_categories_add',function(req,res,next) {
@@ -480,19 +485,19 @@ router.post('/manage/articles_categories_add',function(req,res,next) {
 /*
 * 编辑菜单
 * */
-router.get('/manage/doc/menu/edit', function (req, res, next) {
+router.get('/manage/doc_manage//menu/edit', function (req, res, next) {
   res.render('admin/menu_edit', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
  * 菜单位置
  * */
-router.get('/manage/doc/menu/location', function (req, res, next) {
+router.get('/manage/doc_manage//menu/location', function (req, res, next) {
   res.render('admin/menu_location', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_CATEGORY[1]));
 });
 /*
 * 获取所有分类
 * */
-router.get('/manage/articles_manage/categories_get',function (req,res,next) {
+router.get('/manage/doc_manage/articles_manage/categories_get',function (req,res,next) {
 
   Category.find({
 
@@ -503,16 +508,16 @@ router.get('/manage/articles_manage/categories_get',function (req,res,next) {
 /*
 * 写文章
 * */
-router.get('/manage/articles_add', function (req, res, next) {
+router.get('/manage/doc_manage/articles_add', function (req, res, next) {
   res.render('admin/articles_add', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
-router.post('/manage/articles_add',function (req,res,next) {
+router.post('/manage/doc_manage/articles_add',function (req,res,next) {
   console.log(req.body);
 });
 /*
  * 接收文件上传请求
  * */
-router.post('/manage/upload', function (req, res, next) {
+router.post('/manage/fiels_manage/upload', function (req, res, next) {
 
   var params = url.parse(req.url, true, false);//获取参数
   var fileType = params.query.type;//获取文件类型
@@ -593,21 +598,21 @@ router.post('/manage/upload', function (req, res, next) {
 /*
 * 站点设置
 * */
-router.get('/manage/settings/website', function (req, res, next) {
+router.get('/manage/system_settings/website', function (req, res, next) {
   res.render('admin/website', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
 
 /*
  * 阅读设置
  * */
-router.get('/manage/settings/read', function (req, res, next) {
+router.get('/manage/system_settings/read', function (req, res, next) {
   res.render('admin/read', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
 
 /*
  * 附件设置
  * */
-router.get('/manage/settings/files', function (req, res, next) {
+router.get('/manage/system_settings/files', function (req, res, next) {
   res.render('admin/files', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
 
