@@ -2,6 +2,23 @@
  * Created by v_lljunli on 2017/5/16.
  */
 var install = angular.module('install', []);
+//确认密码一致校验
+install.directive('pwCheck', [function () {
+  return {
+    require: 'ngModel',
+    link: function (scope, elem, attrs, ctrl) {
+      var firstPassword = '#' + attrs.pwCheck;
+      elem.add(firstPassword).on('keyup', function () {
+        scope.$apply(function () {
+          var v = elem.val()===$(firstPassword).val();
+          ctrl.$setValidity('pwmatch', v);
+        });
+      });
+    }
+  }
+}]);
+
+
 install.controller('protocol', ['$scope', function ($scope) {
   $scope.nextStep = function () {
 
@@ -42,7 +59,11 @@ install.controller('websiteSettings', ['$scope', '$http', function ($scope, $htt
         }),
         headers: {'content-type': 'application/x-www-form-urlencoded'}
       }).then(function success(res) {
-
+        console.log(res.data.code);
+        if(res.data.code===1){
+          console.log(111);
+          window.location.href='complete';
+        }
       },function error(res) {
 
       });

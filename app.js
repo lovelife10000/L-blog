@@ -111,6 +111,10 @@ app.use('/install/start', function (req, res, next) {
         adminUser_password:req.body.adminUser_password
       });
       user.save();
+      res.json({
+        code:1,
+        msg:'安装成功'
+      });
 
     }
 

@@ -57,6 +57,12 @@ router.get('/website_settings',function (req,res,next) {
   res.render('install/website_settings');
 });
 
+/*
+ * 安装完成
+ * */
+router.get('/complete',function (req,res,next) {
+  res.render('install/complete');
+});
 
 
 module.exports=router;
