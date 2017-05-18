@@ -97,12 +97,13 @@ var system = {
   /*
   * 统一渲染前台模版参数
   * */
-  renderFront:function (categories,documentAll,documentHot,documentRecommend) {
+  renderFront:function (categories,documentAll,documentHot,documentRecommend,singleDocument) {
     return{
       categories:categories,
       documentAll:documentAll,
       documentHot:documentHot,
       documentRecommend:documentRecommend,
+      singleDocument:singleDocument,
     };
   },
 

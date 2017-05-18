@@ -10,24 +10,32 @@ var system=require('../util/system');
 * */
 var Category=require('../models/Category');
 var Post=require('../models/Post');
+
+/*
+* 首页
+* */
 router.get('/',function (req,res,next) {
   /*
   * 获取文档分类
   * */
   Category.find().then(function (cate) {
     var categories=system.categoriesFormat(cate);
-
+    req.session.categories=categories;
     /*
     * 获取文档数据
     * */
     Post.find().then(function (posts) {
       var documentAll=posts;
+      req.session.documentAll=documentAll;
       var documentHot=[];
       for(var i=0;i<posts.length;i++){
         if(posts[i].post_hot===1){
           documentHot.push(posts[i]);
         }
       }
+
+      req.session.documentHot=documentHot;
+
 
       var documentRecommend=[];
       for(var j=0;j<posts.length;j++){
@@ -37,12 +45,34 @@ router.get('/',function (req,res,next) {
           documentRecommend.push(posts[j]);
         }
       }
+      req.session.documentRecommend=documentRecommend;
 
-      res.render('index/default/templates/index',system.renderFront(categories,documentAll,documentHot,documentRecommend));
+      res.render('index/default/templates/index',system.renderFront(req.session.categories,req.session.documentAll,req.session.documentHot,req.session.documentRecommend));
     });
 
   });
 
 });
+
+
+/*
+* 内容页
+* */
+router.get('/document/content/:title',function (req,res,next) {
+  var title=req.params.title;
+  Post.find({
+    post_title:title
+  }).then(function (post) {
+    if(!post){
+      res.render('index/default/templates/404');
+    }else {
+      var singleDocument=post;
+      console.log(post);
+      res.render('index/default/templates/content',system.renderFront(req.session.categories,req.session.documentAll,req.session.documentHot,req.session.documentRecommend,singleDocument));
+    }
+  });    
+
+});
+
 
 module.exports=router;
