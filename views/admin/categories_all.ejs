@@ -27,81 +27,25 @@
               <tr>
                 <th style="width: 10px"><input type="checkbox" class="minimal"></th>
                 <th>分类名称</th>
-                <th>名称</th>
                 <th>别名</th>
-                <th>结构</th>
+                <th>父级分类</th>
                 <th>文章数量</th>
-                <th>查看</th>
+
                 <th>操作</th>
               </tr>
-              <tr>
+              <tr ng-repeat="x in data">
                 <td><input type="checkbox" class="minimal"></td>
-                <td>Update software</td>
-                <td>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                  </div>
-                </td>
-                <td>other</td>
-                <td><span class="badge bg-red">55%</span></td>
-                <td>888</td>
-                <td>888</td>
+                <td>{{x.name}}</td>
+                <td>{{x.cate_slug}}</td>
+                <td>{{x.cate_parent}}</td>
+                <td>{{x.name}}</td>
+
                 <td>
                   <button type="button" class="btn btn-primary btn-xs btn-flat">编辑</button>
                   <button type="button" class="btn btn-danger btn-xs btn-flat">删除</button>
                 </td>
               </tr>
-              <tr>
-                <td><input type="checkbox" class="minimal"></td>
-                <td>Clean database</td>
-                <td>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                  </div>
-                </td>
-                <td>other</td>
-                <td><span class="badge bg-yellow">70%</span></td>
-                <td>888</td>
-                <td>888</td>
-                <td>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-danger">删除</button>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="minimal"></td>
-                <td>Cron job running</td>
-                <td>
-                  <div class="progress progress-xs progress-striped active">
-                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                  </div>
-                </td>
-                <td>other</td>
-                <td><span class="badge bg-light-blue">30%</span></td>
-                <td>888</td>
-                <td>888</td>
-                <td>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-danger">删除</button>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="minimal"></td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <div class="progress progress-xs progress-striped active">
-                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                  </div>
-                </td>
-                <td>other</td>
-                <td><span class="badge bg-green">90%</span></td>
-                <td>888</td>
-                <td>888</td>
-                <td>
-                  <button type="button" class="btn btn-primary">编辑</button>
-                  <button type="button" class="btn btn-danger">删除</button>
-                </td>
-              </tr>
+
             </table>
           </div>
           <!-- /.box-body -->

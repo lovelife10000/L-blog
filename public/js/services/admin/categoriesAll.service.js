@@ -31,7 +31,7 @@ app.factory('categoriesAllService',['$http',function ($http) {
     getCategories: function () {
       return $http({
         method: 'GET',
-        url: 'get',
+        url: '/admin/manage/document_manage/categories_manage/get',
         headers: {'content-type': 'application/x-www-form-urlencoded'}
       });
     },

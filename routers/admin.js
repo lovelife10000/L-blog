@@ -20,6 +20,7 @@ var cache = require('../util/cache');
 var AdminUser = require('../models/AdminUser');
 var AdminUserGroup = require('../models/AdminUserGroup');
 var Category=require('../models/Category');
+var Post=require('../models/Post');
 /*
  * 后台用户登录302重定向
  * */
@@ -528,8 +529,10 @@ router.get('/manage/document_manage/categories_manage/get',function (req,res,nex
 router.get('/manage/document_manage/write', function (req, res, next) {
   res.render('admin/document_write', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.ARTICLES_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
-router.post('/manage/document_manage/articles_manage/write',function (req,res,next) {
-  //console.log(req.body);
+router.post('/manage/document_manage/write',function (req,res,next) {
+  console.log(req.body);
+  var post=new Post(req.body);
+  post.save();
 });
 /*
  * 接收文件上传请求
