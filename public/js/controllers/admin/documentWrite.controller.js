@@ -2,12 +2,12 @@
  * Created by v_lljunli on 2017/4/27.
  */
 /*
- * 添加文章
+ * 写文章
  * */
-app.controller('articlesAdd', ['$scope', '$http','articlesAddService', function ($scope, $http,articlesAddService) {
+app.controller('articlesAdd', ['$scope', '$http','documentWriteService', function ($scope, $http,documentWriteService) {
 
 
-  $scope.articleAdd = function () {
+  $scope.documentWrite = function () {
 
     if(myForm.$valid){
       var postContent = '';
@@ -17,7 +17,7 @@ app.controller('articlesAdd', ['$scope', '$http','articlesAddService', function 
       });
 
 
-      articlesAddService.get(
+      documentWriteService.get(
         $scope.post_title,
         $scope.post_title,
         $scope.post_from,

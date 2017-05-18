@@ -83,7 +83,7 @@ var system = {
   },
 
   /*
-   * 统一渲染模版提供的参数
+   * 统一渲染后台模版提供的参数
    * */
   renderItem: function (userInfo, blogName, category, item) {
     return {
@@ -93,6 +93,59 @@ var system = {
       item: item,
     }
   },
+
+  /*
+  * 统一渲染前台模版参数
+  * */
+  renderFront:function (categories) {
+    return{
+      categories:categories,
+    };
+  },
+
+  /*
+  * 格式化分类数据
+  * */
+  categoriesFormat:function (cate) {
+    var data=cate;
+    var dataFormat=[];
+
+    for(var j=0;j<data.length;j++){
+      if(data[j].cate_parent===''){
+        dataFormat.push({
+          name:data[j].cate_name,
+          id:data[j].cate_slug,
+          cate_name:data[j].cate_name,
+          cate_slug:data[j].cate_slug,
+          cate_parent:data[j].cate_parent,
+        });
+      }
+
+    }
+
+    for(var m=0;m<dataFormat.length;m++){
+      for(var z=0;z<data.length;z++){
+
+        if(dataFormat[m].id===data[z].cate_parent){
+          dataFormat.splice(m+1,0,{
+            name:data[z].cate_name,
+            id:data[z].cate_slug,
+            cate_name:data[z].cate_name,
+            cate_slug:data[z].cate_slug,
+            cate_parent:data[z].cate_parent,
+          });
+
+        }
+
+      }
+    }
+
+    return dataFormat;
+  },
+
+
+
+
 
 };
 

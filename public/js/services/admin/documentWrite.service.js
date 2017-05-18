@@ -1,7 +1,7 @@
 /**
  * Created by v_lljunli on 2017/5/10.
  */
-app.factory('articlesAddService',['$http',function ($http) {
+app.factory('documentWriteService',['$http',function ($http) {
   return{
     get:function (title,from,display,tags,img,parent,keywords,discription,type,view,author,content) {
       return $http({

@@ -24,35 +24,6 @@ app.factory('adminLoginService', ['$http', function ($http) {
 /**
  * Created by v_lljunli on 2017/5/10.
  */
-app.factory('articlesAddService',['$http',function ($http) {
-  return{
-    get:function (title,from,display,tags,img,parent,keywords,discription,type,view,author,content) {
-      return $http({
-        method:'POST',
-        url:'admin/manage/articles_add',
-        data:$.param({
-          post_title:title,
-          post_from:from,
-          post_display:display,
-          post_tags:tags,
-          post_img:img,
-          cate_parent:parent,
-          post_keywords:keywords,
-          post_discription:discription,
-          post_type:type,
-          post_view:view,
-          post_author:author,
-          post_content:content
-        }),
-        headers:{'content-type':'applicatin/x-www-form-urlencoded'}
-      });
-    },
-
-  };
-}]);
-/**
- * Created by v_lljunli on 2017/5/10.
- */
 app.factory('categoriesAddService', ['$http', function ($http) {
   return {
     get: function (cate_name, cate_slug, cate_order, cate_parent, cate_remark) {
@@ -117,6 +88,35 @@ app.factory('categoriesAllService',['$http',function ($http) {
     },
 
 
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('documentWriteService',['$http',function ($http) {
+  return{
+    get:function (title,from,display,tags,img,parent,keywords,discription,type,view,author,content) {
+      return $http({
+        method:'POST',
+        url:'admin/manage/articles_add',
+        data:$.param({
+          post_title:title,
+          post_from:from,
+          post_display:display,
+          post_tags:tags,
+          post_img:img,
+          cate_parent:parent,
+          post_keywords:keywords,
+          post_discription:discription,
+          post_type:type,
+          post_view:view,
+          post_author:author,
+          post_content:content
+        }),
+        headers:{'content-type':'applicatin/x-www-form-urlencoded'}
+      });
+    },
 
   };
 }]);
@@ -337,48 +337,6 @@ app.controller('adminLogin', ['$scope', '$http', 'adminLoginService', function (
 
 }]);
 /**
- * Created by v_lljunli on 2017/4/27.
- */
-/*
- * 添加文章
- * */
-app.controller('articlesAdd', ['$scope', '$http','articlesAddService', function ($scope, $http,articlesAddService) {
-
-
-  $scope.articleAdd = function () {
-
-    if(myForm.$valid){
-      var postContent = '';
-      ue.ready(function () {
-        postContent = ue.getContent();
-        console.log(postContent);
-      });
-
-
-      articlesAddService.get(
-        $scope.post_title,
-        $scope.post_title,
-        $scope.post_from,
-        $scope.post_display,
-        $scope.post_tags,
-        $scope.post_img,
-        $scope.cate_parent,
-        $scope.post_keywords,
-        $scope.post_discription,
-        $scope.post_type,
-        $scope.post_view,
-        $scope.post_author,
-        $scope.post_content).then(function success(res) {
-
-      },function error(res) {
-
-      });
-    }
-
-
-  };
-}]);
-/**
  * Created by v_lljunli on 2017/5/10.
  */
 
@@ -458,6 +416,48 @@ app.controller('categoriesAll', ['$scope', '$http', function ($scope,$http) {
 
 
 
+}]);
+/**
+ * Created by v_lljunli on 2017/4/27.
+ */
+/*
+ * 写文章
+ * */
+app.controller('articlesAdd', ['$scope', '$http','documentWriteService', function ($scope, $http,documentWriteService) {
+
+
+  $scope.documentWrite = function () {
+
+    if(myForm.$valid){
+      var postContent = '';
+      ue.ready(function () {
+        postContent = ue.getContent();
+        console.log(postContent);
+      });
+
+
+      documentWriteService.get(
+        $scope.post_title,
+        $scope.post_title,
+        $scope.post_from,
+        $scope.post_display,
+        $scope.post_tags,
+        $scope.post_img,
+        $scope.cate_parent,
+        $scope.post_keywords,
+        $scope.post_discription,
+        $scope.post_type,
+        $scope.post_view,
+        $scope.post_author,
+        $scope.post_content).then(function success(res) {
+
+      },function error(res) {
+
+      });
+    }
+
+
+  };
 }]);
 /**
  * Created by v_lljunli on 2017/5/15.

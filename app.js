@@ -17,6 +17,7 @@ var ueditor = require("ueditor");
  * 数据模型
  * */
 var AdminUser = require('./models/AdminUser');
+
 /*
  * 创建app应用
  * */
@@ -126,6 +127,8 @@ app.use('/install/start', function (req, res, next) {
  * 所有请求访问入口
  * */
 app.use('/', function (req, res, next) {
+
+
 
 
   next();
