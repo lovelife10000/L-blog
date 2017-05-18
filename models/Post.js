@@ -11,6 +11,7 @@ var PostSchema=Schema({
   post_from:String,
   post_type:String,
   post_recommend:Number,
+  post_hot:Number,
   post_view:String,
   post_comment_num:Number,
   post_display:Number,

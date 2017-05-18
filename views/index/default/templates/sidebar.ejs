@@ -1,16 +1,78 @@
-<ul>
-    <% categories.forEach(function(item){ %>
-
-    <li>
-
-        <a href="#"><%= item.name %></a>
 
 
-    </li>
+<!-- Sidebar -->
+<div id="sidebar">
+    <div class="inner">
 
-    <% if(item.cate_parent != ''){ %>
+        <!-- Search -->
+        <section id="search" class="alt">
+            <form method="post" action="#">
+                <input type="text" name="query" id="query" placeholder="Search" />
+            </form>
+        </section>
 
-    <% } %>
+        <!-- Menu -->
+        <nav id="menu">
+            <header class="major">
+                <h2>博客分类</h2>
+            </header>
+            <ul>
+                <% categories.forEach(function(item){ %>
 
-    <% }) %>
-</ul>
+                <li>
+
+                    <a href="#"><%= item.name %></a>
+
+
+                </li>
+
+                <% if(item.cate_parent != ''){ %>
+
+                <% } %>
+
+                <% }) %>
+            </ul>
+
+        </nav>
+
+        <!-- Section -->
+        <section>
+            <header class="major">
+                <h2>热门文章</h2>
+            </header>
+            <div class="mini-posts">
+                <% documentHot.forEach(function (doc) {%>
+                <article>
+                    <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+                    <p><%= doc.post_title %></p>
+                </article>
+                <%}) %>
+
+
+            </div>
+            <ul class="actions">
+                <li><a href="#" class="button">More</a></li>
+            </ul>
+        </section>
+
+        <!-- Section -->
+        <section>
+            <header class="major">
+                <h2>联系方式</h2>
+            </header>
+            <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+            <ul class="contact">
+                <li class="fa-envelope-o"><a href="#">information@untitled.tld</a></li>
+                <li class="fa-phone">(000) 000-0000</li>
+                <li class="fa-home">1234 Somewhere Road #8254<br />
+                    Nashville, TN 00000-0000</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright"> Copyright © 2017-2017 <a href="https://github.com/lovelife10000/L-blog">L-blog</a>. All rights reserved.  <a href="https://html5up.net">浙ICP备 15005796号-2</a>.</p>
+        </footer>
+
+    </div>
+</div>

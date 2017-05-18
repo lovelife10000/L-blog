@@ -96,7 +96,7 @@ app.factory('categoriesAllService',['$http',function ($http) {
  */
 app.factory('documentWriteService',['$http',function ($http) {
   return{
-    get:function (title,from,display,tags,img,category,keywords,abstract,type,view,author,content) {
+    get:function (title,from,display,hot,recommend,tags,img,category,keywords,abstract,type,view,author,content) {
       return $http({
         method:'POST',
         url:'/admin/manage/document_manage/write',
@@ -104,6 +104,8 @@ app.factory('documentWriteService',['$http',function ($http) {
           post_title:title,
           post_from:from,
           post_display:display,
+          post_hot:hot,
+          post_recommend:recommend,
           post_tags:tags,
           post_img:img,
           post_category:category,
@@ -508,8 +510,14 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
   $scope.post_display = {
     name: '1'
   };
+  $scope.post_hot = {
+    name: '1'
+  };
   $scope.post_type = {
     name: 'post'
+  };
+  $scope.post_recommend = {
+    name: '0'
   };
   $scope.documentWrite = function () {
 
@@ -528,6 +536,8 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
         $scope.post_title,
         $scope.post_from,
         $scope.post_display.name,
+        $scope.post_hot.name,
+        $scope.post_recommend.name,
         $scope.post_tags,
         $scope.post_img,
         $scope.post_category,

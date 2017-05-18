@@ -52,8 +52,14 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
   $scope.post_display = {
     name: '1'
   };
+  $scope.post_hot = {
+    name: '1'
+  };
   $scope.post_type = {
     name: 'post'
+  };
+  $scope.post_recommend = {
+    name: '0'
   };
   $scope.documentWrite = function () {
 
@@ -72,6 +78,8 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
         $scope.post_title,
         $scope.post_from,
         $scope.post_display.name,
+        $scope.post_hot.name,
+        $scope.post_recommend.name,
         $scope.post_tags,
         $scope.post_img,
         $scope.post_category,
