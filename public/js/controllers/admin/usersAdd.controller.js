@@ -91,7 +91,7 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
   $('#adminUser_avatar').uploadify({
 
     'swf': '/plugins/uploadify/uploadify.swf',//指定swf文件
-    'uploader': '/admin/manage/files_manage/upload' + '?adminId=' + 'adminUser_username' + '&type=' + 'images' + '&key=' + 'adminUser_avatar',//后台处理的页面
+    'uploader': '/admin/manage/users_manage/upload' + '?adminId=' + 'adminUser_username' + '&type=' + 'images' + '&key=' + 'adminUser_avatar',//后台处理的页面
     'buttonText': '上传图片',//按钮显示的文字
     'buttonClass': 'uploadify-btn-default',//按钮显示的文字
     'width': 100,//显示的高度和宽度，默认 height 30；width 120
@@ -105,7 +105,7 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
     'onUploadSuccess': function (file, data, response) {//上传成功的回调
       $("#adminUser_avatar_preview").attr("src", data);
       $scope.logo= data;
-      console.log($scope.logo);
+
     },
     //
     // 'onComplete': function(event, queueID, fileObj, response, data) {//当单个文件上传完成后触发

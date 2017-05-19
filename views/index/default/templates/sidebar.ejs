@@ -43,7 +43,7 @@
             <div class="mini-posts">
                 <% documentHot.forEach(function (doc) {%>
                 <article>
-                    <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+                    <a href="#" class="image"><img src="<%= doc.post_img %>" alt="" /></a>
                     <p><%= doc.post_title %></p>
                 </article>
                 <%}) %>

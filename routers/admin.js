@@ -535,9 +535,90 @@ router.post('/manage/document_manage/write',function (req,res,next) {
   post.save();
 });
 /*
- * 接收文件上传请求
+ * 用户头像上传
  * */
-router.post('/manage/files_manage/upload', function (req, res, next) {
+router.post('/manage/users_manage/upload', function (req, res, next) {
+
+  var params = url.parse(req.url, true, false);//获取参数
+  var fileType = params.query.type;//获取文件类型
+  var fileKey = params.query.key;//获取上传的文件的用途
+
+
+  var updatePath = "public/upload/images/";//存放目录
+  // var smallImgPath = "public/upload/smallimages/";//存放目录
+
+
+  var newFileName = "";//修改后的文件名
+
+  var form = new formidable.IncomingForm();
+  form.uploadDir = updatePath;//设置保存的位置
+  // var files=[];
+  // var fields=[];
+  // var docs=[];
+
+
+  form.on('field', function (field, value) { //POST 普通数据 不包含文件 field 表单name value 表单value
+
+    // fields.push([field,value]);
+  });
+
+  form.on('file', function (field, file) {//上传文件
+
+    // files.push([field, file]);
+    // docs.push(file);
+
+    /*
+     * 检查文件合法性
+     * */
+    var realFileType = system.getFileMimeType(file.path);//获取真实的文件后缀名
+
+    var thisType = realFileType.fileType;
+
+    var date = new Date();
+
+    var ms = moment(date).format('YYYYMMDDHHmmss').toString();
+
+    var typeKey = 'others';
+    if (fileType == 'images') {
+      typeKey = 'img';
+    }
+
+    newFileName = typeKey + ms + "." + thisType;
+
+    if (fileType == 'images') {
+      if (realFileType.fileType == 'jpg' || realFileType.fileType == 'jpeg' || realFileType.fileType == 'png' || realFileType.fileType == 'gif') {
+
+        /*
+         * 重命名文件
+         * */
+        fs.rename(file.path, updatePath + newFileName, function (error) {
+
+        });
+
+      }
+    }
+
+
+  });
+
+  form.on('error', function (err) {
+    console.log('出现错误');
+  });
+
+  form.on('end', function () {//解析完毕
+    res.end('/upload/images/' + newFileName);
+  });
+
+  form.parse(req, function (error, fields, files) {//解析request对象
+
+  });
+
+
+});
+/*
+ * 文档缩略图上传
+ * */
+router.post('/manage/document_manage/upload', function (req, res, next) {
 
   var params = url.parse(req.url, true, false);//获取参数
   var fileType = params.query.type;//获取文件类型
