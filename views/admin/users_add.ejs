@@ -17,7 +17,7 @@
   <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <div class="box box-info">
+        <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">添加用户</h3>
           </div>
@@ -83,7 +83,7 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label">头像</label>
                 <div class="col-sm-10">
-                  <img src="{{logo}}" alt="" class="img-circle col-sm-4" id="adminUser_avatar_preview"/>
+                  <img src="{{logo}}" alt="" class="img-circle col-sm-2" id="adminUser_avatar_preview"/>
                   <p id="adminUser_avatar"></p>
                 </div>
               </div>
@@ -203,18 +203,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
               <button type="submit" class="btn btn-default">取消</button>
-              <button type="submit" class="btn btn-info pull-right" ng-click="addAdminUser({
-              adminUser_username:myForm.adminUser_username.$valid,
-              adminUser_nickname:myForm.adminUser_nickname.$valid,
-              adminUser_avatar:myForm.adminUser_avatar.$valid,
-              ava:!myForm.adminUser_avatar.$pristine,
-              adminUser_password:myForm.adminUser_password.$valid,
-              adminUser_repassword:myForm.adminUser_repassword.$valid,
-              adminUser_userGroup:myForm.adminUser_userGroup.$valid,
-              adminUser_phone:myForm.adminUser_phone.$valid,
-              adminUser_email:myForm.adminUser_email.$valid,
-              adminUser_remark:myForm.adminUser_remark.$valid
-              })" ng-disabled="myForm.$invalid">添加
+              <button type="submit" class="btn btn-primary pull-right" ng-click="addAdminUser()" ng-disabled="myForm.$invalid">添加
               </button>
             </div>
             <!-- /.box-footer -->

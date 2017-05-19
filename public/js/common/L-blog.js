@@ -161,13 +161,14 @@ app.factory('usersService',['$http',function ($http) {
  */
 app.factory('usersAddService',['$http',function ($http) {
   return {
-    get:function (username,nickname,password,repassword,userGroup,status,phone,email,remark) {
+    get:function (username,nickname,logo,password,repassword,userGroup,status,phone,email,remark) {
       return $http({
         method: 'POST',
-        url: 'admin/users_add/add',
+        url: 'add',
         data: $.param({
           adminUser_username: username,
           adminUser_nickname: nickname,
+          adminUser_avatar:logo,
           adminUser_password: password,
           adminUser_repassword: repassword,
           adminUser_userGroup: userGroup,
@@ -656,7 +657,7 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
   /*
    * 提交数据
    * */
-  $scope.addAdminUser = function (valid) {
+  $scope.addAdminUser = function () {
 
     var adminUser_userGroup = 1;
 
@@ -676,8 +677,8 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
     }
 
 
-    if (valid) {
-        usersAddService.get($scope.adminUser_username,$scope.adminUser_nickname,$scope.adminUser_password,$scope.adminUser_repassword,adminUser_userGroup,$scope.adminUser_status,$scope.adminUser_phone,$scope.adminUser_email,$scope.adminUser_remark).then(function (res) {
+    if ($scope.myForm.$valid) {
+        usersAddService.get($scope.adminUser_username,$scope.adminUser_nickname,$scope.logo,$scope.adminUser_password,$scope.adminUser_repassword,adminUser_userGroup,$scope.adminUser_status,$scope.adminUser_phone,$scope.adminUser_email,$scope.adminUser_remark).then(function (res) {
 
       }, function (res) {
 
@@ -717,7 +718,7 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
     } else {
       $http({
         method: 'POST',
-        url: 'users_add/add',
+        url: 'add',
         data: $.param({
           adminUser_username: realUsername
         }),
@@ -732,12 +733,12 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
     }
   };
 
-  $scope.logo = '/public/upload/images/defaultlogo.png';
+  $scope.logo = '/upload/images/defaultlogo.png';
 
   $('#adminUser_avatar').uploadify({
 
-    'swf': '/public/plugins/uploadify/uploadify.swf',//指定swf文件
-    'uploader': '/admin/upload' + '?adminId=' + 'adminUser_username' + '&type=' + 'images' + '&key=' + 'adminUser_avatar',//后台处理的页面
+    'swf': '/plugins/uploadify/uploadify.swf',//指定swf文件
+    'uploader': '/admin/manage/files_manage/upload' + '?adminId=' + 'adminUser_username' + '&type=' + 'images' + '&key=' + 'adminUser_avatar',//后台处理的页面
     'buttonText': '上传图片',//按钮显示的文字
     'buttonClass': 'uploadify-btn-default',//按钮显示的文字
     'width': 100,//显示的高度和宽度，默认 height 30；width 120
@@ -750,6 +751,8 @@ app.controller('usersAdd', ['$scope','$http','usersAddService',function ($scope,
 
     'onUploadSuccess': function (file, data, response) {//上传成功的回调
       $("#adminUser_avatar_preview").attr("src", data);
+      $scope.logo= data;
+      console.log($scope.logo);
     },
     //
     // 'onComplete': function(event, queueID, fileObj, response, data) {//当单个文件上传完成后触发

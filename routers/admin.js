@@ -537,7 +537,7 @@ router.post('/manage/document_manage/write',function (req,res,next) {
 /*
  * 接收文件上传请求
  * */
-router.post('/manage/fiels_manage/upload', function (req, res, next) {
+router.post('/manage/files_manage/upload', function (req, res, next) {
 
   var params = url.parse(req.url, true, false);//获取参数
   var fileType = params.query.type;//获取文件类型
@@ -606,7 +606,7 @@ router.post('/manage/fiels_manage/upload', function (req, res, next) {
   });
 
   form.on('end', function () {//解析完毕
-    res.end('/public/upload/images/' + newFileName);
+    res.end('/upload/images/' + newFileName);
   });
 
   form.parse(req, function (error, fields, files) {//解析request对象
