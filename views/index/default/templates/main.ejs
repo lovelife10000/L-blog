@@ -84,13 +84,14 @@
           <h3><%= doc.post_title %></h3>
           <p><%= doc.post_abstract %></p>
           <ul class="actions">
-            <li><a href="#" class="button">More</a></li>
+            <li><a href="/document/content/<%= doc.post_title %>" class="button">查看</a></li>
           </ul>
         </article>
         <% }) %>
 
       </div>
     </section>
+    <%- include('pagination')%>
 
   </div>
 </div>
