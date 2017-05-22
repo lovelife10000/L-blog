@@ -10,7 +10,7 @@ var system=require('../util/system');
 * */
 var Category=require('../models/Category');
 var Post=require('../models/Post');
-
+var theme='woshipm';
 /*
 * 首页
 * */
@@ -46,7 +46,8 @@ router.get('/',function (req,res,next) {
 
 
 
-      res.render('index/default/templates/index',{
+      res.render('index/'+theme+'/templates/index',{
+        theme:theme,
         categories:req.session.categories,
         documentAll:req.session.documentAll,
         documentHot:req.session.documentHot,
@@ -121,7 +122,8 @@ router.get('/page/:number',function (req,res,next) {
 
 
 
-        res.render('index/default/templates/index',{
+        res.render('index/'+theme+'/templates/index',{
+          theme:theme,
           categories:req.session.categories,
           documentAll:req.session.documentAll,
           documentHot:req.session.documentHot,
@@ -176,13 +178,28 @@ router.get('/document/content/:title',function (req,res,next) {
     post_title:title
   }).then(function (post) {
     if(!post){
-      res.render('index/default/templates/404');
+      res.render('index/'+theme+'/templates/404');
     }else {
       var singleDocument=post;
       console.log(post);
-      res.render('index/default/templates/content',system.renderFront(req.session.categories,req.session.documentAll,req.session.documentHot,req.session.documentRecommend,singleDocument));
+      res.render('index/'+theme+'/templates/content',{
+        theme:theme,
+        singleDocument:singleDocument,
+      });
     }
   });    
+
+});
+
+/*
+* 用户登录页
+* */
+router.get('/user/login',function (req,res,next) {
+
+      res.render('index/'+theme+'/templates/login',{
+        theme:theme,
+      });
+
 
 });
 
