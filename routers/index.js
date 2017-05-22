@@ -163,9 +163,25 @@ router.get('/user/login', function (req, res, next) {
 /*
  * 列表页
  * */
-router.get('/list/:cate', function (res, req, next) {
+
+router.get('/list/:cate', function (req, res, next) {
   var cate = req.params.cate;
-  res.render('index/' + theme + '/templates/list');
+  var categoriesData = Category.find();
+  var documentAllData = Post.find();
+
+  Promise.all([categoriesData,documentAllData]).then(function (result) {
+    var categories = system.categoriesFormat(result[0]);
+    res.render('index/' + theme + '/templates/list', {
+      theme: theme,
+      categories:categories,
+      documentAll:result[1],
+    });
+
+
+  });
+
+
+
 });
 
 
