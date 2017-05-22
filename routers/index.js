@@ -90,80 +90,40 @@ router.get('/',function (req,res,next) {
  * 首页列表分页显示
  * */
 router.get('/page/:number',function (req,res,next) {
+  var categoriesData=Category.find();
+  var documentCount=Post.count();
+  var documentAllData=Post.find();
+  var documentHotData=Post.find({post_hot:1});
+  var documentRecommendData=Post.find({post_recommend:1});
 
+  Promise.all([categoriesData,documentCount, documentAllData,documentHotData,documentRecommendData]).then(function (result) {
 
-  /*
-   * 获取文档分类
-   * */
-  Category.find().then(function (cate) {
-    var categories=system.categoriesFormat(cate);
-    req.session.categories=categories;
-    /*
-     * 获取文档数据
-     * */
-    /*
-    * 统计文档条数
-    * */
-    Post.count().then(function (count) {
-      /*
-       * 分页显示
-       * */
-
-      var pageList=Number(req.params.number) || 1;//当前页
-      var limitList=2;//每页显示的条数
-      var skipList=(pageList-1)*limitList;//忽略掉的条数
-      var pageAll=Math.ceil(count/limitList);
-      Post.find().limit(limitList).skip(skipList).then(function (posts) {
-        var documentAll=posts;
-        req.session.documentAll=documentAll;
-
-        req.session.documentHot=posts;
-        req.session.documentRecommend=posts;
-
-
-
-        res.render('index/'+theme+'/templates/index',{
-          theme:theme,
-          categories:req.session.categories,
-          documentAll:req.session.documentAll,
-          documentHot:req.session.documentHot,
-          documentRecommend:req.session.documentRecommend,
-          pageList:pageList,
-          pageAll:pageAll,
-        });
-      });
-
+     var categories=system.categoriesFormat(result[0]);
+    var documentAll=result[2];
+    var documentHot=result[3];
+    var documentRecommend=result[4];
+    res.render('index/'+theme+'/templates/index',{
+      theme:theme,
+      categories:categories,
+      documentAll:documentAll,
+      documentHot:documentHot,
+      documentRecommend:documentRecommend,
+      // pageList:pageList,
+      // pageAll:pageAll,
     });
-
-
-
-    // Post.find().then(function (posts) {
-    //   var documentAll=posts;
-    //   req.session.documentAll=documentAll;
-    //   var documentHot=[];
-    //   for(var i=0;i<posts.length;i++){
-    //     if(posts[i].post_hot===1){
-    //       documentHot.push(posts[i]);
-    //     }
-    //   }
-    //
-    //   req.session.documentHot=documentHot;
-    //
-    //
-    //   var documentRecommend=[];
-    //   for(var j=0;j<posts.length;j++){
-    //
-    //     if(posts[j].post_recommend===1){
-    //
-    //       documentRecommend.push(posts[j]);
-    //     }
-    //   }
-    //   req.session.documentRecommend=documentRecommend;
-    //
-    //   res.render('index/default/templates/index',system.renderFront(req.session.categories,req.session.documentAll,req.session.documentHot,req.session.documentRecommend));
-    // });
-
   });
+
+
+
+
+
+
+
+      // var pageList=Number(req.params.number) || 1;//当前页
+      // var limitList=2;//每页显示的条数
+      // var skipList=(pageList-1)*limitList;//忽略掉的条数
+      // var pageAll=Math.ceil(count/limitList);
+      // Post.find().limit(limitList).skip(skipList).then(function (posts) {
 
 
 
