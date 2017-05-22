@@ -12,39 +12,14 @@
               class="fenlei menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-155939">
             <a href="http://www.woshipm.com/#" ng-mouseenter="showMenu()" ng-mouseleave="hideMenu()">分类浏览</a>
             <ul class="sub-menu ng-hide" ng-show="show || hold" ng-mouseenter="hold=true" ng-mouseleave="hold=false">
+              <%categories.forEach(function (cate) {%>
               <li id="menu-item-155928"
                   class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155928"><a
-                        href="http://www.woshipm.com/category/pmd">产品经理</a></li>
-              <li id="menu-item-155929"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155929"><a
-                        href="http://www.woshipm.com/category/pd">产品设计</a></li>
-              <li id="menu-item-155927"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155927"><a
-                        href="http://www.woshipm.com/category/ucd">交互体验</a></li>
-              <li id="menu-item-155930"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155930"><a
-                        href="http://www.woshipm.com/category/operate">产品运营</a></li>
-              <li id="menu-item-155932"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155932"><a
-                        href="http://www.woshipm.com/category/rp">原型设计</a></li>
-              <li id="menu-item-191466"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-191466"><a
-                        href="http://www.woshipm.com/category/evaluating">分析评测</a></li>
-              <li id="menu-item-155931"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155931"><a
-                        href="http://www.woshipm.com/category/discuss">人人专栏</a></li>
-              <li id="menu-item-155926"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155926"><a
-                        href="http://www.woshipm.com/category/it">业界动态</a></li>
-              <li id="menu-item-155936"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155936"><a
-                        href="http://www.woshipm.com/category/zhichang">职场攻略</a></li>
-              <li id="menu-item-155971"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-155971"><a
-                        href="http://www.woshipm.com/category/xiazai">干货下载</a></li>
-              <li id="menu-item-184121"
-                  class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-184121"><a
-                        href="http://www.woshipm.com/category/chuangye">创业学院</a></li>
+                        href="/list/<%=cate.cate_slug%>"><%=cate.cate_name%></a></li>
+              <% })%>
+
+          
+
             </ul>
           </li>
           <li id="menu-item-420537"

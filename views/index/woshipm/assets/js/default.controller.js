@@ -29,20 +29,23 @@ app.controller('contentCtrl', ['$scope', '$timeout', function ($scope, $timeout)
   $scope.collection = function () {
 
   };
-
   /*
-  * 弹出登录框
-  * */
-  // $('#collection').on('click', function () {
-  //   $('body').prepend('<div class="overlay overlay--dark" id="login_iframe"><button class="overlayclose-btn button--close" id="collection_close">×</button><iframe id="top_login_frame" src="/user/login" width="600" height="400" scrolling="no" class="top_fc_box"></iframe></div>');
-  //
-  //
-  //
-  //   $('#collection_close').on('click', function () {
-  //     $('#login_iframe').remove();
-  //
-  //   });
-  // });
+   * 弹出登录框
+   * */
+  $scope.loginOut=function () {
+
+      $('body').prepend('<div class="overlay overlay--dark" id="login_iframe"><button class="overlayclose-btn button--close" id="collection_close">×</button><iframe id="top_login_frame" src="/user/login" width="600" height="400" scrolling="no" class="top_fc_box"></iframe></div>');
+
+
+      $('#collection_close').on('click', function () {
+        $('#login_iframe').remove();
+
+      });
+
+
+  };
+
+
 
 
 }]);

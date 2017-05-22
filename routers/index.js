@@ -172,11 +172,13 @@ router.get('/page/:number',function (req,res,next) {
 /*
 * 内容页
 * */
-router.get('/document/content/:title',function (req,res,next) {
+router.get('/content/:title',function (req,res,next) {
   var title=req.params.title;
   Post.find({
     post_title:title
   }).then(function (post) {
+
+
     if(!post){
       res.render('index/'+theme+'/templates/404');
     }else {
@@ -202,6 +204,14 @@ router.get('/user/login',function (req,res,next) {
 
 
 });
+/*
+* 列表页
+* */
+router.get('/list/:cate',function (res,req,next) {
+  var cate=req.params.cate;
+  res.render('index/'+theme+'/templates/list');
+});
+
 
 
 module.exports=router;
