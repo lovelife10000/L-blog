@@ -621,6 +621,22 @@ router.post('/manage/document_manage/get_page_document', function (req, res, nex
 
 });
 /*
+* 删除单篇文档
+* */
+router.post('/manage/document_manage/remove_one_document', function (req, res, next) {
+  Document.remove({
+    _id:req.body.data._id,
+  }).then(function (info) {
+    if(info.ok===1){
+      res.json({
+        code:1,
+        msg:'删除成功'
+      });
+    }
+  });
+
+});
+/*
  * 待审核
  * */
 router.get('/manage/document_manage/no_access', function (req, res, next) {

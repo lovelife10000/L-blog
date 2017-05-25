@@ -1,6 +1,6 @@
 <%- include('header') %>
 <div class="content-wrapper" ng-controller="documentAll">
-
+<%- include('modal/remove_one_document_modal') %>
     <section class="content-header">
         <h1>
             <%= blogName %>
@@ -75,8 +75,9 @@
                                     <td>
                                         <button type="button" class="btn btn-primary btn-xs btn-flat">编辑</button>
                                         <button type="button" class="btn btn-info btn-xs btn-flat">推荐</button>
-                                        <button type="button" class="btn btn-warning btn-xs btn-flat">删除</button>
-                                        <button type="button" class="btn btn-info btn-xs btn-flat">查看</button>
+                                        <button type="button" class="btn btn-danger btn-xs btn-flat">取消推荐</button>
+                                        <button type="button" class="btn btn-warning btn-xs btn-flat" ng-click="removeOneDocument(x)">删除</button>
+                                        <a type="button" class="btn btn-info btn-xs btn-flat" href="http://www.baidu.com">查看</a>
                                     </td>
                                 </tr>
 

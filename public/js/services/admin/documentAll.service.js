@@ -25,6 +25,16 @@ app.factory('documentAllService',['$http',function ($http) {
         headers:{'content-type':'application/x-www-form-urlencoded'}
       });
     },
+    removeOneDocument:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/remove_one_document',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
 
   };
 }]);

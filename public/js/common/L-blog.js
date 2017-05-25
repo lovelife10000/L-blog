@@ -118,6 +118,16 @@ app.factory('documentAllService',['$http',function ($http) {
         headers:{'content-type':'application/x-www-form-urlencoded'}
       });
     },
+    removeOneDocument:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/remove_one_document',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
 
   };
 }]);
@@ -523,6 +533,9 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
 
   $scope.limit = '5';
   $scope.currentPage=1;
+  /*
+  * 按条件获取文档数据
+  * */
   $scope.getPage = function (limit, page) {
     documentAllService.postLimitAndPage(limit, page).then(function success(res) {
       $scope.data = res.data.documentByLimitAndPage;
@@ -534,7 +547,9 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
     $scope.currentPage=1;
 
   };
-
+/*
+* 单击跳转页面
+* */
   $scope.goToPage=function (limit,page) {
     documentAllService.postLimitAndPage(limit, page).then(function success(res) {
       $scope.data = res.data.documentByLimitAndPage;
@@ -544,6 +559,22 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
 
     });
   };
+/*
+* 删除单篇文档
+* */
+$scope.removeOneDocument=function (doc) {
+  $scope.oneDocument=doc;
+$('#remove_one_document_modal').modal({
+  keyboard: true
+});
+  documentAllService.removeOneDocument(doc).then(function success(res) {
+    if(res.data.code===1){
+
+    }
+  },function error(res) {
+
+  });
+};
 
 }]);
 /**
