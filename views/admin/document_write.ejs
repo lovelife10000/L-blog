@@ -27,35 +27,35 @@
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_title.$invalid && !myForm.post_title.$pristine,'has-success':myForm.post_title.$valid && !myForm.post_title.$pristine}">
-                                <label for="post_title" class="col-sm-2 control-label">文章标题</label>
+                                 ng-class="{'has-error':myForm.document_title.$invalid && !myForm.document_title.$pristine,'has-success':myForm.document_title.$valid && !myForm.document_title.$pristine}">
+                                <label for="document_title" class="col-sm-2 control-label">文章标题</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="post_title" ng-model="post_title" class="form-control"
-                                           id="post_title" placeholder="请输入文章标题" ng-minlength="5" ng-maxlength="30"
+                                    <input type="text" name="document_title" ng-model="document_title" class="form-control"
+                                           id="document_title" placeholder="请输入文章标题" ng-minlength="5" ng-maxlength="30"
                                            required>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_title.$invalid && !myForm.post_title.$pristine"><span
+                                          ng-show="myForm.document_title.$invalid && !myForm.document_title.$pristine"><span
                                                 class="glyphicon glyphicon-remove"></span>对不起，文章标题格式不正确！</span>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_title.$valid && !myForm.post_title.$pristine"><span
+                                          ng-show="myForm.document_title.$valid && !myForm.document_title.$pristine"><span
                                                 class="glyphicon glyphicon-ok"></span>恭喜您，文章标题可用！</span>
                                 </div>
                             </div>
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_from.$invalid && !myForm.post_from.$pristine,'has-success':myForm.post_from.$valid && !myForm.post_from.$pristine}">
-                                <label for="post_from" class="col-sm-2 control-label">来源</label>
+                                 ng-class="{'has-error':myForm.document_from.$invalid && !myForm.document_from.$pristine,'has-success':myForm.document_from.$valid && !myForm.document_from.$pristine}">
+                                <label for="document_from" class="col-sm-2 control-label">来源</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" name="post_from" ng-model="post_from" class="form-control"
-                                           id="post_from" placeholder="请输入来源" required>
+                                    <input type="text" name="document_from" ng-model="document_from" class="form-control"
+                                           id="document_from" placeholder="请输入来源" required>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_from.$invalid && !myForm.post_from.$pristine"><span
+                                          ng-show="myForm.document_from.$invalid && !myForm.document_from.$pristine"><span
                                                 class="glyphicon glyphicon-remove"></span>对不起，来源格式不正确！</span>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_from.$valid && !myForm.post_from.$pristine"><span
+                                          ng-show="myForm.document_from.$valid && !myForm.document_from.$pristine"><span
                                                 class="glyphicon glyphicon-ok"></span>恭喜您，来源可用！</span>
                                 </div>
                             </div>
@@ -66,11 +66,11 @@
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="post_display" ng-model="post_display.name" id="" value="1" ng-checked="true">
+                                            <input type="radio" name="document_display" ng-model="document_display.name" id="" value="1" ng-checked="true">
                                             显示
                                         </label>
                                         <label>
-                                            <input type="radio" name="post_display" ng-model="post_display.name" id="" value="0">
+                                            <input type="radio" name="document_display" ng-model="document_display.name" id="" value="0">
                                             隐藏
                                         </label>
 
@@ -82,11 +82,11 @@
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="post_hot" ng-model="post_hot.name" id="" value="1" ng-checked="true">
+                                            <input type="radio" name="document_hot" ng-model="document_hot.name" id="" value="1" ng-checked="true">
                                             是
                                         </label>
                                         <label>
-                                            <input type="radio" name="post_hot" ng-model="post_hot.name" id="" value="0">
+                                            <input type="radio" name="document_hot" ng-model="document_hot.name" id="" value="0">
                                             否
                                         </label>
 
@@ -98,11 +98,11 @@
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="post_recommend" ng-model="post_recommend.name" id="" value="1" >
+                                            <input type="radio" name="document_recommend" ng-model="document_recommend.name" id="" value="1" >
                                             是
                                         </label>
                                         <label>
-                                            <input type="radio" name="post_recommend" ng-model="post_recommend.name" id="" value="0" ng-checked="true">
+                                            <input type="radio" name="document_recommend" ng-model="document_recommend.name" id="" value="0" ng-checked="true">
                                             否
                                         </label>
 
@@ -112,12 +112,12 @@
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_tags.$invalid && !myForm.post_tags.$pristine,'has-success':myForm.post_tags.$valid && !myForm.post_tags.$pristine}">
-                                <label for="post_tags" class="col-sm-2 control-label">TAG标签</label>
+                                 ng-class="{'has-error':myForm.document_tags.$invalid && !myForm.document_tags.$pristine,'has-success':myForm.document_tags.$valid && !myForm.document_tags.$pristine}">
+                                <label for="document_tags" class="col-sm-2 control-label">TAG标签</label>
 
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="text" name="post_tags" ng-model="post_tags" class="form-control" required>
+                                        <input type="text" name="document_tags" ng-model="document_tags" class="form-control" required>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle"
                                                     data-toggle="dropdown">选择
@@ -150,51 +150,51 @@
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_category.$invalid && !myForm.post_category.$pristine,'has-success':myForm.post_category.$valid && !myForm.post_category.$pristine}">
+                                 ng-class="{'has-error':myForm.document_category.$invalid && !myForm.document_category.$pristine,'has-success':myForm.document_category.$valid && !myForm.document_category.$pristine}">
                                 <label class="col-sm-2 control-label">文档分类</label>
                                 <div class="col-sm-10">
 
 
-                                    <select class="form-control" name="post_category" ng-model="post_category"
+                                    <select class="form-control" name="document_category" ng-model="document_category"
                                             ng-options="x.id as x.name for x in cateOptions" required>
                                         <option value="">-- 请选择 --</option>
                                     </select>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_category.$invalid && !myForm.post_category.$pristine"><span
+                                          ng-show="myForm.document_category.$invalid && !myForm.document_category.$pristine"><span
                                                 class="glyphicon glyphicon-remove"></span>对不起，您必须选择一项！</span>
                                 </div>
                             </div>
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_keywords.$invalid && !myForm.post_keywords.$pristine,'has-success':myForm.post_keywords.$valid && !myForm.post_keywords.$pristine}">
+                                 ng-class="{'has-error':myForm.document_keywords.$invalid && !myForm.document_keywords.$pristine,'has-success':myForm.document_keywords.$valid && !myForm.document_keywords.$pristine}">
                                 <label class="col-sm-2 control-label">关键字</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="post_keywords" ng-model="post_keywords"
+                                    <input type="password" name="document_keywords" ng-model="document_keywords"
                                            class="form-control"
                                            id="" placeholder="请输入关键字" required>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_keywords.$invalid && !myForm.post_keywords.$pristine"><span
+                                          ng-show="myForm.document_keywords.$invalid && !myForm.document_keywords.$pristine"><span
                                                 class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_keywords.$valid && !myForm.post_keywords.$pristine"><span
+                                          ng-show="myForm.document_keywords.$valid && !myForm.document_keywords.$pristine"><span
                                                 class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>
                                 </div>
                             </div>
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_abstract.$invalid && !myForm.post_abstract.$pristine,'has-success':myForm.post_abstract.$valid && !myForm.post_abstract.$pristine}">
+                                 ng-class="{'has-error':myForm.document_abstract.$invalid && !myForm.document_abstract.$pristine,'has-success':myForm.document_abstract.$valid && !myForm.document_abstract.$pristine}">
                                 <label class="col-sm-2 control-label">内容摘要</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="post_abstract" ng-model="post_abstract"
+                                    <input type="password" name="document_abstract" ng-model="document_abstract"
                                            class="form-control"
                                            id="" placeholder="请输入内容摘要" required>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_abstract.$invalid && !myForm.post_abstract.$pristine"><span
+                                          ng-show="myForm.document_abstract.$invalid && !myForm.document_abstract.$pristine"><span
                                                 class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_abstract.$valid && !myForm.post_abstract.$pristine "><span
+                                          ng-show="myForm.document_abstract.$valid && !myForm.document_abstract.$pristine "><span
                                                 class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>
                                 </div>
                             </div>
@@ -205,11 +205,11 @@
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="post_type" ng-model="post_type.name" id="" value="post" ng-checked="true">
+                                            <input type="radio" name="document_type" ng-model="document_type.name" id="" value="post" ng-checked="true">
                                             文章
                                         </label>
                                         <label>
-                                            <input type="radio" name="post_type" ng-model="post_type.name"  id="" value="page">
+                                            <input type="radio" name="document_type" ng-model="document_type.name"  id="" value="page">
                                             页面
                                         </label>
                                     </div>
@@ -218,16 +218,16 @@
 
 
                             <div class="form-group"
-                                 ng-class="{'has-error':myForm.post_view.$invalid && !myForm.post_view.$pristine,'has-success':myForm.post_view.$valid && !myForm.post_view.$pristine}">
+                                 ng-class="{'has-error':myForm.document_view.$invalid && !myForm.document_view.$pristine,'has-success':myForm.document_view.$valid && !myForm.document_view.$pristine}">
                                 <label class="col-sm-2 control-label">点击数</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="post_view" ng-model="post_view" class="form-control"
+                                    <input type="text" name="document_view" ng-model="document_view" class="form-control"
                                            id="" placeholder="请输入点击数" ng-pattern="/^\d{1,4}$/" required>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_view.$invalid && !myForm.post_view.$pristine"><span
+                                          ng-show="myForm.document_view.$invalid && !myForm.document_view.$pristine"><span
                                                 class="glyphicon glyphicon-remove"></span>对不起，排序格式不正确！</span>
                                     <span class="help-block ng-hide"
-                                          ng-show="myForm.post_view.$valid && !myForm.post_view.$pristine"><span
+                                          ng-show="myForm.document_view.$valid && !myForm.document_view.$pristine"><span
                                                 class="glyphicon glyphicon-ok"></span>恭喜您，排序可用！</span>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@
                                 <label class="col-sm-2 control-label">作者</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="text" name="post_author" ng-model="post_author"
+                                        <input type="text" name="document_author" ng-model="document_author"
                                                class="form-control" required>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle"
@@ -257,7 +257,7 @@
                                 <label class="col-sm-2 control-label">文档内容</label>
                                 <div class="col-sm-10">
 
-                                    <script id="container" name="post_content" type="text/plain"></script>
+                                    <script id="container" name="document_content" type="text/plain"></script>
 
 
                                 </div>

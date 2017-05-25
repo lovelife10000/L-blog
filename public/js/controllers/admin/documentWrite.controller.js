@@ -44,21 +44,21 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
      * 设置默认值
      * */
     $scope.cateOptions = dataFormat;
-    $scope.post_category = $scope.cateOptions[1].id;
+    $scope.document_category = $scope.cateOptions[1].id;
   },function error(res) {
 
   });
 
-  $scope.post_display = {
+  $scope.document_display = {
     name: '1'
   };
-  $scope.post_hot = {
+  $scope.document_hot = {
     name: '1'
   };
-  $scope.post_type = {
+  $scope.document_type = {
     name: 'post'
   };
-  $scope.post_recommend = {
+  $scope.document_recommend = {
     name: '0'
   };
   $scope.postImg='/upload/images/defaultlogo.png';
@@ -70,26 +70,26 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
       var postContent = '';
       ue.ready(function () {
         postContent = ue.getContent();
-        $scope.post_content=postContent;
+        $scope.document_content=postContent;
 
       });
 
 
       documentWriteService.get(
-        $scope.post_title,
-        $scope.post_from,
-        $scope.post_display.name,
-        $scope.post_hot.name,
-        $scope.post_recommend.name,
-        $scope.post_tags,
+        $scope.document_title,
+        $scope.document_from,
+        $scope.document_display.name,
+        $scope.document_hot.name,
+        $scope.document_recommend.name,
+        $scope.document_tags,
         $scope.postImg,
-        $scope.post_category,
-        $scope.post_keywords,
-        $scope.post_abstract,
-        $scope.post_type.name,
-        $scope.post_view,
-        $scope.post_author,
-        $scope.post_content).then(function success(res) {
+        $scope.document_category,
+        $scope.document_keywords,
+        $scope.document_abstract,
+        $scope.document_type.name,
+        $scope.document_view,
+        $scope.document_author,
+        $scope.document_content).then(function success(res) {
 
       },function error(res) {
 

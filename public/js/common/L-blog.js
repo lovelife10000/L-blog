@@ -96,10 +96,25 @@ app.factory('categoriesAllService',['$http',function ($http) {
  */
 app.factory('documentAllService',['$http',function ($http) {
   return{
-    get:function () {
+    get:function (limit,page) {
       return $http({
-        method:'GET',
-        url:'/admin/manage/document_manage/get_all_document',
+        method:'POST',
+        url:'/admin/manage/document_manage/get_page_document',
+        data:$.param({
+          limit:limit,
+          page:page,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+    postLimitAndPage:function (limit,page) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/get_page_document',
+        data:$.param({
+          limit:limit,
+          page:page,
+        }),
         headers:{'content-type':'application/x-www-form-urlencoded'}
       });
     },
@@ -116,20 +131,20 @@ app.factory('documentWriteService',['$http',function ($http) {
         method:'POST',
         url:'/admin/manage/document_manage/write',
         data:$.param({
-          post_title:title,
-          post_from:from,
-          post_display:display,
-          post_hot:hot,
-          post_recommend:recommend,
-          post_tags:tags,
-          post_img:img,
-          post_category:category,
-          post_keywords:keywords,
-          post_abstract:abstract,
-          post_type:type,
-          post_view:view,
-          post_author:author,
-          post_content:content
+          document_title:title,
+          document_from:from,
+          document_display:display,
+          document_hot:hot,
+          document_recommend:recommend,
+          document_tags:tags,
+          document_img:img,
+          document_category:category,
+          document_keywords:keywords,
+          document_abstract:abstract,
+          document_type:type,
+          document_view:view,
+          document_author:author,
+          document_content:content
         }),
         headers:{'content-type':'application/x-www-form-urlencoded'}
       });
@@ -496,12 +511,38 @@ app.controller('categoriesAll', ['$scope', '$http','categoriesAllService', funct
 /**
  * Created by v_lljunli on 2017/5/10.
  */
-app.controller('documentAll', ['$scope', '$http','documentAllService', function ($scope, $http,documentAllService) {
-  documentAllService.get().then(function success(res) {
-    
-  },function error(res) {
+app.controller('documentAll', ['$scope', '$http', 'documentAllService', function ($scope, $http, documentAllService) {
+
+  documentAllService.get(5, 1).then(function success(res) {
+    $scope.data = res.data.documentByLimitAndPage;
+    $scope.allPage = res.data.allPage;
+  }, function error(res) {
 
   });
+
+
+  $scope.limit = '5';
+  $scope.currentPage=1;
+  $scope.getPage = function (limit, page) {
+    documentAllService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+    }, function error(res) {
+
+    });
+
+
+  };
+
+  $scope.goToPage=function (limit,page) {
+    documentAllService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.currentPage=page;
+    }, function error(res) {
+
+    });
+  };
 
 }]);
 /**
@@ -550,21 +591,21 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
      * 设置默认值
      * */
     $scope.cateOptions = dataFormat;
-    $scope.post_category = $scope.cateOptions[1].id;
+    $scope.document_category = $scope.cateOptions[1].id;
   },function error(res) {
 
   });
 
-  $scope.post_display = {
+  $scope.document_display = {
     name: '1'
   };
-  $scope.post_hot = {
+  $scope.document_hot = {
     name: '1'
   };
-  $scope.post_type = {
+  $scope.document_type = {
     name: 'post'
   };
-  $scope.post_recommend = {
+  $scope.document_recommend = {
     name: '0'
   };
   $scope.postImg='/upload/images/defaultlogo.png';
@@ -576,26 +617,26 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
       var postContent = '';
       ue.ready(function () {
         postContent = ue.getContent();
-        $scope.post_content=postContent;
+        $scope.document_content=postContent;
 
       });
 
 
       documentWriteService.get(
-        $scope.post_title,
-        $scope.post_from,
-        $scope.post_display.name,
-        $scope.post_hot.name,
-        $scope.post_recommend.name,
-        $scope.post_tags,
+        $scope.document_title,
+        $scope.document_from,
+        $scope.document_display.name,
+        $scope.document_hot.name,
+        $scope.document_recommend.name,
+        $scope.document_tags,
         $scope.postImg,
-        $scope.post_category,
-        $scope.post_keywords,
-        $scope.post_abstract,
-        $scope.post_type.name,
-        $scope.post_view,
-        $scope.post_author,
-        $scope.post_content).then(function success(res) {
+        $scope.document_category,
+        $scope.document_keywords,
+        $scope.document_abstract,
+        $scope.document_type.name,
+        $scope.document_view,
+        $scope.document_author,
+        $scope.document_content).then(function success(res) {
 
       },function error(res) {
 

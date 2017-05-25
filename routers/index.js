@@ -9,7 +9,7 @@ var system = require('../util/system');
  * 加载数据模型
  * */
 var Category = require('../models/Category');
-var Post = require('../models/Post');
+var Document = require('../models/Document');
 var theme = 'woshipm';
 /*
  * 首页
@@ -90,10 +90,10 @@ router.get('/', function (req, res, next) {
  * */
 router.get('/page/:number', function (req, res, next) {
   var categoriesData = Category.find();
-  var documentCount = Post.count();
-  var documentAllData = Post.find();
-  var documentHotData = Post.find({post_hot: 1});
-  var documentRecommendData = Post.find({post_recommend: 1});
+  var documentCount = Document.count();
+  var documentAllData = Document.find();
+  var documentHotData = Document.find({document_hot: 1});
+  var documentRecommendData = Document.find({document_recommend: 1});
 
   Promise.all([categoriesData, documentCount, documentAllData, documentHotData, documentRecommendData]).then(function (result) {
 
@@ -128,7 +128,7 @@ router.get('/page/:number', function (req, res, next) {
 router.get('/content/:title', function (req, res, next) {
   var title = req.params.title;
   var categoriesData = Category.find();
-  var documentByTitleData = Post.find({post_title: title});
+  var documentByTitleData = Document.find({document_title: title});
   
   Promise.all([categoriesData,documentByTitleData]).then(function (result) {
 
@@ -167,7 +167,7 @@ router.get('/user/login', function (req, res, next) {
 router.get('/list/:cate', function (req, res, next) {
   var cate = req.params.cate;
   var categoriesData = Category.find();
-  var documentAllData = Post.find();
+  var documentAllData = Document.find();
 
   Promise.all([categoriesData,documentAllData]).then(function (result) {
     var categories = system.categoriesFormat(result[0]);

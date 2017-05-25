@@ -20,7 +20,7 @@ var cache = require('../util/cache');
 var AdminUser = require('../models/AdminUser');
 var AdminUserGroup = require('../models/AdminUserGroup');
 var Category = require('../models/Category');
-var Post = require('../models/Post');
+var Document = require('../models/Document');
 /*
  * 后台用户登录302重定向
  * */
@@ -215,15 +215,15 @@ router.post('/manage/panel/password_modify', function (req, res, next) {
       adminUser_password: req.body.adminUser_password,
       adminUser_repassword: req.body.adminUser_repassword,
     }).then(function (info) {
-      if(info.ok===1){
+      if (info.ok === 1) {
         res.json({
-          code:1,
-          msg:'密码修改成功',
+          code: 1,
+          msg: '密码修改成功',
         });
-      }else {
+      } else {
         res.json({
-          code:0,
-          msg:'密码修改失败',
+          code: 0,
+          msg: '密码修改失败',
         });
       }
     });
@@ -467,15 +467,7 @@ router.get('/manage/panel/login_log', function (req, res, next) {
   res.render('admin/login_log', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.USERS_MANAGE[1], settings.LOGIN_LOG[1]));
 });
 
-/*
- * 所有文档
- * */
-router.get('/manage/document_manage/all_document', function (req, res, next) {
-  res.render('admin/document_all', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ALL_DOCUMENT[1]));
-});
-router.get('/manage/document_manage/get_all_document', function (req, res, next) {
 
-});
 /*
  * 所有分类
  * */
@@ -578,9 +570,55 @@ router.get('/manage/document_manage/write', function (req, res, next) {
   res.render('admin/document_write', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
 router.post('/manage/document_manage/write', function (req, res, next) {
-  console.log(req.body);
-  var post = new Post(req.body);
-  post.save();
+  var document = new Document(req.body);
+  document.save();
+});
+/*
+ * 所有文档
+ * */
+router.get('/manage/document_manage/all_document', function (req, res, next) {
+
+
+  var documentCount = Document.count();
+
+  Promise.all([documentCount]).then(function (result) {
+    // var ms = moment(date).format('YYYYMMDDHHmmss').toString();
+
+    res.render('admin/document_all', {
+      userInfo: req.session.userInfo,
+      blogName: settings.BLOG_NAME,
+      category: settings.DOCUMENT_MANAGE[1],
+      item: settings.ALL_DOCUMENT[1],
+      documentCount: result[0],
+    });
+
+
+  });
+
+
+});
+router.post('/manage/document_manage/get_page_document', function (req, res, next) {
+  var limit = Number(req.body.limit);
+  var currentPage = req.body.page || 1;
+  var skip = (currentPage - 1) * limit;
+
+  var allDocument = Document.find();
+  var documentCount = Document.count();
+
+
+  var documentByLimitAndPage = Document.find().limit(limit).skip(skip);
+
+  Promise.all([allDocument, documentCount, documentByLimitAndPage]).then(function (result) {
+
+    var allPage = Math.ceil(result[1] / limit);
+    res.json({
+      allPage: allPage,
+      documentByLimitAndPage: result[2],
+    });
+
+  });
+
+
 });
 /*
  * 待审核
