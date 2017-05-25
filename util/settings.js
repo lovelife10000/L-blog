@@ -25,6 +25,7 @@ module.exports={
   * */
   PANEL:['panel','仪表盘'],
   BASIC_INFO:['basicInfo','基本信息'],
+  PASSWORD_MODIFY:['password_modify','修改密码'],
 
   USERS_MANAGE:['usersManage','用户管理'],
   ALL_USERS_GROUP:['allUsersGroup','所有用户组'],
@@ -33,11 +34,11 @@ module.exports={
   ALL_USERS_ADD:['allUsersAdd','添加用户'],
   LOGIN_LOG:['loginLog','登录记录'],
 
-  ARTICLES_MANAGE:['articlesManage','文档管理'],
-  ALL_ARTICLES:['allArticles','所有文章'],
+  DOCUMENT_MANAGE:['documentManage','文档管理'],
+  ALL_DOCUMENT:['allDocument','所有文档'],
   CATEGORIES_ALL:['categories_all','所有分类'],
   ARTICLES_CATEGORY_ADD:['CategoriesAdd','添加分类'],
-  ARTICLES_ADD:['articles_add','写文章'],
+  ARTICLES_ADD:['articles_add','写文档'],
 
 
 

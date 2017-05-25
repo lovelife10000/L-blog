@@ -94,6 +94,21 @@ app.factory('categoriesAllService',['$http',function ($http) {
 /**
  * Created by v_lljunli on 2017/5/10.
  */
+app.factory('documentAllService',['$http',function ($http) {
+  return{
+    get:function () {
+      return $http({
+        method:'GET',
+        url:'/admin/manage/document_manage/get_all_document',
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
 app.factory('documentWriteService',['$http',function ($http) {
   return{
     get:function (title,from,display,hot,recommend,tags,img,category,keywords,abstract,type,view,author,content) {
@@ -138,6 +153,27 @@ app.factory('headerCtrlService', ['$http', function ($http) {
     },
 
 
+
+  }
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+
+app.factory('passwordModifyService', ['$http', function ($http) {
+  return {
+    get: function (password,repassword) {
+
+      return $http({
+        method: 'POST',
+        url:  '/admin/manage/panel/password_modify',
+        data: $.param({
+          adminUser_password: password,
+          adminUser_repassword: repassword
+        }),
+        headers: {'content-type': 'application/x-www-form-urlencoded'}
+      });
+    },
 
   }
 }]);
@@ -458,6 +494,17 @@ app.controller('categoriesAll', ['$scope', '$http','categoriesAllService', funct
 
 }]);
 /**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.controller('documentAll', ['$scope', '$http','documentAllService', function ($scope, $http,documentAllService) {
+  documentAllService.get().then(function success(res) {
+    
+  },function error(res) {
+
+  });
+
+}]);
+/**
  * Created by v_lljunli on 2017/4/27.
  */
 /*
@@ -616,6 +663,26 @@ app.controller('headerCtrl',['$scope','$http','headerCtrlService',function ($sco
 
     });
   };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.controller('passwordModify', ['$scope', '$http', 'passwordModifyService', function ($scope, $http, passwordModifyService) {
+
+  $scope.passwordModify = function () {
+    passwordModifyService.get($scope.adminUser_password,$scope.adminUser_repassword).then(function success(res) {
+      if(res.data.code===1){
+        $('#password_modify_modal').modal({
+          keyboard: true
+        });
+      }
+    }, function error(res) {
+
+    });
+
+
+  };
+
 }]);
 /**
  * Created by v_lljunli on 2017/5/11.
