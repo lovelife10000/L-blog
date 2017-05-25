@@ -17,10 +17,11 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
     documentAllService.postLimitAndPage(limit, page).then(function success(res) {
       $scope.data = res.data.documentByLimitAndPage;
       $scope.allPage = res.data.allPage;
+
     }, function error(res) {
 
     });
-
+    $scope.currentPage=1;
 
   };
 
