@@ -574,21 +574,15 @@ router.post('/manage/document_manage/write', function (req, res, next) {
   document.save();
 });
 /*
- * 所有文档
+ * 已发布
  * */
-router.get('/manage/document_manage/all_document', function (req, res, next) {
-    res.render('admin/document_all', {
-      userInfo: req.session.userInfo,
-      blogName: settings.BLOG_NAME,
-      category: settings.DOCUMENT_MANAGE[1],
-      item: settings.ALL_DOCUMENT[1],
-
-    });
+router.get('/manage/document_manage/published', function (req, res, next) {
+  res.render('admin/published', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.PUBLISHED[1]));
 });
 /*
- * 根据每页显示数、当前页数来获取显示的文档数据
+ * 根据每页显示数、当前页数来获取已发布文档数据
  * */
-router.post('/manage/document_manage/get_yes_display_document', function (req, res, next) {
+router.post('/manage/document_manage/get_published_document', function (req, res, next) {
   var limit = Number(req.body.limit);
   var currentPage = req.body.page || 1;
   var skip = (currentPage - 1) * limit;
@@ -597,19 +591,19 @@ router.post('/manage/document_manage/get_yes_display_document', function (req, r
   var documentCount = Document.count({document_display: 1});
 
 
-  var documentYesDisplayByLimitAndPage = Document.find({
+  var documentPublishedByLimitAndPage = Document.find({
     document_display: 1,
   }).limit(limit).skip(skip);
 
-  Promise.all([documentCount, documentYesDisplayByLimitAndPage]).then(function (result) {
+  Promise.all([documentCount, documentPublishedByLimitAndPage]).then(function (result) {
 
 
     var allPage = Math.ceil(result[0] / limit);
 
     res.json({
-      documentCountNum:result[0],
+      documentCountNum: result[0],
       allPage: allPage,
-      documentYesDisplayByLimitAndPage: result[1],
+      documentPublishedByLimitAndPage: result[1],
     });
 
   });
@@ -636,26 +630,107 @@ router.post('/manage/document_manage/remove_one_document', function (req, res, n
 /*
  * 待审核
  * */
-router.get('/manage/document_manage/no_access', function (req, res, next) {
-  res.render('admin/no_access', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+router.get('/manage/document_manage/wait_for_verify', function (req, res, next) {
+  res.render('admin/wait_for_verify', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.WAIT_FOR_VERIFY[1]));
+});
+/*
+ * 根据每页显示数、当前页数来获取待审核文档数据
+ * */
+router.post('/manage/document_manage/get_wait_for_verify_document', function (req, res, next) {
+  var limit = Number(req.body.limit);
+  var currentPage = req.body.page || 1;
+  var skip = (currentPage - 1) * limit;
+
+
+  var documentCount = Document.count({document_display: 2});
+
+
+  var documentWaitForVerifyByLimitAndPage = Document.find({
+    document_display: 2,
+  }).limit(limit).skip(skip);
+
+  Promise.all([documentCount, documentWaitForVerifyByLimitAndPage]).then(function (result) {
+
+
+    var allPage = Math.ceil(result[0] / limit);
+
+    res.json({
+      documentCountNum: result[0],
+      allPage: allPage,
+      documentWaitForVerifyByLimitAndPage: result[1],
+    });
+
+  });
 });
 /*
  * 未通过
  * */
-router.get('/manage/document_manage/wait', function (req, res, next) {
-  res.render('admin/wait', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+router.get('/manage/document_manage/no_access', function (req, res, next) {
+  res.render('admin/no_access', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.NO_ACCESS[1]));
 });
 /*
- * 已发布
+ * 根据每页显示数、当前页数来获取未通过文档数据
  * */
-router.get('/manage/document_manage/published', function (req, res, next) {
-  res.render('admin/published', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+router.post('/manage/document_manage/get_no_access_document', function (req, res, next) {
+  var limit = Number(req.body.limit);
+  var currentPage = req.body.page || 1;
+  var skip = (currentPage - 1) * limit;
+
+
+  var documentCount = Document.count({document_display: 3});
+
+
+  var documentByLimitAndPage = Document.find({
+    document_display: 3,
+  }).limit(limit).skip(skip);
+
+  Promise.all([documentCount, documentByLimitAndPage]).then(function (result) {
+
+
+    var allPage = Math.ceil(result[0] / limit);
+
+    res.json({
+      documentCountNum: result[0],
+      allPage: allPage,
+      documentByLimitAndPage: result[1],
+    });
+
+  });
 });
 /*
  * 草稿箱
  * */
 router.get('/manage/document_manage/draft', function (req, res, next) {
-  res.render('admin/draft', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+  res.render('admin/draft', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.DRAFT[1]));
+});
+/*
+ * 根据每页显示数、当前页数来获取草稿箱文档数据
+ * */
+router.post('/manage/document_manage/get_draft_document', function (req, res, next) {
+  var limit = Number(req.body.limit);
+  var currentPage = req.body.page || 1;
+  var skip = (currentPage - 1) * limit;
+
+
+  var documentCount = Document.count({document_display: 4});
+
+
+  var documentByLimitAndPage = Document.find({
+    document_display: 4,
+  }).limit(limit).skip(skip);
+
+  Promise.all([documentCount, documentByLimitAndPage]).then(function (result) {
+
+
+    var allPage = Math.ceil(result[0] / limit);
+
+    res.json({
+      documentCountNum: result[0],
+      allPage: allPage,
+      documentByLimitAndPage: result[1],
+    });
+
+  });
 });
 /*
  * 回收站
@@ -664,8 +739,8 @@ router.get('/manage/document_manage/recycle', function (req, res, next) {
   res.render('admin/recycle', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.RECYCLE[1]));
 });
 /*
-* 获取回收站文档数据
-* */
+ * 获取回收站文档数据
+ * */
 router.post('/manage/document_manage/get_no_display_document', function (req, res, next) {
   var limit = Number(req.body.limit);
   var currentPage = req.body.page || 1;
@@ -685,7 +760,7 @@ router.post('/manage/document_manage/get_no_display_document', function (req, re
     var allPage = Math.ceil(result[0] / limit);
 
     res.json({
-      documentCountNum:result[0],
+      documentCountNum: result[0],
       allPage: allPage,
       documentNoDisplayByLimitAndPage: result[1],
     });

@@ -173,6 +173,56 @@ app.factory('documentWriteService',['$http',function ($http) {
   };
 }]);
 /**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('draftService',['$http',function ($http) {
+  return{
+
+    /*
+    * 根据每页显示数、第几页来获取已发布文档数据
+    * */
+    postLimitAndPage:function (limit,page) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/get_draft_document',
+        data:$.param({
+          limit:limit,
+          page:page,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+    /*
+    * 删除单篇文档
+    * */
+    removeOneDocument:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/remove_one_document',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+    /*
+    * 单篇文档放入回收站
+    * */
+    putIntoRecycle:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/put_into_recycle',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
  * Created by v_lljunli on 2017/5/15.
  */
 
@@ -194,6 +244,56 @@ app.factory('headerCtrlService', ['$http', function ($http) {
 /**
  * Created by v_lljunli on 2017/5/10.
  */
+app.factory('noAccessService',['$http',function ($http) {
+  return{
+
+    /*
+    * 根据每页显示数、第几页来获取已发布文档数据
+    * */
+    postLimitAndPage:function (limit,page) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/get_no_access_document',
+        data:$.param({
+          limit:limit,
+          page:page,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+    /*
+    * 删除单篇文档
+    * */
+    removeOneDocument:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/remove_one_document',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+    /*
+    * 单篇文档放入回收站
+    * */
+    putIntoRecycle:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/put_into_recycle',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
 
 app.factory('passwordModifyService', ['$http', function ($http) {
   return {
@@ -211,6 +311,56 @@ app.factory('passwordModifyService', ['$http', function ($http) {
     },
 
   }
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('publishedService',['$http',function ($http) {
+  return{
+
+    /*
+    * 根据每页显示数、第几页来获取已发布文档数据
+    * */
+    postLimitAndPage:function (limit,page) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/get_published_document',
+        data:$.param({
+          limit:limit,
+          page:page,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+    /*
+    * 删除单篇文档
+    * */
+    removeOneDocument:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/remove_one_document',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+    /*
+    * 单篇文档放入回收站
+    * */
+    putIntoRecycle:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/put_into_recycle',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
 }]);
 /**
  * Created by v_lljunli on 2017/5/10.
@@ -390,6 +540,56 @@ app.factory('usersGroupAddService', ['$http', function ($http) {
     },
 
   }
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.factory('waitForVerifyService',['$http',function ($http) {
+  return{
+
+    /*
+    * 根据每页显示数、第几页来获取已发布文档数据
+    * */
+    postLimitAndPage:function (limit,page) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/get_wait_for_verify_document',
+        data:$.param({
+          limit:limit,
+          page:page,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+    /*
+    * 删除单篇文档
+    * */
+    removeOneDocument:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/remove_one_document',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+    /*
+    * 单篇文档放入回收站
+    * */
+    putIntoRecycle:function (doc) {
+      return $http({
+        method:'POST',
+        url:'/admin/manage/document_manage/put_into_recycle',
+        data:$.param({
+          data:doc,
+        }),
+        headers:{'content-type':'application/x-www-form-urlencoded'}
+      });
+    },
+
+  };
 }]);
 /**
  * Created by v_lljunli on 2017/4/25.
@@ -795,6 +995,92 @@ app.controller('documentWrite', ['$scope', '$http','documentWriteService','categ
   });
 }]);
 /**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.controller('draft', ['$scope', '$http', 'draftService', function ($scope, $http, draftService) {
+
+  draftService.postLimitAndPage(5, 1).then(function success(res) {
+    $scope.data = res.data.documentByLimitAndPage;
+    $scope.allPage = res.data.allPage;
+    $scope.documentCountNum=res.data.documentCountNum;
+  }, function error(res) {
+
+  });
+
+
+  $scope.limit = '5';
+  $scope.currentPage = 1;
+  /*
+   * 按条件获取文档数据
+   * */
+  $scope.getPage = function (limit, page) {
+    draftService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+    }, function error(res) {
+
+    });
+    $scope.currentPage = 1;
+
+  };
+  /*
+   * 单击跳转页面
+   * */
+  $scope.goToPage = function (limit, page) {
+    draftService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+      $scope.currentPage = page;
+    }, function error(res) {
+
+    });
+  };
+  /*
+   * 删除单篇文档
+   * */
+  $scope.removeOneDocument = function (doc) {
+    $scope.oneDocument = doc;
+    $('#remove_one_document_modal').modal({
+      keyboard: true
+    });
+
+  };
+  /*
+   * 删除单篇文档提交
+   * */
+  $scope.removeOneDocumentCommit = function (doc) {
+
+
+    $scope.document_display={
+      name:'1',
+    };
+    if ($scope.document_display.name == 1) {
+      draftService.putIntoRecycle(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    } else {
+      draftService.removeOneDocument(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    }
+
+  };
+
+
+}]);
+/**
  * Created by v_lljunli on 2017/5/15.
  */
 
@@ -809,6 +1095,92 @@ app.controller('headerCtrl',['$scope','$http','headerCtrlService',function ($sco
 
     });
   };
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.controller('noAccess', ['$scope', '$http', 'noAccessService', function ($scope, $http, noAccessService) {
+
+  noAccessService.postLimitAndPage(5, 1).then(function success(res) {
+    $scope.data = res.data.documentByLimitAndPage;
+    $scope.allPage = res.data.allPage;
+    $scope.documentCountNum=res.data.documentCountNum;
+  }, function error(res) {
+
+  });
+
+
+  $scope.limit = '5';
+  $scope.currentPage = 1;
+  /*
+   * 按条件获取文档数据
+   * */
+  $scope.getPage = function (limit, page) {
+    noAccessService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+    }, function error(res) {
+
+    });
+    $scope.currentPage = 1;
+
+  };
+  /*
+   * 单击跳转页面
+   * */
+  $scope.goToPage = function (limit, page) {
+    noAccessService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+      $scope.currentPage = page;
+    }, function error(res) {
+
+    });
+  };
+  /*
+   * 删除单篇文档
+   * */
+  $scope.removeOneDocument = function (doc) {
+    $scope.oneDocument = doc;
+    $('#remove_one_document_modal').modal({
+      keyboard: true
+    });
+
+  };
+  /*
+   * 删除单篇文档提交
+   * */
+  $scope.removeOneDocumentCommit = function (doc) {
+
+
+    $scope.document_display={
+      name:'1',
+    };
+    if ($scope.document_display.name == 1) {
+      noAccessService.putIntoRecycle(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    } else {
+      noAccessService.removeOneDocument(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    }
+
+  };
+
+
 }]);
 /**
  * Created by v_lljunli on 2017/5/10.
@@ -828,6 +1200,92 @@ app.controller('passwordModify', ['$scope', '$http', 'passwordModifyService', fu
 
 
   };
+
+}]);
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.controller('published', ['$scope', '$http', 'publishedService', function ($scope, $http, publishedService) {
+
+  publishedService.postLimitAndPage(5, 1).then(function success(res) {
+    $scope.data = res.data.documentPublishedByLimitAndPage;
+    $scope.allPage = res.data.allPage;
+    $scope.documentCountNum=res.data.documentCountNum;
+  }, function error(res) {
+
+  });
+
+
+  $scope.limit = '5';
+  $scope.currentPage = 1;
+  /*
+   * 按条件获取文档数据
+   * */
+  $scope.getPage = function (limit, page) {
+    publishedService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentPublishedByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+    }, function error(res) {
+
+    });
+    $scope.currentPage = 1;
+
+  };
+  /*
+   * 单击跳转页面
+   * */
+  $scope.goToPage = function (limit, page) {
+    publishedService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentPublishedByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+      $scope.currentPage = page;
+    }, function error(res) {
+
+    });
+  };
+  /*
+   * 删除单篇文档
+   * */
+  $scope.removeOneDocument = function (doc) {
+    $scope.oneDocument = doc;
+    $('#remove_one_document_modal').modal({
+      keyboard: true
+    });
+
+  };
+  /*
+   * 删除单篇文档提交
+   * */
+  $scope.removeOneDocumentCommit = function (doc) {
+
+
+    $scope.document_display={
+      name:'1',
+    };
+    if ($scope.document_display.name == 1) {
+      publishedService.putIntoRecycle(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    } else {
+      publishedService.removeOneDocument(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    }
+
+  };
+
 
 }]);
 /**
@@ -1479,3 +1937,90 @@ app.controller('usersGroup', ['$scope', '$http', 'usersGroupService','usersGroup
 
 }]);
 
+
+/**
+ * Created by v_lljunli on 2017/5/10.
+ */
+app.controller('waitForVerify', ['$scope', '$http', 'waitForVerifyService', function ($scope, $http, waitForVerifyService) {
+
+  waitForVerifyService.postLimitAndPage(5, 1).then(function success(res) {
+    $scope.data = res.data.documentWaitForVerifyByLimitAndPage;
+    $scope.allPage = res.data.allPage;
+    $scope.documentCountNum=res.data.documentCountNum;
+  }, function error(res) {
+
+  });
+
+
+  $scope.limit = '5';
+  $scope.currentPage = 1;
+  /*
+   * 按条件获取文档数据
+   * */
+  $scope.getPage = function (limit, page) {
+    waitForVerifyService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentWaitForVerifyByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+    }, function error(res) {
+
+    });
+    $scope.currentPage = 1;
+
+  };
+  /*
+   * 单击跳转页面
+   * */
+  $scope.goToPage = function (limit, page) {
+    waitForVerifyService.postLimitAndPage(limit, page).then(function success(res) {
+      $scope.data = res.data.documentWaitForVerifyByLimitAndPage;
+      $scope.allPage = res.data.allPage;
+      $scope.documentCountNum=res.data.documentCountNum;
+      $scope.currentPage = page;
+    }, function error(res) {
+
+    });
+  };
+  /*
+   * 删除单篇文档
+   * */
+  $scope.removeOneDocument = function (doc) {
+    $scope.oneDocument = doc;
+    $('#remove_one_document_modal').modal({
+      keyboard: true
+    });
+
+  };
+  /*
+   * 删除单篇文档提交
+   * */
+  $scope.removeOneDocumentCommit = function (doc) {
+
+
+    $scope.document_display={
+      name:'1',
+    };
+    if ($scope.document_display.name == 1) {
+      waitForVerifyService.putIntoRecycle(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    } else {
+      waitForVerifyService.removeOneDocument(doc).then(function success(res) {
+        if (res.data.code === 1) {
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
+        }
+      }, function error(res) {
+
+      });
+    }
+
+  };
+
+
+}]);

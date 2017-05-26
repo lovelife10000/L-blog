@@ -35,10 +35,14 @@ module.exports={
   LOGIN_LOG:['loginLog','登录记录'],
 
   DOCUMENT_MANAGE:['documentManage','文档管理'],
-  ALL_DOCUMENT:['allDocument','所有文档'],
+
   CATEGORIES_ALL:['categories_all','所有分类'],
   ARTICLES_CATEGORY_ADD:['CategoriesAdd','添加分类'],
-  DOCUMENT_WRITE:['document_write','写文档'],
+  DOCUMENT_WRITE:['documentWrite','写文档'],
+  PUBLISHED:['published','已发布'],
+  WAIT_FOR_VERIFY:['waitForVerify','待审核'],
+  NO_ACCESS:['noAccess','未通过'],
+  DRAFT:['draft','草稿箱'],
   RECYCLE:['recycle','回收站'],
 
 

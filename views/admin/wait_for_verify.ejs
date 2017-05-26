@@ -1,5 +1,5 @@
 <%- include('header') %>
-<div class="content-wrapper" ng-controller="published">
+<div class="content-wrapper" ng-controller="waitForVerify">
   <%- include('modal/remove_one_document_modal') %>
   <section class="content-header">
     <h1>
@@ -74,10 +74,8 @@
                   <td ng-bind="x.document_author"></td>
                   <td>
                     <button type="button" class="btn btn-primary btn-xs btn-flat">编辑</button>
-                    <button type="button" class="btn btn-info btn-xs btn-flat">推荐</button>
-                    <button type="button" class="btn btn-danger btn-xs btn-flat">取消推荐</button>
                     <button type="button" class="btn btn-warning btn-xs btn-flat" ng-click="removeOneDocument(x)">删除</button>
-                    <a type="button" class="btn btn-info btn-xs btn-flat" href="http://www.baidu.com">查看</a>
+                    <a type="button" class="btn btn-info btn-xs btn-flat" >审批</a>
                   </td>
                 </tr>
 
