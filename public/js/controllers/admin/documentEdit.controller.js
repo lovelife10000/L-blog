@@ -1,7 +1,30 @@
 /**
  * Created by v_lljunli on 2017/4/27.
  */
-app.controller('documentWrite', ['$scope', '$http', 'documentWriteService', 'categoriesAllService', function ($scope, $http, documentWriteService, categoriesAllService) {
+app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categoriesAllService','$location', function ($scope, $http, documentEditService, categoriesAllService,$location) {
+  var absurl = $location.absUrl();//获取当前链接的url
+  var absurlFormat=/admin\/manage\/document_manage\/edit\/[a-z0-9]{24}/.exec(absurl)[0].slice(34,58);//获取_id
+
+
+  documentEditService.postEditId(absurlFormat).then(function success(res) {
+    $scope.data=res.data[0];
+    console.log($scope.data);
+    $scope.document_title=$scope.data.document_title;
+    $scope.document_from=$scope.data.document_from;
+    $scope.document_display=$scope.data.document_display;
+    $scope.document_hot=$scope.data.document_hot;
+    $scope.document_recommend=$scope.data.document_recommend;
+    $scope.document_tags=$scope.data.document_tags;
+    $scope.document_keywords=$scope.data.document_keywords;
+    $scope.document_abstract=$scope.data.document_abstract;
+    $scope.document_type=$scope.data.document_type;
+
+  },function error(res) {
+
+  });
+
+
+  $scope.document_title='1';
 
   categoriesAllService.getCategories().then(function success(res) {
     var data = res.data;
@@ -58,47 +81,6 @@ app.controller('documentWrite', ['$scope', '$http', 'documentWriteService', 'cat
   $scope.document_recommend = {
     name: '0'
   };
-  $scope.postImg = '/upload/images/defaultlogo.png';
-  $scope.documentWrite = function () {
-
-
-    if ($scope.myForm.$valid) {
-      var postContent = '';
-      ue.ready(function () {
-        postContent = ue.getContent();
-        $scope.document_content = postContent;
-
-      });
-
-
-      documentWriteService.get(
-        $scope.document_title,
-        $scope.document_from,
-        $scope.document_display.name,
-        $scope.document_hot.name,
-        $scope.document_recommend.name,
-        $scope.document_tags,
-        $scope.postImg,
-        $scope.document_category,
-        $scope.document_keywords,
-        $scope.document_abstract,
-        $scope.document_type.name,
-        $scope.document_view,
-        $scope.document_author,
-        $scope.document_content).then(function success(res) {
-          if(res.data.code===1){
-
-          }
-
-      }, function error(res) {
-
-      });
-    }
-
-
-  };
-
-
   $scope.postImg = '/upload/images/defaultlogo.png';
 
   $('#post_img').uploadify({

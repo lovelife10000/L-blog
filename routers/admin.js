@@ -567,11 +567,29 @@ router.get('/manage/document_manage/categories_manage/get', function (req, res, 
  * 写文档
  * */
 router.get('/manage/document_manage/write', function (req, res, next) {
-  res.render('admin/document_write', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.DOCUMENT_WRITE[1]));
+  res.render('admin/document_write', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.DOCUMENT_WRITE[1]));
 });
+/*
+ * 写文档
+ * */
 router.post('/manage/document_manage/write', function (req, res, next) {
   var document = new Document(req.body);
-  document.save();
+  document.save(function (error, product, numAffected) {
+    if(error){
+      return error;
+    }
+    if(numAffected===1){
+      res.json({
+        code:1,
+        msg:'保存成功'
+      });
+    }else {
+      res.json({
+        code:0,
+        msg:'保存失败'
+      });
+    }
+  });
 });
 /*
  * 已发布
@@ -625,6 +643,27 @@ router.post('/manage/document_manage/remove_one_document', function (req, res, n
       });
     }
   });
+
+});
+/*
+ * 编辑单篇文档
+ * */
+router.get('/manage/document_manage/edit/:id', function (req, res, next) {
+
+  res.render('admin/document_edit', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.DOCUMENT_EDIT[1]));
+
+
+});
+router.post('/manage/document_manage/edit', function (req, res, next) {
+
+  Document.find({
+    _id:req.body.id
+  }).then(function (info) {
+    console.log(info);
+    res.json(info);
+  });
+
+
 
 });
 /*

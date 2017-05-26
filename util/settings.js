@@ -38,6 +38,7 @@ module.exports = {
   CATEGORIES_ALL: ['categories_all', '所有分类'],
   ARTICLES_CATEGORY_ADD: ['CategoriesAdd', '添加分类'],
   DOCUMENT_WRITE: ['documentWrite', '写文档'],
+  DOCUMENT_EDIT: ['documentEdit', '编辑文档'],
   PUBLISHED: ['published', '已发布'],
   WAIT_FOR_VERIFY: ['waitForVerify', '待审核'],
   NO_ACCESS: ['noAccess', '未通过'],

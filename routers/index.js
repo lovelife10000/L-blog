@@ -15,9 +15,6 @@ var theme = 'woshipm';
  * 首页
  * */
 router.get('/', function (req, res, next) {
-  // Post.findByHot(1,function (info) {
-  //   console.log(info);
-  // });
 
 
   /*
@@ -37,7 +34,7 @@ router.get('/', function (req, res, next) {
     var pageList = req.query.page || 1;//当前页
     var limitList = 2;//每页显示的条数
     var skipList = (pageList - 1) * limitList;//忽略掉的条数
-    Post.find().limit(limitList).skip(skipList).then(function (posts) {
+    Document.find().limit(limitList).skip(skipList).then(function (posts) {
       var documentAll = posts;
       req.session.documentAll = documentAll;
 
@@ -129,22 +126,21 @@ router.get('/content/:title', function (req, res, next) {
   var title = req.params.title;
   var categoriesData = Category.find();
   var documentByTitleData = Document.find({document_title: title});
-  
-  Promise.all([categoriesData,documentByTitleData]).then(function (result) {
+
+  Promise.all([categoriesData, documentByTitleData]).then(function (result) {
 
     if (!result[1]) {
       res.render('index/' + theme + '/templates/404');
     } else {
       res.render('index/' + theme + '/templates/content', {
         theme: theme,
-        categories:result[0],
+        categories: result[0],
         singleDocument: result[1],
       });
     }
 
 
   });
-
 
 
 });
@@ -169,17 +165,16 @@ router.get('/list/:cate', function (req, res, next) {
   var categoriesData = Category.find();
   var documentAllData = Document.find();
 
-  Promise.all([categoriesData,documentAllData]).then(function (result) {
+  Promise.all([categoriesData, documentAllData]).then(function (result) {
     var categories = system.categoriesFormat(result[0]);
     res.render('index/' + theme + '/templates/list', {
       theme: theme,
-      categories:categories,
-      documentAll:result[1],
+      categories: categories,
+      documentAll: result[1],
     });
 
 
   });
-
 
 
 });
