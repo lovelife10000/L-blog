@@ -586,9 +586,7 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
    * */
   $scope.removeOneDocumentCommit = function (doc) {
 
-    $scope.document_display = {
-      name: '1',
-    };
+
     console.log($scope.document_display.name);
     if ($scope.document_display.name == 1) {
       documentAllService.putIntoRecycle(doc).then(function success(res) {
@@ -602,7 +600,8 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
     } else {
       documentAllService.removeOneDocument(doc).then(function success(res) {
         if (res.data.code === 1) {
-
+          $('#remove_one_document_modal').modal('hide');
+          $scope.getPage();
         }
       }, function error(res) {
 

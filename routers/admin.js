@@ -567,7 +567,7 @@ router.get('/manage/document_manage/categories_manage/get', function (req, res, 
  * 写文档
  * */
 router.get('/manage/document_manage/write', function (req, res, next) {
-  res.render('admin/document_write', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+  res.render('admin/document_write', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.DOCUMENT_WRITE[1]));
 });
 router.post('/manage/document_manage/write', function (req, res, next) {
   var document = new Document(req.body);
@@ -577,12 +577,6 @@ router.post('/manage/document_manage/write', function (req, res, next) {
  * 所有文档
  * */
 router.get('/manage/document_manage/all_document', function (req, res, next) {
-
-
-
-
-
-
     res.render('admin/document_all', {
       userInfo: req.session.userInfo,
       blogName: settings.BLOG_NAME,
@@ -590,10 +584,6 @@ router.get('/manage/document_manage/all_document', function (req, res, next) {
       item: settings.ALL_DOCUMENT[1],
 
     });
-
-
-
-
 });
 /*
  * 根据每页显示数、当前页数来获取显示的文档数据
@@ -615,7 +605,7 @@ router.post('/manage/document_manage/get_yes_display_document', function (req, r
 
 
     var allPage = Math.ceil(result[0] / limit);
-    console.log(allPage);
+
     res.json({
       documentCountNum:result[0],
       allPage: allPage,
@@ -633,7 +623,8 @@ router.post('/manage/document_manage/remove_one_document', function (req, res, n
   Document.remove({
     _id: req.body.data._id,
   }).then(function (info) {
-    if (info.ok === 1) {
+    console.log(info.result);
+    if (info.result.ok === 1) {
       res.json({
         code: 1,
         msg: '删除成功'
