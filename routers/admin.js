@@ -790,7 +790,7 @@ router.post('/manage/document_manage/put_into_recycle', function (req, res, next
  * 媒体管理
  * */
 router.get('/manage/files_manage/media_manage', function (req, res, next) {
-  res.render('admin/media_manage', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+  res.render('admin/media_manage', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.FILES_MANAGE[1], settings.MEDIA_MANAGE[1]));
 });
 /*
  * 文件备份
