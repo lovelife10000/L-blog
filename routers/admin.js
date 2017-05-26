@@ -664,6 +664,36 @@ router.get('/manage/document_manage/recycle', function (req, res, next) {
   res.render('admin/recycle', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.RECYCLE[1]));
 });
 /*
+* 获取回收站文档数据
+* */
+router.post('/manage/document_manage/get_no_display_document', function (req, res, next) {
+  var limit = Number(req.body.limit);
+  var currentPage = req.body.page || 1;
+  var skip = (currentPage - 1) * limit;
+
+
+  var documentCount = Document.count({document_display: 0});
+
+
+  var documentNoDisplayByLimitAndPage = Document.find({
+    document_display: 0,
+  }).limit(limit).skip(skip);
+
+  Promise.all([documentCount, documentNoDisplayByLimitAndPage]).then(function (result) {
+
+
+    var allPage = Math.ceil(result[0] / limit);
+
+    res.json({
+      documentCountNum:result[0],
+      allPage: allPage,
+      documentNoDisplayByLimitAndPage: result[1],
+    });
+
+  });
+
+});
+/*
  * 放入回收站
  * */
 router.post('/manage/document_manage/put_into_recycle', function (req, res, next) {
