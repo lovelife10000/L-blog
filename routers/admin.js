@@ -579,41 +579,47 @@ router.post('/manage/document_manage/write', function (req, res, next) {
 router.get('/manage/document_manage/all_document', function (req, res, next) {
 
 
-  var documentCount = Document.count();
 
-  Promise.all([documentCount]).then(function (result) {
-    // var ms = moment(date).format('YYYYMMDDHHmmss').toString();
+
+
 
     res.render('admin/document_all', {
       userInfo: req.session.userInfo,
       blogName: settings.BLOG_NAME,
       category: settings.DOCUMENT_MANAGE[1],
       item: settings.ALL_DOCUMENT[1],
-      documentCount: result[0],
+
     });
 
 
-  });
 
 
 });
-router.post('/manage/document_manage/get_page_document', function (req, res, next) {
+/*
+ * 根据每页显示数、当前页数来获取显示的文档数据
+ * */
+router.post('/manage/document_manage/get_yes_display_document', function (req, res, next) {
   var limit = Number(req.body.limit);
   var currentPage = req.body.page || 1;
   var skip = (currentPage - 1) * limit;
 
-  var allDocument = Document.find();
-  var documentCount = Document.count();
+
+  var documentCount = Document.count({document_display: 1});
 
 
-  var documentByLimitAndPage = Document.find().limit(limit).skip(skip);
+  var documentYesDisplayByLimitAndPage = Document.find({
+    document_display: 1,
+  }).limit(limit).skip(skip);
 
-  Promise.all([allDocument, documentCount, documentByLimitAndPage]).then(function (result) {
+  Promise.all([documentCount, documentYesDisplayByLimitAndPage]).then(function (result) {
 
-    var allPage = Math.ceil(result[1] / limit);
+
+    var allPage = Math.ceil(result[0] / limit);
+    console.log(allPage);
     res.json({
+      documentCountNum:result[0],
       allPage: allPage,
-      documentByLimitAndPage: result[2],
+      documentYesDisplayByLimitAndPage: result[1],
     });
 
   });
@@ -621,16 +627,16 @@ router.post('/manage/document_manage/get_page_document', function (req, res, nex
 
 });
 /*
-* 删除单篇文档
-* */
+ * 删除单篇文档
+ * */
 router.post('/manage/document_manage/remove_one_document', function (req, res, next) {
   Document.remove({
-    _id:req.body.data._id,
+    _id: req.body.data._id,
   }).then(function (info) {
-    if(info.ok===1){
+    if (info.ok === 1) {
       res.json({
-        code:1,
-        msg:'删除成功'
+        code: 1,
+        msg: '删除成功'
       });
     }
   });
@@ -664,7 +670,25 @@ router.get('/manage/document_manage/draft', function (req, res, next) {
  * 回收站
  * */
 router.get('/manage/document_manage/recycle', function (req, res, next) {
-  res.render('admin/recycle', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGEE[1], settings.ARTICLES_ADD[1]));
+  res.render('admin/recycle', system.renderItem(req.session.userInfo, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.RECYCLE[1]));
+});
+/*
+ * 放入回收站
+ * */
+router.post('/manage/document_manage/put_into_recycle', function (req, res, next) {
+  Document.update({
+    _id: req.body.data._id,
+  }, {
+    document_display: 0,
+  }).then(function (info) {
+    if (info.ok === 1) {
+      res.json({
+        code: 1,
+        msg: '放入回收站成功'
+      });
+    }
+
+  });
 });
 /*
  * 媒体管理

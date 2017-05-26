@@ -38,7 +38,8 @@ module.exports={
   ALL_DOCUMENT:['allDocument','所有文档'],
   CATEGORIES_ALL:['categories_all','所有分类'],
   ARTICLES_CATEGORY_ADD:['CategoriesAdd','添加分类'],
-  ARTICLES_ADD:['articles_add','写文档'],
+  DOCUMENT_WRITE:['document_write','写文档'],
+  RECYCLE:['recycle','回收站'],
 
 
 
