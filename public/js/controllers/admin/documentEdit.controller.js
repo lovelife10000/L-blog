@@ -25,7 +25,9 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
     $scope.document_tags = $scope.data.document_tags;
     $scope.document_keywords = $scope.data.document_keywords;
     $scope.document_abstract = $scope.data.document_abstract;
-    $scope.document_type = $scope.data.document_type;
+    $scope.document_type = {
+      name: String($scope.data.document_type)
+    };
     $scope.document_view = $scope.data.document_view;
     $scope.document_author = $scope.data.document_author;
 
@@ -43,8 +45,8 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
       var data = res.data;
       var dataFormat = [];
       /*
-      * 格式化分类数据
-      * */
+       * 格式化分类数据
+       * */
       for (var j = 0; j < data.length; j++) {
         if (data[j].cate_parent === '') {
           dataFormat.push({
@@ -80,10 +82,10 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
        * */
       $scope.cateOptions = dataFormat;
       console.log($scope.cateOptions);
-var id=1;
-      for(var i=0;i<dataFormat.length;i++){
-        if(dataFormat[i].cate_slug==$scope.data.document_category){
-          id=i;
+      var id = 1;
+      for (var i = 0; i < dataFormat.length; i++) {
+        if (dataFormat[i].cate_slug == $scope.data.document_category) {
+          id = i;
           console.log(id);
           break;
         }
@@ -97,19 +99,20 @@ var id=1;
 
   });
 
+$scope.updateDocument=function () {
+  /*
+   * 获取编辑器内容
+   * */
 
-  $scope.document_display = {
-    name: '1'
-  };
-  $scope.document_hot = {
-    name: '1'
-  };
-  $scope.document_type = {
-    name: 'post'
-  };
-  $scope.document_recommend = {
-    name: '0'
-  };
+  ue.ready(function () {
+    $scope.document_content = ue.getContent();
+  });
+  documentEditService.update(absurlFormat, $scope.document_title, $scope.document_from, $scope.document_display.name, $scope.document_hot.name, $scope.document_recommend.name, $scope.document_tags,$scope.document_category, $scope.document_keywords, $scope.document_abstract, $scope.document_type.name, $scope.document_view, $scope.document_author,$scope.document_content).then(function success(res) {
+
+  },function error(res) {
+
+  });
+};
   $scope.postImg = '/upload/images/defaultlogo.png';
 
   $('#post_img').uploadify({

@@ -659,7 +659,36 @@ router.post('/manage/document_manage/edit', function (req, res, next) {
   Document.find({
     _id:req.body.id
   }).then(function (info) {
-    console.log(info);
+
+    res.json(info);
+  });
+
+
+
+});
+/*
+* 更新文档
+* */
+router.post('/manage/document_manage/update', function (req, res, next) {
+
+  Document.update({
+    _id:req.body.id
+  },{
+    document_title: req.body.title,
+    document_from: req.body.from,
+    document_display: req.body.display,
+    document_hot: req.body.hot,
+    document_recommend: req.body.recommend,
+    document_tags: req.body.tags,
+    document_category: req.body.category,
+    document_keywords: req.body.keywords,
+    document_abstract: req.body.abstract,
+    document_type: req.body.type,
+    document_view: req.body.view,
+    document_author: req.body.author,
+    document_content:req.body.content,
+  }).then(function (info) {
+
     res.json(info);
   });
 
