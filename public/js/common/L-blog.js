@@ -911,88 +911,102 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
 /**
  * Created by v_lljunli on 2017/4/27.
  */
-app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categoriesAllService','$location', function ($scope, $http, documentEditService, categoriesAllService,$location) {
+app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categoriesAllService', '$location', function ($scope, $http, documentEditService, categoriesAllService, $location) {
   var absurl = $location.absUrl();//获取当前链接的url
-  var absurlFormat=/admin\/manage\/document_manage\/edit\/[a-z0-9]{24}/.exec(absurl)[0].slice(34,58);//获取_id
+  var absurlFormat = /admin\/manage\/document_manage\/edit\/[a-z0-9]{24}/.exec(absurl)[0].slice(34, 58);//获取_id
 
-
+  /*
+   * 获取所编辑的文档id，并设置各字段内容
+   * */
   documentEditService.postEditId(absurlFormat).then(function success(res) {
-    $scope.data=res.data[0];
+    $scope.data = res.data[0];
     console.log($scope.data);
-    $scope.document_title=$scope.data.document_title;
-    $scope.document_from=$scope.data.document_from;
-    $scope.document_display={
-      name:String($scope.data.document_display)
+    $scope.document_title = $scope.data.document_title;
+    $scope.document_from = $scope.data.document_from;
+    $scope.document_display = {
+      name: String($scope.data.document_display)
     };
-    $scope.document_hot={
-      name:String($scope.data.document_hot)
+    $scope.document_hot = {
+      name: String($scope.data.document_hot)
     };
-    $scope.document_recommend={
-      name:String($scope.data.document_recommend)
+    $scope.document_recommend = {
+      name: String($scope.data.document_recommend)
     };
-    $scope.document_tags=$scope.data.document_tags;
-    $scope.document_keywords=$scope.data.document_keywords;
-    $scope.document_abstract=$scope.data.document_abstract;
-    $scope.document_type=$scope.data.document_type;
-    $scope.document_view=$scope.data.document_view;
-    $scope.document_author=$scope.data.document_author;
+    $scope.document_tags = $scope.data.document_tags;
+    $scope.document_keywords = $scope.data.document_keywords;
+    $scope.document_abstract = $scope.data.document_abstract;
+    $scope.document_type = $scope.data.document_type;
+    $scope.document_view = $scope.data.document_view;
+    $scope.document_author = $scope.data.document_author;
 
     /*
-    * 设置编辑器内容
-    * */
+     * 设置编辑器内容
+     * */
     ue.ready(function () {
-      ue.setContent($scope.data.document_content,false);
+      ue.setContent($scope.data.document_content, false);
     });
 
-  },function error(res) {
-
-  });
-
-
-  $scope.document_title='1';
-
-  categoriesAllService.getCategories().then(function success(res) {
-    var data = res.data;
-    var dataFormat = [];
-
-    for (var j = 0; j < data.length; j++) {
-      if (data[j].cate_parent === '') {
-        dataFormat.push({
-          name: data[j].cate_name,
-          id: data[j].cate_slug,
-          cate_name: data[j].cate_name,
-          cate_slug: data[j].cate_slug,
-          cate_parent: data[j].cate_parent,
-        });
-      }
-
-    }
-
-    for (var m = 0; m < dataFormat.length; m++) {
-      for (var z = 0; z < data.length; z++) {
-
-        if (dataFormat[m].id === data[z].cate_parent) {
-          dataFormat.splice(m + 1, 0, {
-            name: data[z].cate_name,
-            id: data[z].cate_slug,
-            cate_name: data[z].cate_name,
-            cate_slug: data[z].cate_slug,
-            cate_parent: data[z].cate_parent,
+    /*
+     * 获取分类，并设置分类
+     * */
+    categoriesAllService.getCategories().then(function success(res) {
+      var data = res.data;
+      var dataFormat = [];
+      /*
+      * 格式化分类数据
+      * */
+      for (var j = 0; j < data.length; j++) {
+        if (data[j].cate_parent === '') {
+          dataFormat.push({
+            name: data[j].cate_name,
+            id: data[j].cate_slug,
+            cate_name: data[j].cate_name,
+            cate_slug: data[j].cate_slug,
+            cate_parent: data[j].cate_parent,
           });
-
         }
 
       }
-    }
 
-    /*
-     * 设置默认值
-     * */
-    $scope.cateOptions = dataFormat;
-    $scope.document_category = $scope.cateOptions[1].id;
+      for (var m = 0; m < dataFormat.length; m++) {
+        for (var z = 0; z < data.length; z++) {
+
+          if (dataFormat[m].id === data[z].cate_parent) {
+            dataFormat.splice(m + 1, 0, {
+              name: data[z].cate_name,
+              id: data[z].cate_slug,
+              cate_name: data[z].cate_name,
+              cate_slug: data[z].cate_slug,
+              cate_parent: data[z].cate_parent,
+            });
+
+          }
+
+        }
+      }
+
+      /*
+       * 设置分类默认值
+       * */
+      $scope.cateOptions = dataFormat;
+      console.log($scope.cateOptions);
+var id=1;
+      for(var i=0;i<dataFormat.length;i++){
+        if(dataFormat[i].cate_slug==$scope.data.document_category){
+          id=i;
+          console.log(id);
+          break;
+        }
+      }
+      $scope.document_category = $scope.cateOptions[id].id;
+    }, function error(res) {
+
+    });
+
   }, function error(res) {
 
   });
+
 
   $scope.document_display = {
     name: '1'
