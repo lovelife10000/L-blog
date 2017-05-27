@@ -933,15 +933,15 @@ app.controller('documentAll', ['$scope', '$http', 'documentAllService', function
  * Created by v_lljunli on 2017/4/27.
  */
 app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categoriesAllService', '$location', function ($scope, $http, documentEditService, categoriesAllService, $location) {
-  var absurl = $location.absUrl();//获取当前链接的url
-  var absurlFormat = /admin\/manage\/document_manage\/edit\/[a-z0-9]{24}/.exec(absurl)[0].slice(34, 58);//获取_id
+  var absUrl = $location.absUrl();//获取当前链接的url
+  var absUrlFormat = /admin\/manage\/document_manage\/edit\/[a-z0-9]{24}/.exec(absUrl)[0].slice(34, 58);//获取_id
 
   /*
    * 获取所编辑的文档id，并设置各字段内容
    * */
-  documentEditService.postEditId(absurlFormat).then(function success(res) {
+  documentEditService.postEditId(absUrlFormat).then(function success(res) {
     $scope.data = res.data[0];
-    console.log($scope.data);
+
     $scope.document_title = $scope.data.document_title;
     $scope.document_from = $scope.data.document_from;
     $scope.document_display = {
@@ -954,6 +954,8 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
       name: String($scope.data.document_recommend)
     };
     $scope.document_tags = $scope.data.document_tags;
+    $scope.documentImg = $scope.data.document_img;
+    console.log($scope.documentImg);
     $scope.document_keywords = $scope.data.document_keywords;
     $scope.document_abstract = $scope.data.document_abstract;
     $scope.document_type = {
@@ -1012,12 +1014,12 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
        * 设置分类默认值
        * */
       $scope.cateOptions = dataFormat;
-      console.log($scope.cateOptions);
+
       var id = 1;
       for (var i = 0; i < dataFormat.length; i++) {
         if (dataFormat[i].cate_slug == $scope.data.document_category) {
           id = i;
-          console.log(id);
+
           break;
         }
       }
@@ -1030,26 +1032,31 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
 
   });
 
-$scope.updateDocument=function () {
+  $scope.updateDocument = function () {
+    /*
+     * 获取编辑器内容
+     * */
+
+    ue.ready(function () {
+      $scope.document_content = ue.getContent();
+    });
+    documentEditService.update(absUrlFormat, $scope.document_title, $scope.document_from, $scope.document_display.name, $scope.document_hot.name, $scope.document_recommend.name, $scope.document_tags, $scope.document_category, $scope.document_keywords, $scope.document_abstract, $scope.document_type.name, $scope.document_view, $scope.document_author, $scope.document_content).then(function success(res) {
+
+    }, function error(res) {
+
+    });
+  };
+
   /*
-   * 获取编辑器内容
-   * */
+  * 缩略图上传配置
+  * */
 
-  ue.ready(function () {
-    $scope.document_content = ue.getContent();
-  });
-  documentEditService.update(absurlFormat, $scope.document_title, $scope.document_from, $scope.document_display.name, $scope.document_hot.name, $scope.document_recommend.name, $scope.document_tags,$scope.document_category, $scope.document_keywords, $scope.document_abstract, $scope.document_type.name, $scope.document_view, $scope.document_author,$scope.document_content).then(function success(res) {
 
-  },function error(res) {
+  $('#document_img').uploadify({
 
-  });
-};
-  $scope.postImg = '/upload/images/defaultlogo.png';
-
-  $('#post_img').uploadify({
 
     'swf': '/plugins/uploadify/uploadify.swf',//指定swf文件
-    'uploader': '/admin/manage/document_manage/upload' + '?postTitle=' + 'post_title' + '&type=' + 'images' + '&key=' + 'post_img',//后台处理的页面
+    'uploader': '/admin/manage/document_manage/upload' + '?documentTitle=' + 'document_title' + '&type=' + 'images' + '&key=' + 'document_img'+'&id='+absUrlFormat,//后台处理的页面
     'buttonText': '上传图片',//按钮显示的文字
     'buttonClass': 'uploadify-btn-default',//按钮显示的文字
     'width': 100,//显示的高度和宽度，默认 height 30；width 120
@@ -1061,8 +1068,8 @@ $scope.updateDocument=function () {
     'multi': false,//设置为true将允许多文件上传
 
     'onUploadSuccess': function (file, data, response) {//上传成功的回调
-      $("#post_img_preview").attr("src", data);
-      $scope.postImg = data;
+      //$("#document_img_preview").attr("src", data);
+      $scope.documentImg = data;
 
     },
     //

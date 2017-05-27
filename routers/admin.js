@@ -575,18 +575,18 @@ router.get('/manage/document_manage/write', function (req, res, next) {
 router.post('/manage/document_manage/write', function (req, res, next) {
   var document = new Document(req.body);
   document.save(function (error, product, numAffected) {
-    if(error){
+    if (error) {
       return error;
     }
-    if(numAffected===1){
+    if (numAffected === 1) {
       res.json({
-        code:1,
-        msg:'保存成功'
+        code: 1,
+        msg: '保存成功'
       });
-    }else {
+    } else {
       res.json({
-        code:0,
-        msg:'保存失败'
+        code: 0,
+        msg: '保存失败'
       });
     }
   });
@@ -657,41 +657,40 @@ router.get('/manage/document_manage/edit/:id', function (req, res, next) {
 router.post('/manage/document_manage/edit', function (req, res, next) {
 
   Document.find({
-    _id:req.body.id
+    _id: req.body.id
   }).then(function (info) {
 
     res.json(info);
   });
 
 
-
 });
 /*
-* 更新文档
-* */
+ * 更新文档
+ * */
 router.post('/manage/document_manage/update', function (req, res, next) {
 
   Document.update({
-    _id:req.body.id
-  },{
+    _id: req.body.id
+  }, {
     document_title: req.body.title,
     document_from: req.body.from,
     document_display: req.body.display,
     document_hot: req.body.hot,
     document_recommend: req.body.recommend,
     document_tags: req.body.tags,
+    document_img: req.body.img,
     document_category: req.body.category,
     document_keywords: req.body.keywords,
     document_abstract: req.body.abstract,
     document_type: req.body.type,
     document_view: req.body.view,
     document_author: req.body.author,
-    document_content:req.body.content,
+    document_content: req.body.content,
   }).then(function (info) {
 
     res.json(info);
   });
-
 
 
 });
@@ -1070,9 +1069,10 @@ router.post('/manage/document_manage/upload', function (req, res, next) {
   var params = url.parse(req.url, true, false);//获取参数
   var fileType = params.query.type;//获取文件类型
   var fileKey = params.query.key;//获取上传的文件的用途
+  var id = params.query.id;
 
 
-  var updatePath = "public/upload/images/";//存放目录
+  var updatePath = "public/upload/images/document/";//存放目录
   // var smallImgPath = "public/upload/smallimages/";//存放目录
 
 
@@ -1113,12 +1113,14 @@ router.post('/manage/document_manage/upload', function (req, res, next) {
 
     newFileName = typeKey + ms + "." + thisType;
 
+
     if (fileType == 'images') {
       if (realFileType.fileType == 'jpg' || realFileType.fileType == 'jpeg' || realFileType.fileType == 'png' || realFileType.fileType == 'gif') {
 
         /*
          * 重命名文件
          * */
+
         fs.rename(file.path, updatePath + newFileName, function (error) {
 
         });
@@ -1134,7 +1136,15 @@ router.post('/manage/document_manage/upload', function (req, res, next) {
   });
 
   form.on('end', function () {//解析完毕
-    res.end('/upload/images/' + newFileName);
+
+    Document.update({
+      _id: id,
+    }, {
+      document_img: '/upload/images/document/' + newFileName,
+    }).then(function (info) {
+
+    });
+    res.end('/upload/images/document/' + newFileName);
   });
 
   form.parse(req, function (error, fields, files) {//解析request对象
