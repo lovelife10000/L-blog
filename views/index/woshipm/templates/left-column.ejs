@@ -4,42 +4,23 @@
             <div class="bd">
                 <div class="tempWrap" style="overflow:hidden; position:relative; width:670px">
                     <ul style="width: 2010px; left: 0px; position: relative; overflow: hidden; padding: 0px; margin: 0px;">
+                        <% documentRecommend.forEach(function (doc) { %>
                         <li style="float: left; width: 670px;">
                             <div class="imgs">
-                                <a href="http://www.woshipm.com/pmd/664735.html" target="_blank" title="产品人孙博：五年，从高级产品经理到产品专家">
-                                    <img width="670" height="320" src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/2HdqlfEYKmchEifLGjJF.jpg">
+                                <a href="http://www.woshipm.com/pmd/664735.html" target="_blank"
+                                   title="<%= doc.document_title %>">
+                                    <img width="670" height="320" src="<%= doc.document_img %>">
                                 </a>
                             </div>
                             <div class="text">
-                                <h3><a href="http://www.woshipm.com/pmd/664735.html" target="_blank" title="产品人孙博：五年，从高级产品经理到产品专家">产品人孙博：五年，从高级产品经理到产品专家</a>
+                                <h3><a href="http://www.woshipm.com/pmd/664735.html" target="_blank"
+                                       title="<%= doc.document_title %>"><%= doc.document_title %></a>
                                 </h3>
                             </div>
 
                         </li>
-                        <li style="float: left; width: 670px;">
-                            <div class="imgs">
-                                <a href="http://www.woshipm.com/operate/658624.html" target="_blank" title="网文形态进化：解读四种新式阅读形式">
-                                    <img width="670" height="320" src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/lnHsrcUJWU070Wj74GZ0.jpg">
-                                </a>
-                            </div>
-                            <div class="text">
-                                <h3><a href="http://www.woshipm.com/operate/658624.html" target="_blank" title="网文形态进化：解读四种新式阅读形式">网文形态进化：解读四种新式阅读形式</a>
-                                </h3>
-                            </div>
+                        <% }) %>
 
-                        </li>
-                        <li style="float: left; width: 670px;">
-                            <div class="imgs">
-                                <a href="http://www.woshipm.com/operate/659324.html" target="_blank" title="互联网保险：微信车险理赔设计和运营">
-                                    <img width="670" height="320" src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/WTY70jPUUvSPmdQfYR34.jpg">
-                                </a>
-                            </div>
-                            <div class="text">
-                                <h3><a href="http://www.woshipm.com/operate/659324.html" target="_blank" title="互联网保险：微信车险理赔设计和运营">互联网保险：微信车险理赔设计和运营</a>
-                                </h3>
-                            </div>
-
-                        </li>
                     </ul>
                 </div>
                 <div class="prev"><span class="iconfont icon-zuoqiehuan"></span></div>
@@ -56,21 +37,16 @@
             </div>
             <div class="hd smallScroll">
                 <ul class="">
+                    <% documentRecommendAndHot.forEach(function (doc) { %>
                     <li>
-                        <a href="http://www.woshipm.com/pmd/662334.html" target="_blank" title="电商产品本质是什么？"><img
-                                    src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/RlfsuaCvv7vKl29al2HX.jpg"></a>
-                        <h3><a href="http://www.woshipm.com/pmd/662334.html" target="_blank" title="电商产品本质是什么？">电商产品本质是什么？</a>
+                        <a href="http://www.woshipm.com/pmd/662334.html" target="_blank"
+                           title="<%= doc.document_title %>"><img
+                                    src="<%= doc.document_img %>"></a>
+                        <h3><a href="http://www.woshipm.com/pmd/662334.html" target="_blank"
+                               title="<%= doc.document_title %>"><%= doc.document_title %></a>
                         </h3></li>
-                    <li>
-                        <a href="http://www.woshipm.com/pmd/658181.html" target="_blank" title="P2P应该知道的基础知识"><img
-                                    src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/9aHXLr4NbXpNftyFsM7e.jpg"></a>
-                        <h3><a href="http://www.woshipm.com/pmd/658181.html" target="_blank"
-                               title="P2P应该知道的基础知识">P2P应该知道的基础知识</a></h3></li>
-                    <li>
-                        <a href="http://www.woshipm.com/operate/662193.html" target="_blank" title="没钱没资源运营如何破局？"><img
-                                    src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/qTTxexuILvjlInO9PXPb.jpg"></a>
-                        <h3><a href="http://www.woshipm.com/operate/662193.html" target="_blank" title="没钱没资源运营如何破局？">没钱没资源运营如何破局？</a>
-                        </h3></li>
+                    <% }) %>
+
                 </ul>
             </div>
         </div>
@@ -81,17 +57,18 @@
                                                                         target="_blank">快报</a></span></nav>
     <section class="bigfa-ajax-wrapper">
         <div class="blockGroup homeGroup">
-            <% documentAll.forEach(function (doc) {%>
+            <% documentByLimitCurrentPage.forEach(function (doc) { %>
             <article class="u-clearfix stream-list-item sticky" data-id="663947">
                 <div class="stream-list-image">
-                    <a href="/content/<%= doc.post_title %>" target="_blank" title="<%= doc.post_title %>"><img
-                                src="<%= doc.post_img %>" width="202" height="145"></a>
-                    <div class="stream-list-category"><a href="http://www.woshipm.com/category/chuangye" rel="category tag"><%= doc.post_category %></a>
+                    <a href="/content/<%= doc.document_title %>" target="_blank" title="<%= doc.document_title %>"><img
+                                src="<%= doc.document_img %>" width="202" height="145"></a>
+                    <div class="stream-list-category"><a href="http://www.woshipm.com/category/chuangye"
+                                                         rel="category tag"><%= doc.document_category %></a>
                     </div>
                 </div>
                 <div class="stream-list-content">
-                    <h2 class="stream-list-title"><a target="_blank" href="/content/<%= doc.post_title %>"
-                                                     title="<%= doc.post_title %>"><%= doc.post_title %></a><span
+                    <h2 class="stream-list-title"><a target="_blank" href="/content/<%= doc.document_title %>"
+                                                     title="<%= doc.document_title %>"><%= doc.document_title %></a><span
                                 class="iconfont icon-hot"></span></h2>
                     <div class="stream-list-meta">
                 <span class="avatar-inline"><a target="_blank" href="http://www.woshipm.com/u/31217"><img
@@ -99,15 +76,15 @@
                                 class="avatar"></a></span><span class="author" data-id="31217"><a target="_blank"
                                                                                                   href="http://www.woshipm.com/u/31217">辩手李慕阳</a></span>
                         <span class="dot"></span>
-                        <time datetime="2017-05-16T09:34:00+08:00">2017/05/16</time>
+                        <time datetime="2017-05-16T09:34:00+08:00"><%= doc.document_publish_date %></time>
                     </div>
                     <div class="stream-list-snipper">
-                        <%= doc.post_abstract %>
+                        <%= doc.document_abstract %>
                     </div>
                     <footer class="stream-list-footer">
-                        <span class="post-views"><span class="iconfont icon-view"></span>阅读 5.7k</span>
-                        <span class="post-marks"><span class="iconfont icon-heart"></span>收藏 32</span>
-                        <span class="post-likes"><span class="iconfont icon-zan"></span>被赞 14</span>
+                        <span class="post-views"><span class="iconfont icon-view"></span>阅读 <%= doc.document_view %></span>
+                        <span class="post-marks"><span class="iconfont icon-heart"></span>收藏 <%= doc.document_view %></span>
+                        <span class="post-likes"><span class="iconfont icon-zan"></span>被赞<%= doc.document_view %></span>
                     </footer>
                 </div>
             </article>
@@ -166,7 +143,8 @@
             </article>
             <article class="stream-list-item">
                 <div class="stream-list-image"><a href="http://www.woshipm.com/active/666236.html" target="_blank"><img
-                                src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/202x145(10)" width="202" height="145"></a></div>
+                                src="./人人都是产品经理 _ 产品经理、产品爱好者学习交流平台_files/202x145(10)" width="202" height="145"></a>
+                </div>
                 <div class="stream-list-content"><h2 class="stream-list-title"><a target="_blank"
                                                                                   href="http://www.woshipm.com/active/666236.html">2017UBDC：从DI到应用，激活数据价值</a>
                     </h2>

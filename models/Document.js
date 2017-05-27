@@ -18,7 +18,7 @@ var DocumentSchema = Schema({
   document_view: Number,
   document_collection: Number,
   document_comment_num: Number,
-  document_upvote: Number,
+  document_like: Number,
   document_display: Number,
   document_author: String,
   document_tags: String,
