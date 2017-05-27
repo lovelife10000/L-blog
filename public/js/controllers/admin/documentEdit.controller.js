@@ -11,13 +11,28 @@ app.controller('documentEdit', ['$scope', '$http', 'documentEditService', 'categ
     console.log($scope.data);
     $scope.document_title=$scope.data.document_title;
     $scope.document_from=$scope.data.document_from;
-    $scope.document_display=$scope.data.document_display;
-    $scope.document_hot=$scope.data.document_hot;
-    $scope.document_recommend=$scope.data.document_recommend;
+    $scope.document_display={
+      name:String($scope.data.document_display)
+    };
+    $scope.document_hot={
+      name:String($scope.data.document_hot)
+    };
+    $scope.document_recommend={
+      name:String($scope.data.document_recommend)
+    };
     $scope.document_tags=$scope.data.document_tags;
     $scope.document_keywords=$scope.data.document_keywords;
     $scope.document_abstract=$scope.data.document_abstract;
     $scope.document_type=$scope.data.document_type;
+    $scope.document_view=$scope.data.document_view;
+    $scope.document_author=$scope.data.document_author;
+
+    /*
+    * 设置编辑器内容
+    * */
+    ue.ready(function () {
+      ue.setContent($scope.data.document_content,false);
+    });
 
   },function error(res) {
 

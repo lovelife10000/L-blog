@@ -66,7 +66,7 @@
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="document_display" ng-model="document_display.name" id="" value="1" ng-checked="true">
+                                            <input type="radio" name="document_display" ng-model="document_display.name" id="" value="1" >
                                             显示
                                         </label>
                                         <label>
@@ -170,7 +170,7 @@
                                  ng-class="{'has-error':myForm.document_keywords.$invalid && !myForm.document_keywords.$pristine,'has-success':myForm.document_keywords.$valid && !myForm.document_keywords.$pristine}">
                                 <label class="col-sm-2 control-label">关键字</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="document_keywords" ng-model="document_keywords"
+                                    <input type="text" name="document_keywords" ng-model="document_keywords"
                                            class="form-control"
                                            id="" placeholder="请输入关键字" required>
                                     <span class="help-block ng-hide"
@@ -187,7 +187,7 @@
                                  ng-class="{'has-error':myForm.document_abstract.$invalid && !myForm.document_abstract.$pristine,'has-success':myForm.document_abstract.$valid && !myForm.document_abstract.$pristine}">
                                 <label class="col-sm-2 control-label">内容摘要</label>
                                 <div class="col-sm-10">
-                                    <input type="password" name="document_abstract" ng-model="document_abstract"
+                                    <input type="text" name="document_abstract" ng-model="document_abstract"
                                            class="form-control"
                                            id="" placeholder="请输入内容摘要" required>
                                     <span class="help-block ng-hide"
