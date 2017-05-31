@@ -914,10 +914,10 @@ router.get('/manage/data_manage/statistics_manage/count', function (req, res, ne
   res.render('admin/statistics_count', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
 });
 /*
- * 主题管理
+ * 安装主题
  * */
-router.get('/manage/customization_center/theme_manage', function (req, res, next) {
-  res.render('admin/theme_manage', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.DOCUMENT_MANAGE[1], settings.ARTICLES_ADD[1]));
+router.get('/manage/customization_center/theme_manage/install', function (req, res, next) {
+  res.render('admin/install_theme', system.renderItem(req.session.userInfo.adminUser_username, settings.BLOG_NAME, settings.CUSTOMIZATION_CENTER[1], settings.INSTALL_THEME[1]));
 });
 /*
  * 插件管理

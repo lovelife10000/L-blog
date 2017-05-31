@@ -63,6 +63,9 @@ module.exports = {
 
   CUSTOMIZATION_CENTER: ['customizationCenter', '定制中心'],
   THEME_MANAGE: ['themeManage', '主题管理'],
+  INSTALL_THEME: ['installTheme', '安装主题'],
+  LOCAL_THEME: ['localTheme', '本地主题'],
+  EDIT_TEMPLATE: ['editTemplate', '模版编辑'],
   PLUGINS_MANAGE: ['pluginsManage', '插件管理'],
   HOOKS_MANAGE: ['hooksManage', '钩子管理'],
   AD_MANAGE: ['adManage', '广告管理'],
