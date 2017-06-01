@@ -13,15 +13,34 @@ var settings = require('./util/settings');
 var redisStore = require('connect-redis')(session);
 var path = require('path');
 var ueditor = require("ueditor");
+var http = require('http');
+//var httpProxy = require('http-proxy');
+var proxy = require('express-http-proxy');
 /*
  * 数据模型
  * */
 var AdminUser = require('./models/AdminUser');
 
+
 /*
  * 创建app应用
  * */
 var app = express();
+
+// var proxy = httpProxy.createProxyServer();
+
+// app.use(function (res, req, next) {
+//
+//   proxy.web(req, res, { target: 'http://localhost:3000' });
+//   next();
+// });
+
+app.use('https://www.baidu.com/proxy', proxy('localhost:8082', {
+  proxyReqPathResolver: function(req) {
+    return require('url').parse(req.url).path;
+  }
+}));
+
 /*
  * 设置bodyParser
  * */
@@ -99,23 +118,23 @@ app.use('/install/start', function (req, res, next) {
   database_username = req.body.database_username;
   database_password = req.body.database_password;
 
-  console.log('mongodb://' +database_username+':'+database_password+'@'+ database_path + ':' + database_port + '/' + database_name);
-  mongoose.connect('mongodb://' +database_username+':'+database_password+'@'+ database_path + ':' + database_port + '/' + database_name, function (err) {
+  console.log('mongodb://' + database_username + ':' + database_password + '@' + database_path + ':' + database_port + '/' + database_name);
+  mongoose.connect('mongodb://' + database_username + ':' + database_password + '@' + database_path + ':' + database_port + '/' + database_name, function (err) {
     if (err) {
       console.log('数据库连接失败');
     } else {
       console.log('数据库连接成功');
       /*
-      * 保存用户名和密码
-      * */
-      var user=new AdminUser({
-        adminUser_username:req.body.adminUser_username,
-        adminUser_password:req.body.adminUser_password
+       * 保存用户名和密码
+       * */
+      var user = new AdminUser({
+        adminUser_username: req.body.adminUser_username,
+        adminUser_password: req.body.adminUser_password
       });
       user.save();
       res.json({
-        code:1,
-        msg:'安装成功'
+        code: 1,
+        msg: '安装成功'
       });
 
     }
@@ -127,8 +146,6 @@ app.use('/install/start', function (req, res, next) {
  * 所有请求访问入口
  * */
 app.use('/', function (req, res, next) {
-
-
 
 
   next();
@@ -172,6 +189,7 @@ app.use("/plugins/ueditor/ue", ueditor(path.join(__dirname, 'public'), function 
     res.redirect('/plugins/ueditor/nodejs/config.json');
   }
 }));
+
 
 /*
  * 监听端口
