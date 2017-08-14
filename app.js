@@ -200,7 +200,7 @@ mongoose.connect('mongodb://admin:admin@localhost:27017/blog', function (err) {
   } else {
     console.log('数据库连接成功');
     //监听http请求
-    app.listen(8082);
+    app.listen(8083);
   }
 });
 

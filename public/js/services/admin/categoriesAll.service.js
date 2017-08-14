@@ -21,7 +21,7 @@ app.factory('categoriesAllService',['$http',function ($http) {
           post_author:author,
           post_content:content
         }),
-        headers:{'content-type':'applicatin/x-www-form-urlencoded'}
+        headers:{'content-type':'application/x-www-form-urlencoded'}
       });
     },
 
