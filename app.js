@@ -154,10 +154,11 @@ app.use('/', function (req, res, next) {
 /*
  * 创建模块
  * */
-app.use('/install', require('./routers/install'));
-app.use('/admin', require('./routers/admin'));
-app.use('/api', require('./routers/api'));
-app.use('/', require('./routers/index'));
+app.use(require('./routers/routes'));
+// app.use('/install', require('./routers/install'));
+// app.use('/admin', require('./routers/admin'));
+// app.use('/api', require('./routers/api'));
+// app.use('/', require('./routers/index'));
 
 
 /*
